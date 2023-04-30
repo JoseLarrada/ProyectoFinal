@@ -42,10 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consultas.cs" />
-    <Compile Include="Consultorio.cs" />
     <Compile Include="DatosBsc.cs" />
     <Compile Include="Facturacion.cs" />
-    <Compile Include="Medicamento.cs" />
     <Compile Include="Pacientes.cs" />
     <Compile Include="Procedimiento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

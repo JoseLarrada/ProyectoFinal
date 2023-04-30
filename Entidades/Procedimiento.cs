@@ -36,5 +36,10 @@ namespace Entidades
         public string CodigoDiagPpal { get; set; }
         public string FormaRealiActo { get; set; }
         public double VrlProcedimiento { get; set; }
+
+        public override string ToString()
+        {
+            return $"{NumeroFactura};{CodigoConsultorio};{TipoId};{NumeroIdentificacion};{CodigoC};{FechaProcedimiento.ToShortDateString()};{NumeroAutorizacion};{AmbitoRealProce};{FinalidadProce};{PersonalAti};{DiagnosticoPpal};{CodigoDiagPpal};{FormaRealiActo};{VrlProcedimiento}";
+        }
     }
 }

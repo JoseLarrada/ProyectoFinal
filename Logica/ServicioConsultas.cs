@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace Logica
 {
-    public class ServicioConsultorio : Idatos<Consultorio>
+    public class ServicioConsultas : Idatos<Consultas>
     {
-        public string Actualizar(Consultorio cliente)
+        public string Actualizar(Consultas cliente)
         {
             throw new NotImplementedException();
         }
 
-        public string Crear(Consultorio cliente)
+        public string Crear(Consultas cliente)
         {
             throw new NotImplementedException();
         }
 
-        public string Eliminar(Consultorio cliente)
+        public string Eliminar(Consultas cliente)
         {
             throw new NotImplementedException();
         }

@@ -44,6 +44,10 @@ namespace Entidades
         public double ValorCuoMod { get; set; }
         public double ValorNetoPagar { get; set; }
 
+        public override string ToString()
+        {
+            return $"{NumeroFactura};{CodigoConsultorio};{TipoId};{NumeroIdentificacion};{FechaConsulta.ToShortDateString()};{NumeroAutorizacion};{CodigoC};{FinalidadConsulta};{CausaExterna};{CodDiagPpal};{CodDiaRel1};{CodDiaRel2};{CodDiaRel3};{TipoDiagPpal};{ValorConsulta};{ValorCuoMod};{ValorNetoPagar}";
+        }
 
     }
 }

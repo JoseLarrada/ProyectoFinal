@@ -44,5 +44,10 @@ namespace Entidades
         public double VrlComision { get; set; }
         public double VrlTDescuento { get; set; }
         public double VrlNetoP { get; set; }
+
+        public override string ToString()
+        {
+            return $"{CodigoConsultorio};{NombrePrestador};{TipoId};{NumeroIdentificacion};{NumeroFactura};{FechaExpedicion.ToShortDateString()};{FechaInicio.ToShortDateString()};{FechaFinal.ToShortDateString()};{CodigoC};{NombreConsultorio};{NumeroContrato};{PlanBeneficios};{NumeroPoliza};{VrlTotCo};{VrlComision};{VrlTDescuento};{VrlNetoP}";
+        }
     }
 }

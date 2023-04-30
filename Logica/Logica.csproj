@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Idatos.cs" />
     <Compile Include="ReportesRIPS.cs" />
-    <Compile Include="ServicioConsultorio.cs" />
+    <Compile Include="ServicioConsultas.cs" />
     <Compile Include="ServicioPacientes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
