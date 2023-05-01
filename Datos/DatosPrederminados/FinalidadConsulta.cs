@@ -20,7 +20,7 @@ namespace Datos.DatosPrederminados
 
         }
 
-        public string Guardar(TipoDatos Tipo)
+        public string Guardar(FConsulta Tipo)
         {
             StreamWriter sw = new StreamWriter(ruta, true);
             sw.WriteLine(Tipo.ToString());
@@ -28,10 +28,10 @@ namespace Datos.DatosPrederminados
             return "Guardado Correctamente";
         }
 
-        public List<TipoDatos> ObtenerLista()
+        public List<FConsulta> ObtenerLista()
         {
             StreamReader sr;
-            var lista = new List<TipoDatos>();
+            var lista = new List<FConsulta>();
             try
             {
                 sr = new StreamReader(ruta);
@@ -50,7 +50,7 @@ namespace Datos.DatosPrederminados
             finally { sr = null; }
         }
 
-        public string Modificar_Eliminar(List<TipoDatos> listaActualizada)
+        public string Modificar_Eliminar(List<FConsulta> listaActualizada)
         {
             string rutaTmp = "tmp.txt";
             try
@@ -74,11 +74,11 @@ namespace Datos.DatosPrederminados
             }
         }
 
-        public TipoDatos mapear(string linea)
+        public FConsulta mapear(string linea)
         {
-            var dato = new TipoDatos
+            var dato = new FConsulta
             {
-                NombreTipo = linea.Split(';')[0],
+                FinalidadC = linea.Split(';')[0],
             };
             return dato;
         }

@@ -15,7 +15,7 @@ namespace Vista
     public partial class frmConfiguraciones : Form
     {
         Configuraciones ID= new Configuraciones();
-        ConfCConsultas codigo = new ConfCConsultas();
+        
         public frmConfiguraciones()
         {
             InitializeComponent();
@@ -48,7 +48,6 @@ namespace Vista
         private void limpiar()
         {
             TxtTipo.Text = "";
-            txtCodCons.Text = "";
         }
         private void eliminar()
         {
@@ -75,82 +74,28 @@ namespace Vista
 
         private void frmConfiguraciones_Load(object sender, EventArgs e)
         {
-            mandarlist();
-        }
-
-        private void ListaTipos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            TxtTipo.Text=ListaTipos.Text.Trim();
-        }
-
-
-        private void agregarCod()
-        {
-            var tipo = new CodConsulta();
-            tipo.CConsulta = txtCodCons.Text;
-            string msg = codigo.Crear(tipo);
-            MessageBox.Show(msg);
-            limpiar();
-            ListaCodConsultas.Items.Add(tipo);
-        }
-        private void modificarCod()
-        {
-            var tipoN = new CodConsulta();
-            var tipoV = codigo.ObtenerPorId(txtCodCons.Text);
-            if (tipoV == null)
-            {
-                MessageBox.Show("Tipo de dato inexistente");
-            }
-            else
-            {
-                tipoN.CConsulta = txtCodCons.Text;
-                string msg = codigo.Actualizar(tipoV, tipoN);
-                MessageBox.Show(msg);
-                limpiar();
-            }
-        }
-        private void eliminarCod()
-        {
-            var cod = new CodConsulta();
-            cod.CConsulta=txtCodCons.Text;
-            string msg= codigo.Eliminar(cod);
-            MessageBox.Show(msg);
-            limpiar();
-        }
-        private void mandarlist()
-        {
             foreach (var item in ID.ObtenerTodos())
             {
                 TxtTipo.Text = item.NombreTipo;
                 ListaTipos.Items.Add(TxtTipo.Text);
             }
-
-            // CODIGO DE CONSULTAS
-            foreach (var item in codigo.ObtenerTodos())
-            {
-                txtCodCons.Text = item.CConsulta;
-                ListaCodConsultas.Items.Add(txtCodCons.Text);
-            }
-            limpiar();
         }
+
+        private void ListaTipos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TxtTipo.Text=ListaTipos.Text.Trim();
+        }        
         private void btnAgregar2_Click(object sender, EventArgs e)
         {
-            agregarCod();
         }
-
         private void btnModificar2_Click(object sender, EventArgs e)
         {
-            modificarCod();
         }
-
         private void ListaCodConsultas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtCodCons.Text = ListaCodConsultas.Text.Trim();
         }
-
         private void btnEliminar2_Click(object sender, EventArgs e)
         {
-            eliminarCod();
         }
     }
 }

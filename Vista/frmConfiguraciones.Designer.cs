@@ -35,15 +35,15 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.TxtTipo = new System.Windows.Forms.TextBox();
             this.ListaTipos = new System.Windows.Forms.ListBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnEliminar2 = new System.Windows.Forms.Button();
-            this.btnModificar2 = new System.Windows.Forms.Button();
-            this.btnAgregar2 = new System.Windows.Forms.Button();
-            this.txtCodCons = new System.Windows.Forms.TextBox();
-            this.ListaCodConsultas = new System.Windows.Forms.ListBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnEliminarF = new System.Windows.Forms.Button();
+            this.btnModificarF = new System.Windows.Forms.Button();
+            this.btnAgregarF = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.listFinalidad = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -54,7 +54,7 @@
             this.groupBox1.Controls.Add(this.btnAgregar);
             this.groupBox1.Controls.Add(this.TxtTipo);
             this.groupBox1.Controls.Add(this.ListaTipos);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 27);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(486, 281);
             this.groupBox1.TabIndex = 0;
@@ -116,90 +116,90 @@
             this.ListaTipos.TabIndex = 1;
             this.ListaTipos.SelectedIndexChanged += new System.EventHandler(this.ListaTipos_SelectedIndexChanged);
             // 
-            // groupBox2
+            // groupBox3
             // 
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.btnEliminar2);
-            this.groupBox2.Controls.Add(this.btnModificar2);
-            this.groupBox2.Controls.Add(this.btnAgregar2);
-            this.groupBox2.Controls.Add(this.txtCodCons);
-            this.groupBox2.Controls.Add(this.ListaCodConsultas);
-            this.groupBox2.Location = new System.Drawing.Point(521, 12);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(486, 281);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "CODIGO CONSULTAS";
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.btnEliminarF);
+            this.groupBox3.Controls.Add(this.btnModificarF);
+            this.groupBox3.Controls.Add(this.btnAgregarF);
+            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.listFinalidad);
+            this.groupBox3.Location = new System.Drawing.Point(527, 6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(486, 281);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "FINALIDAD CONSULTA";
             // 
-            // label2
+            // label3
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 75);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "CodigoConsulta";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 75);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(73, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Tipo Finalidad";
             // 
-            // btnEliminar2
+            // btnEliminarF
             // 
-            this.btnEliminar2.Location = new System.Drawing.Point(205, 211);
-            this.btnEliminar2.Name = "btnEliminar2";
-            this.btnEliminar2.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar2.TabIndex = 3;
-            this.btnEliminar2.Text = "Eliminar";
-            this.btnEliminar2.UseVisualStyleBackColor = true;
-            this.btnEliminar2.Click += new System.EventHandler(this.btnEliminar2_Click);
+            this.btnEliminarF.Location = new System.Drawing.Point(205, 211);
+            this.btnEliminarF.Name = "btnEliminarF";
+            this.btnEliminarF.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminarF.TabIndex = 3;
+            this.btnEliminarF.Text = "Eliminar";
+            this.btnEliminarF.UseVisualStyleBackColor = true;
+            this.btnEliminarF.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // btnModificar2
+            // btnModificarF
             // 
-            this.btnModificar2.Location = new System.Drawing.Point(110, 211);
-            this.btnModificar2.Name = "btnModificar2";
-            this.btnModificar2.Size = new System.Drawing.Size(75, 23);
-            this.btnModificar2.TabIndex = 3;
-            this.btnModificar2.Text = "Modificar";
-            this.btnModificar2.UseVisualStyleBackColor = true;
-            this.btnModificar2.Click += new System.EventHandler(this.btnModificar2_Click);
+            this.btnModificarF.Location = new System.Drawing.Point(110, 211);
+            this.btnModificarF.Name = "btnModificarF";
+            this.btnModificarF.Size = new System.Drawing.Size(75, 23);
+            this.btnModificarF.TabIndex = 3;
+            this.btnModificarF.Text = "Modificar";
+            this.btnModificarF.UseVisualStyleBackColor = true;
+            this.btnModificarF.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // btnAgregar2
+            // btnAgregarF
             // 
-            this.btnAgregar2.Location = new System.Drawing.Point(18, 211);
-            this.btnAgregar2.Name = "btnAgregar2";
-            this.btnAgregar2.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar2.TabIndex = 3;
-            this.btnAgregar2.Text = "Agregar";
-            this.btnAgregar2.UseVisualStyleBackColor = true;
-            this.btnAgregar2.Click += new System.EventHandler(this.btnAgregar2_Click);
+            this.btnAgregarF.Location = new System.Drawing.Point(18, 211);
+            this.btnAgregarF.Name = "btnAgregarF";
+            this.btnAgregarF.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarF.TabIndex = 3;
+            this.btnAgregarF.Text = "Agregar";
+            this.btnAgregarF.UseVisualStyleBackColor = true;
+            this.btnAgregarF.Click += new System.EventHandler(this.button1_Click);
             // 
-            // txtCodCons
+            // textBox1
             // 
-            this.txtCodCons.Location = new System.Drawing.Point(18, 94);
-            this.txtCodCons.Name = "txtCodCons";
-            this.txtCodCons.Size = new System.Drawing.Size(110, 20);
-            this.txtCodCons.TabIndex = 2;
+            this.textBox1.Location = new System.Drawing.Point(18, 94);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(110, 20);
+            this.textBox1.TabIndex = 2;
             // 
-            // ListaCodConsultas
+            // listFinalidad
             // 
-            this.ListaCodConsultas.FormattingEnabled = true;
-            this.ListaCodConsultas.Location = new System.Drawing.Point(295, 35);
-            this.ListaCodConsultas.Name = "ListaCodConsultas";
-            this.ListaCodConsultas.Size = new System.Drawing.Size(161, 212);
-            this.ListaCodConsultas.TabIndex = 1;
-            this.ListaCodConsultas.SelectedIndexChanged += new System.EventHandler(this.ListaCodConsultas_SelectedIndexChanged);
+            this.listFinalidad.FormattingEnabled = true;
+            this.listFinalidad.Location = new System.Drawing.Point(295, 35);
+            this.listFinalidad.Name = "listFinalidad";
+            this.listFinalidad.Size = new System.Drawing.Size(161, 212);
+            this.listFinalidad.TabIndex = 1;
+            this.listFinalidad.SelectedIndexChanged += new System.EventHandler(this.ListaTipos_SelectedIndexChanged);
             // 
             // frmConfiguraciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1035, 506);
-            this.Controls.Add(this.groupBox2);
+            this.ClientSize = new System.Drawing.Size(1035, 590);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmConfiguraciones";
             this.Text = "frmConfiguraciones";
             this.Load += new System.EventHandler(this.frmConfiguraciones_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -213,12 +213,12 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.TextBox TxtTipo;
         private System.Windows.Forms.ListBox ListaTipos;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnEliminar2;
-        private System.Windows.Forms.Button btnModificar2;
-        private System.Windows.Forms.Button btnAgregar2;
-        private System.Windows.Forms.TextBox txtCodCons;
-        private System.Windows.Forms.ListBox ListaCodConsultas;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnEliminarF;
+        private System.Windows.Forms.Button btnModificarF;
+        private System.Windows.Forms.Button btnAgregarF;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ListBox listFinalidad;
     }
 }

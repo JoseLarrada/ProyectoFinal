@@ -45,6 +45,7 @@
     <Compile Include="Consultas.cs" />
     <Compile Include="DatosBsc.cs" />
     <Compile Include="Facturacion.cs" />
+    <Compile Include="FConsulta.cs" />
     <Compile Include="Pacientes.cs" />
     <Compile Include="Procedimiento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

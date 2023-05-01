@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArhivoPlanoRips.cs" />
     <Compile Include="DatosPrederminados\CodigoConsulta.cs" />
     <Compile Include="DatosPrederminados\FinalidadConsulta.cs" />
     <Compile Include="DatosPrederminados\TiposDeDatos.cs" />
