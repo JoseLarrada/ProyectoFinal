@@ -36,7 +36,7 @@ namespace Logica
                 Cliente.CodigoMunicipioResidencia = NuevoC.CodigoMunicipioResidencia;
                 Cliente.ZonaResidencia = NuevoC.ZonaResidencia;
                 string msg= paciente.Modificar_Eliminar(ListaPacientes);
-                return msg+"  "+NuevoC.PrimerNombre
+                return msg + "  " + NuevoC.PrimerNombre;
             }
             catch (Exception)
             {
@@ -58,7 +58,7 @@ namespace Logica
                 }
                 else
                 {
-                    string msg=paciente.GuardarContactos(cliente);
+                    string msg=paciente.Guardar(cliente);
                     return msg;
                 }
             }

@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfCConsultas.cs" />
+    <Compile Include="Configuraciones.cs" />
     <Compile Include="Idatos.cs" />
     <Compile Include="ReportesRIPS.cs" />
     <Compile Include="ServicioConsultas.cs" />

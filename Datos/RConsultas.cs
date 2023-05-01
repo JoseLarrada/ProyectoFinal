@@ -20,7 +20,7 @@ namespace Datos
         {
             
         }
-        public string GuardarContactos(Consultas Tipo)
+        public string Guardar(Consultas Tipo)
         {
             StreamWriter sw = new StreamWriter(ruta, true);
             sw.WriteLine(Tipo.ToString());

@@ -19,7 +19,7 @@ namespace Datos
         {
             
         }
-        public string GuardarContactos(Facturacion Tipo)
+        public string Guardar(Facturacion Tipo)
         {
             StreamWriter sw = new StreamWriter(ruta, true);
             sw.WriteLine(Tipo.ToString());
