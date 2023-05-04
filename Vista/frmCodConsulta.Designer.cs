@@ -70,6 +70,7 @@
             this.btnEliminar2.TabIndex = 3;
             this.btnEliminar2.Text = "Eliminar";
             this.btnEliminar2.UseVisualStyleBackColor = true;
+            this.btnEliminar2.Click += new System.EventHandler(this.btnEliminar2_Click);
             // 
             // btnModificar2
             // 
@@ -79,6 +80,7 @@
             this.btnModificar2.TabIndex = 3;
             this.btnModificar2.Text = "Modificar";
             this.btnModificar2.UseVisualStyleBackColor = true;
+            this.btnModificar2.Click += new System.EventHandler(this.btnModificar2_Click);
             // 
             // btnAgregar2
             // 
@@ -88,6 +90,7 @@
             this.btnAgregar2.TabIndex = 3;
             this.btnAgregar2.Text = "Agregar";
             this.btnAgregar2.UseVisualStyleBackColor = true;
+            this.btnAgregar2.Click += new System.EventHandler(this.btnAgregar2_Click);
             // 
             // txtCodCons
             // 
@@ -103,6 +106,7 @@
             this.ListaCodConsultas.Name = "ListaCodConsultas";
             this.ListaCodConsultas.Size = new System.Drawing.Size(161, 212);
             this.ListaCodConsultas.TabIndex = 1;
+            this.ListaCodConsultas.SelectedIndexChanged += new System.EventHandler(this.ListaCodConsultas_SelectedIndexChanged);
             // 
             // frmCodConsulta
             // 
@@ -112,6 +116,7 @@
             this.Controls.Add(this.groupBox2);
             this.Name = "frmCodConsulta";
             this.Text = "frmCodConsulta";
+            this.Load += new System.EventHandler(this.frmCodConsulta_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);

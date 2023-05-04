@@ -16,5 +16,23 @@ namespace Vista
         {
             InitializeComponent();
         }
+
+        private void btnConsultas_Click(object sender, EventArgs e)
+        {
+            var con = new FrmConsultas();
+            con.ShowDialog();
+        }
+
+        private void btnConfiguracion_Click(object sender, EventArgs e)
+        {
+            var confi= new Configuracion();
+            confi.ShowDialog();
+        }
+
+        private void btnPacientes_Click(object sender, EventArgs e)
+        {
+            var pacientes=new FmrPacieentes();
+            pacientes.ShowDialog();
+        }
     }
 }

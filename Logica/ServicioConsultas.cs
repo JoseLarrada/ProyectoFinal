@@ -50,13 +50,9 @@ namespace Logica
         {
             try
             {
-                if (!Existe(cliente))
+                if (Existe(cliente))
                 {
                     return "No Existe el paciente";
-                }
-                if (VExtension(cliente.NumeroIdentificacion, int.Parse(cliente.TipoId)))
-                {
-                    return "No cumple el tipo de dato correspondiente";
                 }
                 else
                 {

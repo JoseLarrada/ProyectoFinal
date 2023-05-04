@@ -46,23 +46,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuracion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuracion.Designer.cs">
+      <DependentUpon>Configuracion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FmrPacieentes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FmrPacieentes.Designer.cs">
+      <DependentUpon>FmrPacieentes.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCodConsulta.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmCodConsulta.Designer.cs">
       <DependentUpon>frmCodConsulta.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmConfiguraciones.cs">
+    <Compile Include="frmCTipoDato.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmConfiguraciones.Designer.cs">
-      <DependentUpon>frmConfiguraciones.cs</DependentUpon>
+    <Compile Include="frmCTipoDato.Designer.cs">
+      <DependentUpon>frmCTipoDato.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmConsultas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmConsultas.Designer.cs">
       <DependentUpon>FrmConsultas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFinalidadC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFinalidadC.Designer.cs">
+      <DependentUpon>frmFinalidadC.cs</DependentUpon>
     </Compile>
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
@@ -72,14 +90,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Configuracion.resx">
+      <DependentUpon>Configuracion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FmrPacieentes.resx">
+      <DependentUpon>FmrPacieentes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCodConsulta.resx">
       <DependentUpon>frmCodConsulta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmConfiguraciones.resx">
-      <DependentUpon>frmConfiguraciones.cs</DependentUpon>
+    <EmbeddedResource Include="frmCTipoDato.resx">
+      <DependentUpon>frmCTipoDato.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmConsultas.resx">
       <DependentUpon>FrmConsultas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFinalidadC.resx">
+      <DependentUpon>frmFinalidadC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Logica
 {
-    public class ConfCConsultas
+    public class ConfCConsultas: Iconfiguraciones<CodConsulta>
     {
         List<CodConsulta> List = new List<CodConsulta>();
         CodigoConsulta codi = new CodigoConsulta("CodigoConsulta.txt");

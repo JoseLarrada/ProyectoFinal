@@ -67,5 +67,30 @@ namespace Vista
             }
             limpiar();
         }
+
+        private void btnAgregar2_Click(object sender, EventArgs e)
+        {
+            agregarCod();
+        }
+
+        private void btnModificar2_Click(object sender, EventArgs e)
+        {
+            modificarCod();
+        }
+
+        private void btnEliminar2_Click(object sender, EventArgs e)
+        {
+            eliminarCod();
+        }
+
+        private void ListaCodConsultas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtCodCons.Text=ListaCodConsultas.Text.Trim();
+        }
+
+        private void frmCodConsulta_Load(object sender, EventArgs e)
+        {
+            mandarlist();
+        }
     }
 }

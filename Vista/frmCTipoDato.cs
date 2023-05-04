@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace Vista
 {
-    public partial class frmConfiguraciones : Form
+    public partial class frmCTipoDato : Form
     {
         Configuraciones ID= new Configuraciones();
         
-        public frmConfiguraciones()
+        public frmCTipoDato()
         {
             InitializeComponent();
         }

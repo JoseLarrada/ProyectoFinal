@@ -52,10 +52,6 @@ namespace Logica
                 {
                     return "Ya existe el Paciente";
                 }
-                if (VExtension(cliente.NumeroId, int.Parse(cliente.TipoId)))
-                {
-                    return "No cumple el tipo de dato correspondiente";
-                }
                 else
                 {
                     string msg=paciente.Guardar(cliente);
