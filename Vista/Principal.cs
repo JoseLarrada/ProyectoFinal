@@ -19,20 +19,60 @@ namespace Vista
 
         private void btnConsultas_Click(object sender, EventArgs e)
         {
-            var con = new FrmConsultas();
-            con.ShowDialog();
+            
         }
 
         private void btnConfiguracion_Click(object sender, EventArgs e)
         {
-            var confi= new Configuracion();
-            confi.ShowDialog();
+            
         }
 
         private void btnPacientes_Click(object sender, EventArgs e)
         {
-            var pacientes=new FmrPacieentes();
-            pacientes.ShowDialog();
+            
+        }
+
+        private void BtnConsultas_Click_1(object sender, EventArgs e)
+        {
+            PanelVista.Visible = true;
+            abrirForm(new FrmConsultas());
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnPacientes_Click_1(object sender, EventArgs e)
+        {
+            
+            abrirForm(new FmrPacieentes());
+            PanelVista.Visible = true;
+        }
+
+        private void Principal_Load(object sender, EventArgs e)
+        {
+            PanelVista.Visible=false;
+        }
+        private void abrirForm(object form)
+        {
+            if (this.PanelVista.Controls.Count > 0)
+            {
+                this.PanelVista.Controls.RemoveAt(0);
+            }
+            Form view = form as Form;
+            view.TopLevel = false;
+            view.Dock = DockStyle.Fill;
+            this.PanelVista.Controls.Add(view);
+            this.PanelVista.Tag=view;
+            view.Show();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PanelVista.Visible = true;
+            abrirForm(new FrmProcedimientos());
         }
     }
 }

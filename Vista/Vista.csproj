@@ -46,41 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuracion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Configuracion.Designer.cs">
-      <DependentUpon>Configuracion.cs</DependentUpon>
-    </Compile>
     <Compile Include="FmrPacieentes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FmrPacieentes.Designer.cs">
       <DependentUpon>FmrPacieentes.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmCodConsulta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmCodConsulta.Designer.cs">
-      <DependentUpon>frmCodConsulta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmCTipoDato.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmCTipoDato.Designer.cs">
-      <DependentUpon>frmCTipoDato.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmConsultas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmConsultas.Designer.cs">
       <DependentUpon>FrmConsultas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmFinalidadC.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmFinalidadC.Designer.cs">
-      <DependentUpon>frmFinalidadC.cs</DependentUpon>
     </Compile>
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
@@ -90,23 +66,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Configuracion.resx">
-      <DependentUpon>Configuracion.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="FrmProcedimientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProcedimientos.Designer.cs">
+      <DependentUpon>FrmProcedimientos.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FmrPacieentes.resx">
       <DependentUpon>FmrPacieentes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCodConsulta.resx">
-      <DependentUpon>frmCodConsulta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmCTipoDato.resx">
-      <DependentUpon>frmCTipoDato.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmConsultas.resx">
       <DependentUpon>FrmConsultas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmFinalidadC.resx">
-      <DependentUpon>frmFinalidadC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
@@ -120,6 +90,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FrmProcedimientos.resx">
+      <DependentUpon>FrmProcedimientos.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

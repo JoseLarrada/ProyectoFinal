@@ -11,6 +11,7 @@ namespace Logica
     public class ServicioConsultas : Idatos<Consultas>
     {
         List<Consultas> Listconsulta =new List<Consultas>();
+        ServicioPacientes pacientes= new ServicioPacientes();
         RConsultas consultaR = new RConsultas("ReporteConsulta.txt");
         public ServicioConsultas()
         {
@@ -20,25 +21,32 @@ namespace Logica
         {
             try
             {
-                Cliente.NumeroFactura = NuevoC.NumeroFactura;
-                Cliente.CodigoConsultorio = NuevoC.CodigoConsultorio;
-                Cliente.TipoId = NuevoC.TipoId;
-                Cliente.NumeroIdentificacion = NuevoC.NumeroIdentificacion;
-                Cliente.FechaConsulta = NuevoC.FechaConsulta;
-                Cliente.NumeroAutorizacion = NuevoC.NumeroAutorizacion;
-                Cliente.CodigoC = NuevoC.CodigoC;
-                Cliente.FinalidadConsulta = NuevoC.FinalidadConsulta;
-                Cliente.CausaExterna = NuevoC.CausaExterna;
-                Cliente.CodDiagPpal = NuevoC.CodDiagPpal;
-                Cliente.CodDiaRel1 = NuevoC.CodDiaRel1;
-                Cliente.CodDiaRel2 = NuevoC.CodDiaRel2;
-                Cliente.CodDiaRel3 = NuevoC.CodDiaRel3;
-                Cliente.TipoDiagPpal = NuevoC.TipoDiagPpal;
-                Cliente.ValorConsulta = NuevoC.ValorConsulta;
-                Cliente.ValorCuoMod = NuevoC.ValorCuoMod;
-                Cliente.ValorNetoPagar = NuevoC.ValorNetoPagar;
-                string msg=consultaR.Guardar(Cliente);
-                return msg + "  " + NuevoC.NumeroAutorizacion;
+                    if (!Existe(Cliente))
+                    {
+                        return "No Existe el paciente";
+                    }
+                    else
+                    {
+                        Cliente.NumeroFactura = NuevoC.NumeroFactura;
+                        Cliente.CodigoConsultorio = NuevoC.CodigoConsultorio;
+                        Cliente.TipoId = NuevoC.TipoId;
+                        Cliente.NumeroIdentificacion = NuevoC.NumeroIdentificacion;
+                        Cliente.FechaConsulta = NuevoC.FechaConsulta;
+                        Cliente.NumeroAutorizacion = NuevoC.NumeroAutorizacion;
+                        Cliente.CodigoC = NuevoC.CodigoC;
+                        Cliente.FinalidadConsulta = NuevoC.FinalidadConsulta;
+                        Cliente.CausaExterna = NuevoC.CausaExterna;
+                        Cliente.CodDiagPpal = NuevoC.CodDiagPpal;
+                        Cliente.CodDiaRel1 = NuevoC.CodDiaRel1;
+                        Cliente.CodDiaRel2 = NuevoC.CodDiaRel2;
+                        Cliente.CodDiaRel3 = NuevoC.CodDiaRel3;
+                        Cliente.TipoDiagPpal = NuevoC.TipoDiagPpal;
+                        Cliente.ValorConsulta = NuevoC.ValorConsulta;
+                        Cliente.ValorCuoMod = NuevoC.ValorCuoMod;
+                        Cliente.ValorNetoPagar = NuevoC.ValorNetoPagar;
+                        string msg = consultaR.Modificar_Eliminar(Listconsulta);
+                        return msg + "  " + NuevoC.NumeroAutorizacion;
+                    }
             }
             catch (Exception)
             {
@@ -50,7 +58,7 @@ namespace Logica
         {
             try
             {
-                if (Existe(cliente))
+                if (!Existe(cliente))
                 {
                     return "No Existe el paciente";
                 }
@@ -59,6 +67,7 @@ namespace Logica
                     string msg = consultaR.Guardar(cliente);
                     return msg;
                 }
+                
             }
             catch (Exception)
             {
@@ -69,7 +78,7 @@ namespace Logica
 
         public string Eliminar(Consultas cliente)
         {
-            if (!Existe(cliente))
+            if (!ExisteConsulta(cliente))
             {
                 return "NO SE ENCONTRO LA CONSULTA";
             }
@@ -86,6 +95,32 @@ namespace Logica
             }
         }
 
+        public bool ExisteConsulta(Consultas cliente)
+        {
+            try
+            {
+                if (Listconsulta == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    foreach (var item in Listconsulta)
+                    {
+                        if (item.NumeroIdentificacion == cliente.NumeroIdentificacion)
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool Existe(Consultas Cliente)
         {
             if (Listconsulta == null)
@@ -94,9 +129,9 @@ namespace Logica
             }
             else
             {
-                foreach (var item in Listconsulta)
+                foreach (var item in pacientes.ObtenerTodos())
                 {
-                    if (item.NumeroIdentificacion == Cliente.NumeroIdentificacion)
+                    if (item.NumeroId == Cliente.NumeroIdentificacion)
                     {
                         return true;
                     }
@@ -120,46 +155,6 @@ namespace Logica
         public List<Consultas> ObtenerTodos()
         {
             return Listconsulta;
-        }
-
-        public double ValidarDouble(string numero)
-        {
-            try
-            {
-                double op = 0.0;
-                op = double.Parse(numero);
-                return op;
-            }
-            catch (Exception)
-            {
-                return 0.0;
-            }
-        }
-
-        public int ValidarEnteros(string numero)
-        {
-            try
-            {
-                int op = 0;
-                op = int.Parse(numero);
-                return op;
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
-        }
-
-        public bool VExtension(string Cliente, int longitud)
-        {
-            for (int i = 0; i < Cliente.Length; i++)
-            {
-                if (Cliente.Length > longitud)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
         private void Refresh()
         {

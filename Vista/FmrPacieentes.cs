@@ -113,8 +113,9 @@ namespace Vista
             paciente.Sexo = cbbSexo.Text;
             string msg = pacientes.Crear(paciente);
             MessageBox.Show(msg);
-            limpiar();
             guardartabla(paciente);
+            limpiar();
+            
         }
         private void guardartabla(Pacientes table)
         {
@@ -131,9 +132,9 @@ namespace Vista
             tablap[0, posicion].Value = cbbTipos.Text;
             tablap[1, posicion].Value = txtNumI.Text;
             tablap[2, posicion].Value = txtxPnombre.Text;
-            tablap[4, posicion].Value = txtxPapellido.Text;
-            tablap[5, posicion].Value = txtEdad.Text;
-            tablap[6, posicion].Value = cbbSexo.Text;
+            tablap[3, posicion].Value = txtxPapellido.Text;
+            tablap[4, posicion].Value = txtEdad.Text;
+            tablap[5, posicion].Value = cbbSexo.Text;
         }
         private void modificar()
         {
@@ -141,7 +142,7 @@ namespace Vista
             var paciente = pacientes.ObtenerPorId(txtNumI.Text);
             if (paciente == null)
             {
-                MessageBox.Show("NO EXISTE ESE CONTACTO");
+                MessageBox.Show("PACIENTE INEXISTENTE");
             }
             else
             {
@@ -158,11 +159,12 @@ namespace Vista
                 pacientenuevo.CodigoDepartamentosResidencia = cbbDepartamentos.Text;
                 pacientenuevo.CodigoMunicipioResidencia = cbbCiudad.Text;
                 pacientenuevo.ZonaResidencia = cbbZona.Text;
-                paciente.Sexo = cbbSexo.Text;
+                pacientenuevo.Sexo = cbbSexo.Text;
                 string msg = pacientes.Actualizar(paciente, pacientenuevo);
                 MessageBox.Show(msg);
-                limpiar();
                 modificartabla();
+                limpiar();
+                
             }
         }
         private void eliminar()
@@ -171,8 +173,9 @@ namespace Vista
             paciente.NumeroId = txtNumI.Text;
             string msg = pacientes.Eliminar(paciente);
             MessageBox.Show(msg);
-            limpiar();
             tablap.Rows.RemoveAt(posicion);
+            limpiar();
+            
         }
         private void inicio()
         {
@@ -181,7 +184,7 @@ namespace Vista
             btnModificar.Visible = false;
             BtnEliminar.Visible = false;
             btnInsertar.Visible = true;
-            btnInsertar.Location = new System.Drawing.Point(415, 422);
+            btnInsertar.Location = new System.Drawing.Point(403,485);
         }
         private void limpiar()
         {
@@ -357,7 +360,7 @@ namespace Vista
             btnInsertar.Visible = false;
             btnModificar.Visible = true;
             BtnEliminar.Visible = true;
-            btnModificar.Location = new Point(231, 422);
+            btnModificar.Location = new Point(144,485);
             if (!checkView.Checked)
             {
                 inicio();

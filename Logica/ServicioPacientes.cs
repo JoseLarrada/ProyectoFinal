@@ -50,12 +50,12 @@ namespace Logica
             {
                 if (Existe(cliente))
                 {
-                    return "Ya existe el Paciente";
+                     return "Ya existe el Paciente";
                 }
                 else
                 {
-                    string msg=paciente.Guardar(cliente);
-                    return msg;
+                     string msg = paciente.Guardar(cliente);
+                     return msg;
                 }
             }
             catch (Exception)
@@ -118,46 +118,6 @@ namespace Logica
         public List<Pacientes> ObtenerTodos()
         {
             return ListaPacientes;
-        }
-
-        public double ValidarDouble(string numero)
-        {
-            try
-            {
-                double op = 0.0;
-                op = double.Parse(numero);
-                return op;
-            }
-            catch (Exception)
-            {
-                return 0.0;
-            }
-        }
-
-        public int ValidarEnteros(string numero)
-        {
-            try
-            {
-                int op = 0;
-                op = int.Parse(numero);
-                return op;
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
-        }
-
-        public bool VExtension(string Cliente, int longitud)
-        {
-            for (int i = 0; i < Cliente.Length; i++)
-            {
-                if (Cliente.Length > longitud)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
         private void Refresh()
         {

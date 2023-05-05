@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmConsultas));
             this.PanelDatos = new System.Windows.Forms.Panel();
             this.Datetime = new System.Windows.Forms.DateTimePicker();
             this.cbbDiagR3 = new System.Windows.Forms.ComboBox();
@@ -65,21 +66,22 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.PanelVista = new System.Windows.Forms.Panel();
-            this.TablaConsultas = new System.Windows.Forms.DataGridView();
-            this.Num_Factura = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.N_Columna = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tablaConsultas = new System.Windows.Forms.DataGridView();
             this.Num_Autorizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Valor_Consulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Valor_C_Mod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Valor_Neto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Numero_Identificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Numf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vrlconsulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vrlCuota = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vrlNeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checkView = new System.Windows.Forms.CheckBox();
             this.PanelDatos.SuspendLayout();
             this.PanelVista.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TablaConsultas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaConsultas)).BeginInit();
             this.SuspendLayout();
             // 
             // PanelDatos
             // 
+            this.PanelDatos.BackColor = System.Drawing.Color.White;
             this.PanelDatos.Controls.Add(this.Datetime);
             this.PanelDatos.Controls.Add(this.cbbDiagR3);
             this.PanelDatos.Controls.Add(this.label12);
@@ -337,6 +339,7 @@
             this.txtVrlNeto.Name = "txtVrlNeto";
             this.txtVrlNeto.Size = new System.Drawing.Size(106, 20);
             this.txtVrlNeto.TabIndex = 0;
+            this.txtVrlNeto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVrlNeto_KeyPress);
             // 
             // label1
             // 
@@ -353,6 +356,7 @@
             this.txtVrlCuoM.Name = "txtVrlCuoM";
             this.txtVrlCuoM.Size = new System.Drawing.Size(106, 20);
             this.txtVrlCuoM.TabIndex = 0;
+            this.txtVrlCuoM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVrlCuoM_KeyPress);
             // 
             // TxtIde
             // 
@@ -360,6 +364,7 @@
             this.TxtIde.Name = "TxtIde";
             this.TxtIde.Size = new System.Drawing.Size(106, 20);
             this.TxtIde.TabIndex = 0;
+            this.TxtIde.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtIde_KeyPress);
             // 
             // txtVrlConsulta
             // 
@@ -367,6 +372,7 @@
             this.txtVrlConsulta.Name = "txtVrlConsulta";
             this.txtVrlConsulta.Size = new System.Drawing.Size(106, 20);
             this.txtVrlConsulta.TabIndex = 0;
+            this.txtVrlConsulta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVrlConsulta_KeyPress);
             // 
             // txtNumAuto
             // 
@@ -374,6 +380,8 @@
             this.txtNumAuto.Name = "txtNumAuto";
             this.txtNumAuto.Size = new System.Drawing.Size(106, 20);
             this.txtNumAuto.TabIndex = 0;
+            this.txtNumAuto.TextChanged += new System.EventHandler(this.txtNumAuto_TextChanged);
+            this.txtNumAuto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumAuto_KeyPress);
             // 
             // txtNumeroFactura
             // 
@@ -386,9 +394,11 @@
             // 
             // btnInsertar
             // 
-            this.btnInsertar.Location = new System.Drawing.Point(231, 422);
+            this.btnInsertar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnInsertar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInsertar.Location = new System.Drawing.Point(144, 485);
             this.btnInsertar.Name = "btnInsertar";
-            this.btnInsertar.Size = new System.Drawing.Size(102, 23);
+            this.btnInsertar.Size = new System.Drawing.Size(185, 35);
             this.btnInsertar.TabIndex = 1;
             this.btnInsertar.Text = "Guardar Consulta";
             this.btnInsertar.UseVisualStyleBackColor = true;
@@ -396,9 +406,11 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(415, 422);
+            this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.Location = new System.Drawing.Point(403, 485);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(98, 23);
+            this.btnModificar.Size = new System.Drawing.Size(185, 35);
             this.btnModificar.TabIndex = 1;
             this.btnModificar.Text = "Actualizar Consultas";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -407,9 +419,11 @@
             // 
             // BtnEliminar
             // 
-            this.BtnEliminar.Location = new System.Drawing.Point(589, 422);
+            this.BtnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.BtnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEliminar.Location = new System.Drawing.Point(664, 485);
             this.BtnEliminar.Name = "BtnEliminar";
-            this.BtnEliminar.Size = new System.Drawing.Size(109, 23);
+            this.BtnEliminar.Size = new System.Drawing.Size(185, 35);
             this.BtnEliminar.TabIndex = 1;
             this.BtnEliminar.Text = "Eliminar Consultas";
             this.BtnEliminar.UseVisualStyleBackColor = true;
@@ -417,88 +431,92 @@
             // 
             // PanelVista
             // 
-            this.PanelVista.Controls.Add(this.TablaConsultas);
-            this.PanelVista.Enabled = false;
-            this.PanelVista.Location = new System.Drawing.Point(141, 21);
+            this.PanelVista.BackColor = System.Drawing.Color.White;
+            this.PanelVista.Controls.Add(this.tablaConsultas);
+            this.PanelVista.Location = new System.Drawing.Point(128, 30);
             this.PanelVista.Name = "PanelVista";
             this.PanelVista.Size = new System.Drawing.Size(721, 385);
             this.PanelVista.TabIndex = 2;
             // 
-            // TablaConsultas
+            // tablaConsultas
             // 
-            this.TablaConsultas.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.TablaConsultas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.TablaConsultas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Num_Factura,
-            this.N_Columna,
+            this.tablaConsultas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaConsultas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Num_Autorizacion,
-            this.Valor_Consulta,
-            this.Valor_C_Mod,
-            this.Valor_Neto});
-            this.TablaConsultas.Location = new System.Drawing.Point(30, 21);
-            this.TablaConsultas.Name = "TablaConsultas";
-            this.TablaConsultas.Size = new System.Drawing.Size(659, 330);
-            this.TablaConsultas.TabIndex = 0;
-            // 
-            // Num_Factura
-            // 
-            this.Num_Factura.HeaderText = "Num_Factura";
-            this.Num_Factura.Name = "Num_Factura";
-            // 
-            // N_Columna
-            // 
-            this.N_Columna.HeaderText = "Num_Identificacion";
-            this.N_Columna.Name = "N_Columna";
+            this.Numero_Identificacion,
+            this.Numf,
+            this.vrlconsulta,
+            this.vrlCuota,
+            this.vrlNeto});
+            this.tablaConsultas.Location = new System.Drawing.Point(34, 21);
+            this.tablaConsultas.Name = "tablaConsultas";
+            this.tablaConsultas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tablaConsultas.Size = new System.Drawing.Size(648, 330);
+            this.tablaConsultas.TabIndex = 1;
+            this.tablaConsultas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaConsultas_CellContentClick_1);
             // 
             // Num_Autorizacion
             // 
             this.Num_Autorizacion.HeaderText = "Num_Autorizacion";
             this.Num_Autorizacion.Name = "Num_Autorizacion";
             // 
-            // Valor_Consulta
+            // Numero_Identificacion
             // 
-            this.Valor_Consulta.HeaderText = "Valor_Consulta";
-            this.Valor_Consulta.Name = "Valor_Consulta";
+            this.Numero_Identificacion.HeaderText = "Numero_Identificacion";
+            this.Numero_Identificacion.Name = "Numero_Identificacion";
             // 
-            // Valor_C_Mod
+            // Numf
             // 
-            this.Valor_C_Mod.HeaderText = "Valor_Cuota";
-            this.Valor_C_Mod.Name = "Valor_C_Mod";
+            this.Numf.HeaderText = "Num_Facturacion";
+            this.Numf.Name = "Numf";
             // 
-            // Valor_Neto
+            // vrlconsulta
             // 
-            this.Valor_Neto.HeaderText = "Valor_Neto";
-            this.Valor_Neto.Name = "Valor_Neto";
+            this.vrlconsulta.HeaderText = "Valor_Consulta";
+            this.vrlconsulta.Name = "vrlconsulta";
+            // 
+            // vrlCuota
+            // 
+            this.vrlCuota.HeaderText = "Valor_Cuota";
+            this.vrlCuota.Name = "vrlCuota";
+            // 
+            // vrlNeto
+            // 
+            this.vrlNeto.HeaderText = "Valor_Neto";
+            this.vrlNeto.Name = "vrlNeto";
             // 
             // checkView
             // 
             this.checkView.AutoSize = true;
-            this.checkView.Location = new System.Drawing.Point(390, 485);
+            this.checkView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.checkView.Location = new System.Drawing.Point(436, 575);
             this.checkView.Name = "checkView";
             this.checkView.Size = new System.Drawing.Size(135, 17);
             this.checkView.TabIndex = 3;
             this.checkView.Text = "Pasar a modificaciones";
-            this.checkView.UseVisualStyleBackColor = true;
+            this.checkView.UseVisualStyleBackColor = false;
             this.checkView.CheckedChanged += new System.EventHandler(this.checkView_CheckedChanged);
             // 
             // FrmConsultas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1040, 574);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.ClientSize = new System.Drawing.Size(1004, 630);
             this.Controls.Add(this.checkView);
             this.Controls.Add(this.PanelVista);
             this.Controls.Add(this.BtnEliminar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnInsertar);
             this.Controls.Add(this.PanelDatos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmConsultas";
             this.Text = "FrmConsultas";
             this.Load += new System.EventHandler(this.FrmConsultas_Load);
             this.PanelDatos.ResumeLayout(false);
             this.PanelDatos.PerformLayout();
             this.PanelVista.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.TablaConsultas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaConsultas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -543,13 +561,13 @@
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button BtnEliminar;
         private System.Windows.Forms.Panel PanelVista;
-        private System.Windows.Forms.DataGridView TablaConsultas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Num_Factura;
-        private System.Windows.Forms.DataGridViewTextBoxColumn N_Columna;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Num_Autorizacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Valor_Consulta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Valor_C_Mod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Valor_Neto;
         private System.Windows.Forms.CheckBox checkView;
+        private System.Windows.Forms.DataGridView tablaConsultas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Num_Autorizacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Identificacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Numf;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vrlconsulta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vrlCuota;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vrlNeto;
     }
 }
