@@ -186,6 +186,16 @@ namespace Vista
             btnInsertar.Visible = true;
             btnInsertar.Location = new System.Drawing.Point(403,485);
         }
+        private void datosn()
+        {
+            if (cbbTipos.Text==null || txtNumI.Text== null || ccbTipoUsuario.Text == null || txtxPapellido.Text == null ||
+              txtxPnombre.Text == null || txtEdad.Text == null || txtMedidaEdad.Text == null || cbbDepartamentos.Text == null ||
+              cbbCiudad.Text == null || cbbCiudad.Text == null || cbbZona.Text == null)
+            {
+                MessageBox.Show("Rellene todos los campos");
+            }
+            
+        }
         private void limpiar()
         {
             txtNumI.Text = string.Empty;

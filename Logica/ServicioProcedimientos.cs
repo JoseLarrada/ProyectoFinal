@@ -50,21 +50,21 @@ namespace Logica
             }
         }
 
-        public string Crear(Procedimiento cliente)
+        public string Crear(Procedimiento proced)
         {
             try
             {
-                //if (!Existe(cliente))
-                //{
-                //    return "No Existe el paciente";
-                //}
-                if (ExisteProcedimiento(cliente))
+                if (!Existe(proced))
+                {
+                    return "No Existe el paciente";
+                }
+                if (ExisteProcedimiento(proced))
                 {
                     return "Ya existe un procedimiento asociado a este codigo";
                 }
                 else
                 {
-                    string msg = Proceso.Guardar(cliente);
+                    string msg = Proceso.Guardar(proced);
                     return msg;
                 }
 
@@ -78,7 +78,7 @@ namespace Logica
 
         public string Eliminar(Procedimiento cliente)
         {
-            if (!ExisteProcedimiento(cliente))
+            if (!Existe(cliente))
             {
                 return "NO SE ENCONTRO LA CONSULTA";
             }
@@ -139,7 +139,6 @@ namespace Logica
             }
 
         }
-
         public Procedimiento ObtenerPorId(string identificacion)
         {
             foreach (var item in ListProcedimiento)

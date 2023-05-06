@@ -433,7 +433,7 @@
             // 
             this.PanelVista.BackColor = System.Drawing.Color.White;
             this.PanelVista.Controls.Add(this.tablaConsultas);
-            this.PanelVista.Location = new System.Drawing.Point(128, 30);
+            this.PanelVista.Location = new System.Drawing.Point(128, 28);
             this.PanelVista.Name = "PanelVista";
             this.PanelVista.Size = new System.Drawing.Size(721, 385);
             this.PanelVista.TabIndex = 2;

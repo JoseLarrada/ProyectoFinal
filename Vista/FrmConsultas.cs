@@ -107,7 +107,7 @@ namespace Vista
         }
         private void guardartabla(Consultas table)
         {
-            tablaConsultas.Rows.Add(txtNumeroFactura.Text, TxtIde.Text, txtNumAuto.Text, txtVrlConsulta.Text, txtVrlCuoM.Text, txtVrlNeto.Text);
+            tablaConsultas.Rows.Add(txtNumAuto.Text, TxtIde.Text, txtNumeroFactura.Text, txtVrlConsulta.Text, txtVrlCuoM.Text, txtVrlNeto.Text);
         }
 
         private void guardar()

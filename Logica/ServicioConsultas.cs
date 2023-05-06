@@ -62,6 +62,10 @@ namespace Logica
                 {
                     return "No Existe el paciente";
                 }
+                if (ExisteConsulta(cliente))
+                {
+                    return "Ya hay un codigo de consulta con este numero";
+                }
                 else
                 {
                     string msg = consultaR.Guardar(cliente);
@@ -78,7 +82,7 @@ namespace Logica
 
         public string Eliminar(Consultas cliente)
         {
-            if (!ExisteConsulta(cliente))
+            if (!Existe(cliente))
             {
                 return "NO SE ENCONTRO LA CONSULTA";
             }
@@ -107,7 +111,7 @@ namespace Logica
                 {
                     foreach (var item in Listconsulta)
                     {
-                        if (item.NumeroIdentificacion == cliente.NumeroIdentificacion)
+                        if (item.NumeroAutorizacion == cliente.NumeroAutorizacion)
                         {
                             return true;
                         }
