@@ -52,6 +52,10 @@ namespace Logica
                 {
                      return "Ya existe el Paciente";
                 }
+                if (nulos(cliente))
+                {
+                    return "No puden haber datos sin rellenar";
+                }
                 else
                 {
                      string msg = paciente.Guardar(cliente);
@@ -117,6 +121,17 @@ namespace Logica
         public List<Pacientes> ObtenerTodos()
         {
             return ListaPacientes;
+        }
+        public bool nulos(Pacientes cliente)
+        {
+            string arg;
+            if (string.IsNullOrEmpty(cliente.TipoId) || string.IsNullOrEmpty(cliente.NumeroId) || string.IsNullOrEmpty(cliente.TipoUsuario)|| string.IsNullOrEmpty(cliente.PrimerApellido)||
+              string.IsNullOrEmpty(cliente.PrimerNombre)|| string.IsNullOrEmpty(cliente.Edad) || string.IsNullOrEmpty(cliente.UnidadMedidaEdad) || string.IsNullOrEmpty(cliente.CodigoDepartamentosResidencia) ||
+              string.IsNullOrEmpty(cliente.CodigoMunicipioResidencia) || string.IsNullOrEmpty(cliente.ZonaResidencia))
+            {
+                return true;
+            }
+            return false;
         }
         private void Refresh()
         {
