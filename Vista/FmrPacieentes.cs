@@ -21,7 +21,7 @@ namespace Vista
         }
         int posicion = 0;
         Configuraciones combob = new Configuraciones();
-        Manejo_Form_Paciente manejo = new Manejo_Form_Paciente();
+        Manejo_Form manejo = new Manejo_Form();
         ServicioPacientes pacientes = new ServicioPacientes();
         private void llenarcombo()
         {

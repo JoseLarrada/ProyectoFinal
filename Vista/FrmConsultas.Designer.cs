@@ -380,7 +380,6 @@
             this.txtNumAuto.Name = "txtNumAuto";
             this.txtNumAuto.Size = new System.Drawing.Size(106, 20);
             this.txtNumAuto.TabIndex = 0;
-            this.txtNumAuto.TextChanged += new System.EventHandler(this.txtNumAuto_TextChanged);
             this.txtNumAuto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumAuto_KeyPress);
             // 
             // txtNumeroFactura
@@ -389,7 +388,6 @@
             this.txtNumeroFactura.Name = "txtNumeroFactura";
             this.txtNumeroFactura.Size = new System.Drawing.Size(106, 20);
             this.txtNumeroFactura.TabIndex = 0;
-            this.txtNumeroFactura.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.txtNumeroFactura.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // btnInsertar
@@ -415,7 +413,6 @@
             this.btnModificar.Text = "Actualizar Consultas";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            this.btnModificar.Enter += new System.EventHandler(this.btnModificar_Enter);
             // 
             // BtnEliminar
             // 

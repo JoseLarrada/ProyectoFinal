@@ -17,8 +17,9 @@ namespace Vista
     public partial class FrmConsultas : Form
     {
         Configuraciones tiposid = new Configuraciones();
-        ErrorProvider Validar = new ErrorProvider();
         ServicioConsultas Consultas = new ServicioConsultas();
+        Manejo_Form manejo=new Manejo_Form();
+        Manejo_Form_Consulta manejoC=new Manejo_Form_Consulta();
         public FrmConsultas()
         {
             InitializeComponent();
@@ -75,39 +76,6 @@ namespace Vista
                 cbbCausa.Items.Add(item);
             }
         }
-        public bool SoloNumeros(KeyPressEventArgs e)
-        {
-            if (Char.IsNumber(e.KeyChar))
-            {
-                e.Handled = false; return true;
-            }else if(Char.IsControl(e.KeyChar))
-            {
-                e.Handled = false; return true;
-            }
-            else
-            {
-                e.Handled=true; return false;
-            }
-        }
-        private ErrorProvider validarN(KeyPressEventArgs e, System.Windows.Forms.TextBox h)
-        {
-            bool error = SoloNumeros(e);
-            if (!error)
-            {
-                Validar.SetError(h, "Solo numeros");
-                return null;
-            }
-            else
-            {
-                Validar.Clear();
-                return null;
-            }
-        }
-        private void guardartabla(Consultas table)
-        {
-            tablaConsultas.Rows.Add(txtNumAuto.Text, TxtIde.Text, txtNumeroFactura.Text, txtVrlConsulta.Text, txtVrlCuoM.Text, txtVrlNeto.Text);
-        }
-
         private void guardar()
         {
             try
@@ -131,8 +99,7 @@ namespace Vista
                 consulta.ValorCuoMod = double.Parse(txtVrlCuoM.Text);
                 consulta.ValorNetoPagar = double.Parse(txtVrlNeto.Text);
                 string msg = Consultas.Crear(consulta);
-                guardartabla(consulta);
-                
+                manejoC.guardartabla(tablaConsultas, consulta, txtNumAuto, TxtIde, txtNumeroFactura, txtVrlConsulta, txtVrlCuoM, txtVrlNeto);
                 Limpiar();
             }
             catch (Exception)
@@ -167,7 +134,7 @@ namespace Vista
                 NuevaConsulta.ValorNetoPagar = double.Parse(txtVrlNeto.Text);
                 string msg = Consultas.Actualizar(consulta, NuevaConsulta);
                 MessageBox.Show(msg);
-                modificartabla();
+                manejoC.modificartabla(tablaConsultas,posicion,txtNumAuto,TxtIde,txtNumeroFactura, txtVrlConsulta, txtVrlCuoM, txtVrlNeto);
                 Limpiar();
         }
         private void eliminar()
@@ -178,7 +145,6 @@ namespace Vista
             MessageBox.Show(msg);
             tablaConsultas.Rows.RemoveAt(posicion);
             Limpiar();
-            tablaConsultas.Rows.RemoveAt(posicion);
         }
         private void llenartabla()
         {
@@ -187,15 +153,6 @@ namespace Vista
 
                 tablaConsultas.Rows.Add(item.NumeroFactura,item.NumeroIdentificacion,item.NumeroAutorizacion,item.ValorConsulta,item.ValorCuoMod,item.ValorNetoPagar);
             }
-        }
-        private void modificartabla()
-        {
-            tablaConsultas[0, posicion].Value = txtNumeroFactura.Text;
-            tablaConsultas[1, posicion].Value = TxtIde.Text;
-            tablaConsultas[2, posicion].Value = txtNumAuto.Text;
-            tablaConsultas[3, posicion].Value = txtVrlConsulta.Text;
-            tablaConsultas[4, posicion].Value = txtVrlCuoM.Text;
-            tablaConsultas[5, posicion].Value = txtVrlNeto.Text;
         }
         private void Limpiar()
         {
@@ -215,64 +172,9 @@ namespace Vista
             cbbTdiagP.Text = string.Empty;
             cbbTipos.Text = string.Empty;
         }
-        private void extension(System.Windows.Forms.TextBox h, int valorMaximo, int valorMinimo)
-        {
-            if (h.Text.Length > valorMaximo || h.Text.Length < valorMinimo)
-            {
-                Validar.SetError(h, "Numero de caracteres superado"); btnInsertar.Enabled = false;
-            }
-            else
-            {
-                btnInsertar.Enabled = true;
-            }
-        }
-        private ErrorProvider validarExtension(KeyPressEventArgs e, System.Windows.Forms.TextBox h)
-        {
-            switch (cbbTipos.SelectedIndex)
-            {
-                case 0:
-                    extension(h, 10, 6);
-                    break;
-                case 1:
-                    extension(h, 11, 6);
-                    break;
-                case 2:
-                    extension(h, 6, 3);
-                    break;
-                case 3:
-                    extension(h, 16, 10);
-                    break;
-                case 4:
-                    extension(h, 16, 10);
-                    break;
-                case 5:
-                    extension(h, 16, 10);
-                    break;
-                case 6:
-                    extension(h, 15, 10);
-                    break;
-                case 7:
-                    extension(h, 11, 10);
-                    break;
-                case 8:
-                    extension(h, 9, 5);
-                    break;
-            }
-            return null;
-        }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, txtNumeroFactura);
-        }
-
-        private void btnModificar_Enter(object sender, EventArgs e)
-        {
-            
+            manejo.validarN(e, txtNumeroFactura);
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -306,48 +208,28 @@ namespace Vista
 
         private void TxtIde_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, TxtIde);
-            validarExtension(e, TxtIde);
+            manejo.validarN(e, TxtIde);
+            manejo.validarExtension(cbbTipos,e, TxtIde,btnInsertar);
         }
-
-        private void txtNumAuto_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtNumAuto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, txtNumAuto);
+            manejo.validarN(e, txtNumAuto);
             txtNumAuto.MaxLength=5;
         }
 
         private void txtVrlConsulta_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, txtVrlConsulta);
+            manejo.validarN(e, txtVrlConsulta);
         }
 
         private void txtVrlCuoM_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, txtVrlCuoM);
+            manejo.validarN(e, txtVrlCuoM);
         }
 
         private void txtVrlNeto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, txtVrlNeto);
-        }
-
-        private void TablaConsultas_Click(object sender, EventArgs e)
-        { 
-        }
-
-        private void TablaConsultas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
-        private void TablaConsultas2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
+            manejo.validarN(e, txtVrlNeto);
         }
 
         private void tablaConsultas_CellContentClick_1(object sender, DataGridViewCellEventArgs e)

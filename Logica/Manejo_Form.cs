@@ -9,7 +9,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Logica
 {
-    public class Manejo_Form_Paciente
+    public class Manejo_Form
     {
         ErrorProvider Validar = new ErrorProvider();
         public void modificartabla(DataGridView tabla,int posicion,ComboBox text0, TextBox text1, TextBox text2,
@@ -124,8 +124,9 @@ namespace Logica
             table.PrimerApellido = text3.Text;
             table.Edad = text4.Text;
             table.Sexo = text5.Text;
-            NomT.Rows.Add(table.TipoId, table.NumeroId, table.PrimerNombre, table.Edad, table.Sexo);
+            NomT.Rows.Add(table.TipoId, table.NumeroId, table.PrimerNombre, table.PrimerApellido, table.Edad, table.Sexo);
         }
+        
 
 
     }

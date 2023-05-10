@@ -44,7 +44,8 @@
   <ItemGroup>
     <Compile Include="Configuraciones.cs" />
     <Compile Include="Idatos.cs" />
-    <Compile Include="Manejo_Form_Paciente.cs" />
+    <Compile Include="Manejo_Form.cs" />
+    <Compile Include="Manejo_Form_Consulta.cs" />
     <Compile Include="ServicioConsultas.cs" />
     <Compile Include="ServicioPacientes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
