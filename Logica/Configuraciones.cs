@@ -1,5 +1,4 @@
 ﻿using Datos;
-using Datos.DatosPrederminados;
 using Entidades;
 using System;
 using System.Collections.Generic;
@@ -9,107 +8,55 @@ using System.Threading.Tasks;
 
 namespace Logica
 {
-    public class Configuraciones: Iconfiguraciones<TipoDatos>
+    public class Configuraciones
     {
-        List<TipoDatos> List = new List<TipoDatos>();
-        TiposDeDatos consultaR = new TiposDeDatos("TiposdeDatos.txt");
+        List<string> TiposId = new List<string>();
         List<string> diagnostico = new List<string>();
         List<string> CausaEx = new List<string>();
         List<string> tipoUsuario = new List<string>();
         List<string> sexo = new List<string>();
         List<string> Departamento = new List<string>();
         List<string> Ciudad = new List<string>();
-        public Configuraciones()
+        List<string> FConsultas = new List<string>();
+        List<string> CConsulta = new List<string>();
+        public List<string> CodigoConsulta()
         {
-            Refresh();
+            CConsulta.Add("Medicina General");
+            CConsulta.Add("Medicina Especializada");
+            CConsulta.Add("Odontologia General");
+            CConsulta.Add("Enfermeria");
+            CConsulta.Add("Nutricion y Dietetica");
+            CConsulta.Add("Psicologia");
+            CConsulta.Add("Fonoaudiologia");
+            CConsulta.Add("Terapias Respiratorias");
+            CConsulta.Add("Terapias Alternativas");
+            return CConsulta;
         }
-        public string Actualizar(TipoDatos Cliente, TipoDatos NuevoC)
+        public List<string> FinalidadConsultas()
         {
-            try
-            {
-                Cliente.NombreTipo = NuevoC.NombreTipo;
-                string msg = consultaR.Guardar(Cliente);
-                return msg + "  " + NuevoC.NombreTipo;
-            }
-            catch (Exception)
-            {
-                return "NO SE PUDO MODIFICAR";
-            }
+            FConsultas.Add("Atencion post parto");
+            FConsultas.Add("Atencion Recien Nacido");
+            FConsultas.Add("Atencion Planificacion Familiar");
+            FConsultas.Add("Deteccion de alteraciones");
+            FConsultas.Add("Deteccion de enfermedad");
+            FConsultas.Add("Deteccion de enfermedad Profesional");
+            FConsultas.Add("Otro");
+            return FConsultas;
         }
-        private void Refresh()
+        public List<string> TipoIdentificacion()
         {
-            List = consultaR.ObtenerLista();
-        }
-        public bool Existe(TipoDatos Cliente)
-        {
-            if (List == null)
-            {
-                return false;
-            }
-            else
-            {
-                foreach (var item in List)
-                {
-                    if (item.NombreTipo == Cliente.NombreTipo)
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
-        public string Crear(TipoDatos cliente)
-        {
-            try
-            {
-                if (Existe(cliente))
-                {
-                    return "Tipo de Dato Existente";
-                }
-                else
-                {
-                    string msg = consultaR.Guardar(cliente);
-                    return msg;
-                }
-            }
-            catch (Exception)
-            {
-
-                return "No se puede crear El tipo de dato";
-            }
-        }
-        public List<TipoDatos> ObtenerTodos()
-        {
-            return List;
-        }
-        public string Eliminar(TipoDatos cliente)
-        {
-            if (!Existe(cliente))
-            {
-                return "NO SE ENCONTRO EL TIPO DE DATO";
-            }
-            else
-            {
-                TipoDatos Borrado = ObtenerPorId(cliente.NombreTipo);
-
-                List.Remove(Borrado);
-
-                string resp = consultaR.Modificar_Eliminar(List);
-                Refresh();
-
-                return resp;
-            }
-        }
-        public TipoDatos ObtenerPorId(string Nombre)
-        {
-            foreach (var item in List)
-            {
-                if (item.NombreTipo == Nombre)
-                {
-                    return item;
-                }
-            }
-            return null;
+            TiposId.Add("CC");
+            TiposId.Add("TI");
+            TiposId.Add("CE");
+            TiposId.Add("CD");
+            TiposId.Add("PA");
+            TiposId.Add("SC");
+            TiposId.Add("PE");
+            TiposId.Add("RC");
+            TiposId.Add("CN");
+            TiposId.Add("AS");
+            TiposId.Add("MS");
+            return TiposId;
         }
         public List<string> DiagnosticoPPal()
         {

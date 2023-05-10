@@ -21,13 +21,13 @@ namespace Vista
         }
         int posicion = 0;
         Configuraciones combob = new Configuraciones();
-        Manejo_Form manejo = new Manejo_Form();
+        Manejo_Form_Paciente manejo = new Manejo_Form_Paciente();
         ServicioPacientes pacientes = new ServicioPacientes();
         private void llenarcombo()
         {
 
             //Tipos de identificacion 
-            foreach (var item in combob.ObtenerTodos())
+            foreach (var item in combob.TipoIdentificacion())
             {
                 cbbTipos.Items.Add(item);
             }
@@ -55,77 +55,28 @@ namespace Vista
                 ccbTipoUsuario.Items.Add(item);
             }
         }
-        private void prueba()
-        {
-            string ciudad = "";
-            switch (cbbDepartamentos.Text)
-            {
-                case "Cesar":
-                    ciudad = "C-";
-                    break;
-                case "La guajira":
-                    ciudad = "G-";
-                    break;
-                case "Atlantico":
-                    ciudad = "A-";
-                    break;
-
-                case "Bolivar":
-                    ciudad = "B-";
-                    break;
-                case "Magdalena":
-                    ciudad = "M-";
-                    break;
-                case "Santander":
-                    ciudad = "S-";
-                    break;
-            }
-            foreach (var item in combob.Departamentos())
-            {
-                if (cbbDepartamentos.Text == item)
-                {
-                    foreach (var item2 in combob.Ciudades())
-                    {
-                        if (item2.StartsWith(ciudad))
-                        {
-                            cbbCiudad.Items.Add(item2);
-                        }
-                    }
-                }
-            }
-        }
         private void guardar()
         {
-            var paciente = new Pacientes();
-            paciente.TipoId = cbbTipos.Text;
-            paciente.NumeroId = txtNumI.Text;
-            paciente.CodigoConsultorio = "3052023";
-            paciente.TipoUsuario = ccbTipoUsuario.Text;
-            paciente.PrimerApellido = txtxPapellido.Text;
-            paciente.SegundoApellido = txtxSapellido.Text;
-            paciente.PrimerNombre = txtxPnombre.Text;
-            paciente.SegundoNombre = txtxSnombre.Text;
-            paciente.Edad = txtEdad.Text;
-            paciente.UnidadMedidaEdad = txtMedidaEdad.Text;
-            paciente.CodigoDepartamentosResidencia = cbbDepartamentos.Text;
-            paciente.CodigoMunicipioResidencia = cbbCiudad.Text;
-            paciente.ZonaResidencia = cbbZona.Text;
-            paciente.Sexo =cbbSexo.Text;
-            string msg = pacientes.Crear(paciente);
-            MessageBox.Show(msg);
-            manejo.guardartabla(tablap,paciente, cbbTipos, txtNumI, txtxPnombre, txtxPapellido, txtEdad, cbbSexo);
-            limpiar();
             
-        }
-        private void guardartabla(Pacientes table)
-        {
-            table.TipoId = cbbTipos.Text;
-            table.NumeroId = txtNumI.Text;
-            table.PrimerNombre = txtxPnombre.Text;
-            table.PrimerApellido = txtxPapellido.Text;
-            table.Edad = txtEdad.Text;
-            table.Sexo = cbbSexo.Text;
-            tablap.Rows.Add(table.TipoId, table.NumeroId, table.PrimerNombre, table.Edad, table.Sexo);
+                var paciente = new Pacientes();
+                paciente.TipoId = cbbTipos.Text;
+                paciente.NumeroId = txtNumI.Text;
+                paciente.CodigoConsultorio = "3052023";
+                paciente.TipoUsuario = ccbTipoUsuario.Text;
+                paciente.PrimerApellido = txtxPapellido.Text;
+                paciente.SegundoApellido = txtxSapellido.Text;
+                paciente.PrimerNombre = txtxPnombre.Text;
+                paciente.SegundoNombre = txtxSnombre.Text;
+                paciente.Edad = txtEdad.Text;
+                paciente.UnidadMedidaEdad = txtMedidaEdad.Text;
+                paciente.CodigoDepartamentosResidencia = cbbDepartamentos.Text;
+                paciente.CodigoMunicipioResidencia = cbbCiudad.Text;
+                paciente.ZonaResidencia = cbbZona.Text;
+                paciente.Sexo = cbbSexo.Text;
+                string msg = pacientes.Crear(paciente);
+                MessageBox.Show(msg);
+                manejo.guardartabla(tablap, paciente, cbbTipos, txtNumI, txtxPnombre, txtxPapellido, txtEdad, cbbSexo);
+                limpiar();
         }
         private void modificar()
         {
@@ -166,8 +117,7 @@ namespace Vista
             string msg = pacientes.Eliminar(paciente);
             MessageBox.Show(msg);
             tablap.Rows.RemoveAt(posicion);
-            limpiar();
-            
+            limpiar(); 
         }
         private void inicio()
         {

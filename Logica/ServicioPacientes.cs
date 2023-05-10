@@ -124,7 +124,6 @@ namespace Logica
         }
         public bool nulos(Pacientes cliente)
         {
-            string arg;
             if (string.IsNullOrEmpty(cliente.TipoId) || string.IsNullOrEmpty(cliente.NumeroId) || string.IsNullOrEmpty(cliente.TipoUsuario)|| string.IsNullOrEmpty(cliente.PrimerApellido)||
               string.IsNullOrEmpty(cliente.PrimerNombre)|| string.IsNullOrEmpty(cliente.Edad) || string.IsNullOrEmpty(cliente.UnidadMedidaEdad) || string.IsNullOrEmpty(cliente.CodigoDepartamentosResidencia) ||
               string.IsNullOrEmpty(cliente.CodigoMunicipioResidencia) || string.IsNullOrEmpty(cliente.ZonaResidencia))

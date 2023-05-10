@@ -58,6 +58,10 @@ namespace Logica
         {
             try
             {
+                if(nulos(cliente))
+                {
+                    return "RELLENE LOS DATOS";
+                }
                 if (!Existe(cliente))
                 {
                     return "No Existe el paciente";
@@ -163,6 +167,18 @@ namespace Logica
         private void Refresh()
         {
             Listconsulta = consultaR.ObtenerLista();
+        }
+
+        public bool nulos(Consultas cliente)
+        {
+            if (string.IsNullOrEmpty(cliente.NumeroFactura) || string.IsNullOrEmpty(cliente.TipoId) || string.IsNullOrEmpty(cliente.NumeroIdentificacion) || string.IsNullOrEmpty(cliente.FechaConsulta.ToString()) ||
+                string.IsNullOrEmpty(cliente.NumeroAutorizacion) || string.IsNullOrEmpty(cliente.CodigoC) || string.IsNullOrEmpty(cliente.FinalidadConsulta) || string.IsNullOrEmpty(cliente.CausaExterna) ||
+                string.IsNullOrEmpty(cliente.CodDiagPpal) || string.IsNullOrEmpty(cliente.TipoDiagPpal) || string.IsNullOrEmpty(cliente.ValorConsulta.ToString()) || string.IsNullOrEmpty(cliente.ValorCuoMod.ToString()) 
+                || string.IsNullOrEmpty(cliente.ValorNetoPagar.ToString()))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -9,7 +9,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Logica
 {
-    public class Manejo_Form
+    public class Manejo_Form_Paciente
     {
         ErrorProvider Validar = new ErrorProvider();
         public void modificartabla(DataGridView tabla,int posicion,ComboBox text0, TextBox text1, TextBox text2,

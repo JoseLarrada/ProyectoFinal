@@ -17,8 +17,6 @@ namespace Vista
     public partial class FrmConsultas : Form
     {
         Configuraciones tiposid = new Configuraciones();
-        ConfCConsultas codigoconsulta = new ConfCConsultas();
-        CFinalidad CFinalidad = new CFinalidad();
         ErrorProvider Validar = new ErrorProvider();
         ServicioConsultas Consultas = new ServicioConsultas();
         public FrmConsultas()
@@ -44,17 +42,17 @@ namespace Vista
         private void llenarCombo()
         {
             //Tipos de  Identificacion
-            foreach (var item in tiposid.ObtenerTodos())
+            foreach (var item in tiposid.TipoIdentificacion())
             {
                 cbbTipos.Items.Add(item);
             }
             //Codigos COnsultas
-            foreach (var item in codigoconsulta.ObtenerTodos())
+            foreach (var item in tiposid.CodigoConsulta())
             {
                 ccbCConsulta.Items.Add(item);
             }
             //Finalidad De consultas
-            foreach (var item in CFinalidad.ObtenerTodos())
+            foreach (var item in tiposid.FinalidadConsultas())
             {
                 cbbFinalidadConsulta.Items.Add(item);
             }
@@ -112,28 +110,37 @@ namespace Vista
 
         private void guardar()
         {
-            var consulta = new Consultas();
-            consulta.NumeroFactura = txtNumeroFactura.Text;
-            consulta.CodigoConsultorio = "3052023";
-            consulta.TipoId = cbbTipos.Text;
-            consulta.NumeroIdentificacion = TxtIde.Text;
-            consulta.FechaConsulta=Datetime.Value;
-            consulta.NumeroAutorizacion=txtNumAuto.Text;
-            consulta.CodigoC = ccbCConsulta.Text;
-            consulta.FinalidadConsulta=cbbFinalidadConsulta.Text;
-            consulta.CausaExterna=cbbCausa.Text;
-            consulta.CodDiagPpal=cbbDiagnosticoP.Text;
-            consulta.CodDiaRel1= cbbDiagR.Text;
-            consulta.CodDiaRel2 = cbbDiagR2.Text;
-            consulta.CodDiaRel3 = cbbDiagR3.Text;
-            consulta.TipoDiagPpal=cbbTdiagP.Text;
-            consulta.ValorConsulta=double.Parse(txtVrlConsulta.Text);
-            consulta.ValorCuoMod= double.Parse(txtVrlCuoM.Text);
-            consulta.ValorNetoPagar= double.Parse(txtVrlNeto.Text);
-            string msg = Consultas.Crear(consulta);
-            guardartabla(consulta);
-            MessageBox.Show(msg);
-            Limpiar();
+            try
+            {
+                var consulta = new Consultas();
+                consulta.NumeroFactura = txtNumeroFactura.Text;
+                consulta.CodigoConsultorio = "3052023";
+                consulta.TipoId = cbbTipos.Text;
+                consulta.NumeroIdentificacion = TxtIde.Text;
+                consulta.FechaConsulta = Datetime.Value;
+                consulta.NumeroAutorizacion = txtNumAuto.Text;
+                consulta.CodigoC = ccbCConsulta.Text;
+                consulta.FinalidadConsulta = cbbFinalidadConsulta.Text;
+                consulta.CausaExterna = cbbCausa.Text;
+                consulta.CodDiagPpal = cbbDiagnosticoP.Text;
+                consulta.CodDiaRel1 = cbbDiagR.Text;
+                consulta.CodDiaRel2 = cbbDiagR2.Text;
+                consulta.CodDiaRel3 = cbbDiagR3.Text;
+                consulta.TipoDiagPpal = cbbTdiagP.Text;
+                consulta.ValorConsulta = double.Parse(txtVrlConsulta.Text);
+                consulta.ValorCuoMod = double.Parse(txtVrlCuoM.Text);
+                consulta.ValorNetoPagar = double.Parse(txtVrlNeto.Text);
+                string msg = Consultas.Crear(consulta);
+                guardartabla(consulta);
+                
+                Limpiar();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Rellene los datos numericos");
+            }
+            
             
         }
         private void modificar()

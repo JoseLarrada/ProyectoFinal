@@ -42,12 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CFinalidad.cs" />
-    <Compile Include="ConfCConsultas.cs" />
     <Compile Include="Configuraciones.cs" />
-    <Compile Include="Iconfiguraciones.cs" />
     <Compile Include="Idatos.cs" />
-    <Compile Include="Manejo_Form.cs" />
+    <Compile Include="Manejo_Form_Paciente.cs" />
     <Compile Include="ServicioConsultas.cs" />
     <Compile Include="ServicioPacientes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -159,5 +159,10 @@ namespace Logica
         {
             ListProcedimiento = Proceso.ObtenerLista();
         }
+
+        public bool nulos(Procedimiento cliente)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

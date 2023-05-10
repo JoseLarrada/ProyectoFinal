@@ -45,7 +45,7 @@ namespace Vista
             cbbFormaRealizacion.Items.Add("Bilateral Tipo 3");
             cbbFormaRealizacion.Items.Add("Bilateral Tipo 4");
             //DATOS DE ID
-            foreach (var item in Combos.ObtenerTodos())
+            foreach (var item in Combos.TipoIdentificacion())
             {
                 cbbTipos.Items.Add(item);
             }

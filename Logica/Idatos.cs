@@ -14,6 +14,7 @@ namespace Logica
         List<T> ObtenerTodos();
         bool Existe(T Cliente);
         T ObtenerPorId(string identificacion);
+        bool nulos(T cliente);
 
     }
 }
