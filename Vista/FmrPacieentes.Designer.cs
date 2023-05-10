@@ -115,8 +115,8 @@
             this.cbbCiudad.Name = "cbbCiudad";
             this.cbbCiudad.Size = new System.Drawing.Size(130, 21);
             this.cbbCiudad.TabIndex = 2;
-            this.cbbCiudad.SelectedIndexChanged += new System.EventHandler(this.cbbDiagR3_SelectedIndexChanged);
-            this.cbbCiudad.Click += new System.EventHandler(this.cbbCiudad_Click);
+            
+            //this.cbbCiudad.Click += new System.EventHandler(this.cbbCiudad_Click);
             // 
             // label12
             // 
@@ -126,7 +126,6 @@
             this.label12.Size = new System.Drawing.Size(96, 13);
             this.label12.TabIndex = 1;
             this.label12.Text = "Ciudad Residencia";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // cbbZona
             // 
@@ -135,7 +134,7 @@
             this.cbbZona.Name = "cbbZona";
             this.cbbZona.Size = new System.Drawing.Size(130, 21);
             this.cbbZona.TabIndex = 2;
-            this.cbbZona.SelectedIndexChanged += new System.EventHandler(this.cbbDiagR2_SelectedIndexChanged);
+            
             // 
             // label8
             // 
@@ -145,7 +144,7 @@
             this.label8.Size = new System.Drawing.Size(32, 13);
             this.label8.TabIndex = 1;
             this.label8.Text = "Zona";
-            this.label8.Click += new System.EventHandler(this.label11_Click);
+            //this.label8.Click += new System.EventHandler(this.label11_Click);
             // 
             // cbbDepartamentos
             // 
@@ -154,8 +153,6 @@
             this.cbbDepartamentos.Name = "cbbDepartamentos";
             this.cbbDepartamentos.Size = new System.Drawing.Size(130, 21);
             this.cbbDepartamentos.TabIndex = 2;
-            this.cbbDepartamentos.SelectedIndexChanged += new System.EventHandler(this.cbbDiagR2_SelectedIndexChanged);
-            this.cbbDepartamentos.Click += new System.EventHandler(this.cbbDepartamentos_Click);
             // 
             // label11
             // 
@@ -165,7 +162,7 @@
             this.label11.Size = new System.Drawing.Size(130, 13);
             this.label11.TabIndex = 1;
             this.label11.Text = "Departamento Residencia";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
+            //this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // cbbSexo
             // 
@@ -419,7 +416,7 @@
             this.BtnEliminar.Name = "BtnEliminar";
             this.BtnEliminar.Size = new System.Drawing.Size(185, 35);
             this.BtnEliminar.TabIndex = 4;
-            this.BtnEliminar.Text = "Eliminar Consultas";
+            this.BtnEliminar.Text = "Eliminar Paciente";
             this.BtnEliminar.UseVisualStyleBackColor = true;
             this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
@@ -431,7 +428,7 @@
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(185, 35);
             this.btnModificar.TabIndex = 5;
-            this.btnModificar.Text = "Actualizar Consultas";
+            this.btnModificar.Text = "Actualizar Paciente";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
@@ -445,7 +442,7 @@
             this.btnInsertar.Name = "btnInsertar";
             this.btnInsertar.Size = new System.Drawing.Size(185, 35);
             this.btnInsertar.TabIndex = 6;
-            this.btnInsertar.Text = "Guardar Consulta";
+            this.btnInsertar.Text = "Guardar Paciente";
             this.btnInsertar.UseVisualStyleBackColor = false;
             this.btnInsertar.Click += new System.EventHandler(this.btnInsertar_Click);
             // 

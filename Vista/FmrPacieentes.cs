@@ -21,8 +21,8 @@ namespace Vista
         }
         int posicion = 0;
         Configuraciones combob = new Configuraciones();
+        Manejo_Form manejo = new Manejo_Form();
         ServicioPacientes pacientes = new ServicioPacientes();
-        ErrorProvider Validar = new ErrorProvider();
         private void llenarcombo()
         {
 
@@ -110,10 +110,10 @@ namespace Vista
             paciente.CodigoDepartamentosResidencia = cbbDepartamentos.Text;
             paciente.CodigoMunicipioResidencia = cbbCiudad.Text;
             paciente.ZonaResidencia = cbbZona.Text;
-            paciente.Sexo = cbbSexo.Text;
+            paciente.Sexo =cbbSexo.Text;
             string msg = pacientes.Crear(paciente);
             MessageBox.Show(msg);
-            guardartabla(paciente);
+            manejo.guardartabla(tablap,paciente, cbbTipos, txtNumI, txtxPnombre, txtxPapellido, txtEdad, cbbSexo);
             limpiar();
             
         }
@@ -126,15 +126,6 @@ namespace Vista
             table.Edad = txtEdad.Text;
             table.Sexo = cbbSexo.Text;
             tablap.Rows.Add(table.TipoId, table.NumeroId, table.PrimerNombre, table.Edad, table.Sexo);
-        }
-        private void modificartabla()
-        {
-            tablap[0, posicion].Value = cbbTipos.Text;
-            tablap[1, posicion].Value = txtNumI.Text;
-            tablap[2, posicion].Value = txtxPnombre.Text;
-            tablap[3, posicion].Value = txtxPapellido.Text;
-            tablap[4, posicion].Value = txtEdad.Text;
-            tablap[5, posicion].Value = cbbSexo.Text;
         }
         private void modificar()
         {
@@ -162,7 +153,8 @@ namespace Vista
                 pacientenuevo.Sexo = cbbSexo.Text;
                 string msg = pacientes.Actualizar(paciente, pacientenuevo);
                 MessageBox.Show(msg);
-                modificartabla();
+                manejo.modificartabla(tablap, posicion, cbbTipos, txtNumI, txtxPnombre, txtxPapellido,
+                                      txtEdad, cbbSexo);
                 limpiar();
                 
             }
@@ -201,40 +193,6 @@ namespace Vista
             cbbTipos.Text = string.Empty;
             cbbZona.Text = string.Empty;
         }
-        public bool SoloNumeros(KeyPressEventArgs e)
-        {
-            if (Char.IsNumber(e.KeyChar))
-            {
-                e.Handled = false; return true;
-
-            }
-            else if (Char.IsControl(e.KeyChar))
-            {
-                e.Handled = false; return true;
-            }
-            else
-            {
-                e.Handled = true; return false;
-            }
-        }
-        private void ValidarLetras(KeyPressEventArgs e, System.Windows.Forms.TextBox h)
-        {
-            if (Char.IsLetter(e.KeyChar) || Char.IsSeparator(e.KeyChar))
-            {
-                e.Handled = false;
-                Validar.Clear();
-
-            }
-            else if (Char.IsControl(e.KeyChar))
-            {
-                e.Handled = false; Validar.Clear();
-            }
-            else
-            {
-                e.Handled = true;
-                Validar.SetError(h, "Solo numeros");
-            }
-        }
         private void llenartabla()
         {
             foreach (var item in pacientes.ObtenerTodos())
@@ -242,102 +200,12 @@ namespace Vista
                 tablap.Rows.Add(item.TipoId, item.NumeroId, item.PrimerNombre, item.PrimerApellido, item.Edad, item.Sexo);
             }
         }
-        private ErrorProvider validarN(KeyPressEventArgs e, System.Windows.Forms.TextBox h)
-        {
-            bool error = SoloNumeros(e);
-            if (!error)
-            {
-                Validar.SetError(h, "Solo numeros");
-                return null;
-            }
-            else
-            {
-                Validar.Clear();
-                return null;
-            }
-        } 
-        private void extension(System.Windows.Forms.TextBox h,int valorMaximo,int valorMinimo)
-        {
-            if (h.Text.Length > valorMaximo || h.Text.Length < valorMinimo)
-            {
-                Validar.SetError(h, "Numero de caracteres superado"); btnInsertar.Enabled = false;
-            }
-            else
-            {
-                btnInsertar.Enabled = true;
-            }
-        }
-        private ErrorProvider validarExtension(KeyPressEventArgs e, System.Windows.Forms.TextBox h)
-        {
-            switch (cbbTipos.SelectedIndex)
-            {
-                case 0:
-                    extension(h, 10, 6);
-                    break;
-                case 1:
-                    extension(h, 11, 6);
-                    break;
-                case 2:
-                    extension(h, 6, 3);
-                    break;
-                case 3:
-                    extension(h, 16, 10);
-                    break;
-                case 4:
-                    extension(h, 16, 10);
-                    break;
-                case 5:
-                    extension(h, 16, 10);
-                    break;
-                case 6:
-                    extension(h, 15, 10);
-                    break;
-                case 7:
-                    extension(h, 11, 10);
-                    break;
-                case 8:
-                    extension(h, 9, 5);
-                    break;
-            }
-            return null;
-        }
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbbDiagR2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbbDiagR3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void FmrPacieentes_Load(object sender, EventArgs e)
         {
             llenarcombo();
             inicio();
             llenartabla();
         }
-
-        private void cbbCiudad_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void cbbDepartamentos_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btnInsertar_Click(object sender, EventArgs e)
         {
             guardar();
@@ -380,37 +248,37 @@ namespace Vista
 
         private void txtNumI_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, txtNumI);
-            validarExtension(e, txtNumI);
+            manejo.validarN(e, txtNumI);
+            manejo.validarExtension(cbbTipos,e, txtNumI,btnInsertar);
         }
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, txtEdad);
+            manejo.validarN(e, txtEdad);
             txtEdad.MaxLength = 3;
         }
 
         private void txtxPnombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidarLetras(e, txtxPnombre);
+            manejo.ValidarLetras(e, txtxPnombre);
             txtxPnombre.MaxLength=15;
         }
 
         private void txtxSnombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidarLetras(e, txtxSnombre);
+            manejo.ValidarLetras(e, txtxSnombre);
             txtxSnombre.MaxLength = 15;
         }
 
         private void txtxPapellido_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidarLetras(e, txtxPapellido);
+            manejo.ValidarLetras(e, txtxPapellido);
             txtxPapellido.MaxLength = 15;
         }
 
         private void txtxSapellido_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidarLetras(e, txtxSapellido);
+            manejo.ValidarLetras(e, txtxSapellido);
             txtxSapellido.MaxLength = 15;
         }
     }

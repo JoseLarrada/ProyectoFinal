@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +47,7 @@
     <Compile Include="Configuraciones.cs" />
     <Compile Include="Iconfiguraciones.cs" />
     <Compile Include="Idatos.cs" />
+    <Compile Include="Manejo_Form.cs" />
     <Compile Include="ServicioConsultas.cs" />
     <Compile Include="ServicioPacientes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
