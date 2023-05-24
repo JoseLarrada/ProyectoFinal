@@ -58,12 +58,6 @@
             this.checkView = new System.Windows.Forms.CheckBox();
             this.PanelVista = new System.Windows.Forms.Panel();
             this.tablaProcedimientos = new System.Windows.Forms.DataGridView();
-            this.Num_Autorizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Numero_Identificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Numf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ambito_Procedimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Diagnostico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Valor_Consulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PanelDatos.SuspendLayout();
             this.PanelVista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaProcedimientos)).BeginInit();
@@ -293,7 +287,7 @@
             this.BtnEliminar.Name = "BtnEliminar";
             this.BtnEliminar.Size = new System.Drawing.Size(185, 35);
             this.BtnEliminar.TabIndex = 2;
-            this.BtnEliminar.Text = "Eliminar Consultas";
+            this.BtnEliminar.Text = "Eliminar Procedimiento";
             this.BtnEliminar.UseVisualStyleBackColor = true;
             this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
@@ -305,7 +299,7 @@
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(185, 35);
             this.btnModificar.TabIndex = 3;
-            this.btnModificar.Text = "Actualizar Consultas";
+            this.btnModificar.Text = "Actualizar Procedimiento";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
@@ -317,7 +311,7 @@
             this.btnInsertar.Name = "btnInsertar";
             this.btnInsertar.Size = new System.Drawing.Size(185, 35);
             this.btnInsertar.TabIndex = 4;
-            this.btnInsertar.Text = "Guardar Consulta";
+            this.btnInsertar.Text = "Guardar Procedimiento";
             this.btnInsertar.UseVisualStyleBackColor = true;
             this.btnInsertar.Click += new System.EventHandler(this.btnInsertar_Click);
             // 
@@ -345,49 +339,12 @@
             // tablaProcedimientos
             // 
             this.tablaProcedimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaProcedimientos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Num_Autorizacion,
-            this.Numero_Identificacion,
-            this.Numf,
-            this.Ambito_Procedimiento,
-            this.Diagnostico,
-            this.Valor_Consulta});
             this.tablaProcedimientos.Location = new System.Drawing.Point(34, 21);
             this.tablaProcedimientos.Name = "tablaProcedimientos";
             this.tablaProcedimientos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tablaProcedimientos.Size = new System.Drawing.Size(648, 330);
             this.tablaProcedimientos.TabIndex = 1;
             this.tablaProcedimientos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaProcedimientos_CellContentClick);
-            // 
-            // Num_Autorizacion
-            // 
-            this.Num_Autorizacion.HeaderText = "Num_Autorizacion";
-            this.Num_Autorizacion.Name = "Num_Autorizacion";
-            // 
-            // Numero_Identificacion
-            // 
-            this.Numero_Identificacion.HeaderText = "Numero_Identificacion";
-            this.Numero_Identificacion.Name = "Numero_Identificacion";
-            // 
-            // Numf
-            // 
-            this.Numf.HeaderText = "Num_Facturacion";
-            this.Numf.Name = "Numf";
-            // 
-            // Ambito_Procedimiento
-            // 
-            this.Ambito_Procedimiento.HeaderText = "Ambito_Procedimiento";
-            this.Ambito_Procedimiento.Name = "Ambito_Procedimiento";
-            // 
-            // Diagnostico
-            // 
-            this.Diagnostico.HeaderText = "Diagnostico";
-            this.Diagnostico.Name = "Diagnostico";
-            // 
-            // Valor_Consulta
-            // 
-            this.Valor_Consulta.HeaderText = "Valor_Procedimiento";
-            this.Valor_Consulta.Name = "Valor_Consulta";
             // 
             // FrmProcedimientos
             // 
@@ -445,11 +402,5 @@
         private System.Windows.Forms.TextBox txtCodigoProcedimiento;
         private System.Windows.Forms.Panel PanelVista;
         private System.Windows.Forms.DataGridView tablaProcedimientos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Num_Autorizacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Identificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Numf;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ambito_Procedimiento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Diagnostico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Valor_Consulta;
     }
 }

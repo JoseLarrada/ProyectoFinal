@@ -59,12 +59,6 @@
             this.txtxPnombre = new System.Windows.Forms.TextBox();
             this.PanelVista = new System.Windows.Forms.Panel();
             this.tablap = new System.Windows.Forms.DataGridView();
-            this.Tipo_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Numero_Identificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Primer_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Primer_Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Edad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sexo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checkView = new System.Windows.Forms.CheckBox();
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
@@ -115,8 +109,6 @@
             this.cbbCiudad.Name = "cbbCiudad";
             this.cbbCiudad.Size = new System.Drawing.Size(130, 21);
             this.cbbCiudad.TabIndex = 2;
-            
-            //this.cbbCiudad.Click += new System.EventHandler(this.cbbCiudad_Click);
             // 
             // label12
             // 
@@ -134,7 +126,6 @@
             this.cbbZona.Name = "cbbZona";
             this.cbbZona.Size = new System.Drawing.Size(130, 21);
             this.cbbZona.TabIndex = 2;
-            
             // 
             // label8
             // 
@@ -144,7 +135,6 @@
             this.label8.Size = new System.Drawing.Size(32, 13);
             this.label8.TabIndex = 1;
             this.label8.Text = "Zona";
-            //this.label8.Click += new System.EventHandler(this.label11_Click);
             // 
             // cbbDepartamentos
             // 
@@ -153,6 +143,7 @@
             this.cbbDepartamentos.Name = "cbbDepartamentos";
             this.cbbDepartamentos.Size = new System.Drawing.Size(130, 21);
             this.cbbDepartamentos.TabIndex = 2;
+            this.cbbDepartamentos.SelectedIndexChanged += new System.EventHandler(this.cbbDepartamentos_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -162,7 +153,6 @@
             this.label11.Size = new System.Drawing.Size(130, 13);
             this.label11.TabIndex = 1;
             this.label11.Text = "Departamento Residencia";
-            //this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // cbbSexo
             // 
@@ -344,7 +334,7 @@
             // PanelVista
             // 
             this.PanelVista.Controls.Add(this.tablap);
-            this.PanelVista.Location = new System.Drawing.Point(111, 37);
+            this.PanelVista.Location = new System.Drawing.Point(95, 41);
             this.PanelVista.Name = "PanelVista";
             this.PanelVista.Size = new System.Drawing.Size(820, 400);
             this.PanelVista.TabIndex = 2;
@@ -352,49 +342,12 @@
             // tablap
             // 
             this.tablap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablap.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Tipo_Id,
-            this.Numero_Identificacion,
-            this.Primer_Nombre,
-            this.Primer_Apellido,
-            this.Edad,
-            this.Sexo});
             this.tablap.Location = new System.Drawing.Point(17, 9);
             this.tablap.Name = "tablap";
             this.tablap.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tablap.Size = new System.Drawing.Size(791, 377);
             this.tablap.TabIndex = 0;
             this.tablap.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablap_CellContentClick);
-            // 
-            // Tipo_Id
-            // 
-            this.Tipo_Id.HeaderText = "Tipo_Identificacion";
-            this.Tipo_Id.Name = "Tipo_Id";
-            // 
-            // Numero_Identificacion
-            // 
-            this.Numero_Identificacion.HeaderText = "Numero_Identificacion";
-            this.Numero_Identificacion.Name = "Numero_Identificacion";
-            // 
-            // Primer_Nombre
-            // 
-            this.Primer_Nombre.HeaderText = "Primer_Nombre";
-            this.Primer_Nombre.Name = "Primer_Nombre";
-            // 
-            // Primer_Apellido
-            // 
-            this.Primer_Apellido.HeaderText = "Primer_Apellido";
-            this.Primer_Apellido.Name = "Primer_Apellido";
-            // 
-            // Edad
-            // 
-            this.Edad.HeaderText = "Edad";
-            this.Edad.Name = "Edad";
-            // 
-            // Sexo
-            // 
-            this.Sexo.HeaderText = "Sexo";
-            this.Sexo.Name = "Sexo";
             // 
             // checkView
             // 
@@ -503,12 +456,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel PanelVista;
         private System.Windows.Forms.DataGridView tablap;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Identificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Primer_Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Primer_Apellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Edad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sexo;
         private System.Windows.Forms.CheckBox checkView;
         private System.Windows.Forms.Button BtnEliminar;
         private System.Windows.Forms.Button btnModificar;

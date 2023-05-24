@@ -20,35 +20,19 @@ namespace Vista
             InitializeComponent();
         }
         ErrorProvider Validar = new ErrorProvider();
-        Configuraciones Combos = new Configuraciones();
-        ServicioProcedimientos procesos=new ServicioProcedimientos();
+        Logica.Configuraciones abstraccion = new Logica.Configuraciones(ConfigConnection.connectionString);
+        Logica.ConfiguracionNombres mostrado = new Logica.ConfiguracionNombres(ConfigConnection.connectionString);
+        Logica.Datos_Prederminados llenado = new Logica.Datos_Prederminados(ConfigConnection.connectionString);
+        Logica.ServicioProcedimientos procesos=new Logica.ServicioProcedimientos(ConfigConnection.connectionString);
+
         int posicion = 0;
         private void llenarCombobox()
         {
-            //Ambito Procedimiento
-            cbbAmbitoP.Items.Add("Urgencias");
-            cbbAmbitoP.Items.Add("Hospitalario");
-            //FinalidadProcedimiento
-            cbbFinalidadProcedimiento.Items.Add("Diagnostico");
-            cbbFinalidadProcedimiento.Items.Add("Proteccion Especifica");
-            cbbFinalidadProcedimiento.Items.Add("Detección temprana de enfermedad general");
-            cbbFinalidadProcedimiento.Items.Add("Detección temprana de enfermedad labora");
-            //Diagnosticos
-            foreach (var item in Combos.DiagnosticoPPal())
-            {
-                cbbDiagnosticoP.Items.Add(item);
-            }
-            //FormaRealizacion
-            cbbFormaRealizacion.Items.Add("Unilateral");
-            cbbFormaRealizacion.Items.Add("Bilateral Tipo 1");
-            cbbFormaRealizacion.Items.Add("Bilateral Tipo 2");
-            cbbFormaRealizacion.Items.Add("Bilateral Tipo 3");
-            cbbFormaRealizacion.Items.Add("Bilateral Tipo 4");
-            //DATOS DE ID
-            foreach (var item in Combos.TipoIdentificacion())
-            {
-                cbbTipos.Items.Add(item);
-            }
+            llenado.TipoIdentificacion(cbbTipos);
+            llenado.Ambitos(cbbAmbitoP);
+            llenado.FinalidadProcedimiento(cbbFinalidadProcedimiento);
+            llenado.DiagnosticoProcedimiento(cbbDiagnosticoP);
+            llenado.Forma(cbbFormaRealizacion);
         }
         private void inicio()
         {
@@ -92,72 +76,53 @@ namespace Vista
         {
             var procedimiento = new Procedimiento();
             procedimiento.NumeroFactura = txtNumeroFactura.Text;
-            procedimiento.CodigoConsultorio = "3052023";
-            procedimiento.TipoId = cbbTipos.Text;
+            procedimiento.CodigoConsultorio = "750309";
+            procedimiento.TipoId = abstraccion.TipoIdentificacion(cbbTipos.Text);
             procedimiento.NumeroIdentificacion = TxtIde.Text;
             procedimiento.CodigoC = txtCodigoProcedimiento.Text;
             procedimiento.FechaProcedimiento = Datetime.Value;
             procedimiento.NumeroAutorizacion = txtNumAuto.Text;
-            procedimiento.AmbitoRealProce = cbbAmbitoP.Text;
-            procedimiento.FinalidadProce = cbbFinalidadProcedimiento.Text;
-            procedimiento.DiagnosticoPpal=cbbDiagnosticoP.Text;
-            procedimiento.FormaRealiActo=cbbFormaRealizacion.Text;
-            procedimiento.VrlProcedimiento = double.Parse(txtVrlProcedimiento.Text);
+            procedimiento.AmbitoRealProce = abstraccion.Ambitos(cbbAmbitoP.Text);
+            procedimiento.PersonalAti = "0";
+            procedimiento.FinalidadProce = abstraccion.FinalidadProcedimientos(cbbFinalidadProcedimiento.Text);
+            procedimiento.DiagnosticoPpal= abstraccion.DiagnosticoProcedimiento(cbbDiagnosticoP.Text);
+            procedimiento.FormaRealiActo= abstraccion.FormaRealizacion(cbbFormaRealizacion.Text);
+            procedimiento.VrlProcedimiento = Convert.ToInt32(txtVrlProcedimiento.Text);
             string msg = procesos.Crear(procedimiento);
-            guardartabla(procedimiento);
             MessageBox.Show(msg);
             Limpiar();
-
         }
         private void modificar()
         {
-            var NuevoProcedimiento = new Procedimiento();
-            var procedimiento = procesos.ObtenerPorId(TxtIde.Text);
-            NuevoProcedimiento.NumeroFactura = txtNumeroFactura.Text;
-            NuevoProcedimiento.CodigoConsultorio = "3052023";
-            NuevoProcedimiento.TipoId = cbbTipos.Text;
-            NuevoProcedimiento.NumeroIdentificacion = TxtIde.Text;
-            NuevoProcedimiento.CodigoC = txtCodigoProcedimiento.Text;
-            NuevoProcedimiento.FechaProcedimiento = Datetime.Value;
-            NuevoProcedimiento.NumeroAutorizacion = txtNumAuto.Text;
-            NuevoProcedimiento.AmbitoRealProce = cbbAmbitoP.Text;
-            NuevoProcedimiento.FinalidadProce = cbbFinalidadProcedimiento.Text;
-            NuevoProcedimiento.DiagnosticoPpal = cbbDiagnosticoP.Text;
-            NuevoProcedimiento.FormaRealiActo = cbbFormaRealizacion.Text;
-            NuevoProcedimiento.VrlProcedimiento = double.Parse(txtVrlProcedimiento.Text);
-            string msg = procesos.Actualizar(procedimiento, NuevoProcedimiento);
+            var procedimiento = new Procedimiento();
+            procedimiento.NumeroFactura = txtNumeroFactura.Text;
+            procedimiento.CodigoConsultorio = "750309";
+            procedimiento.TipoId = abstraccion.TipoIdentificacion(cbbTipos.Text);
+            procedimiento.NumeroIdentificacion = TxtIde.Text;
+            procedimiento.CodigoC = txtCodigoProcedimiento.Text;
+            procedimiento.FechaProcedimiento = Datetime.Value;
+            procedimiento.NumeroAutorizacion = txtNumAuto.Text;
+            procedimiento.AmbitoRealProce = abstraccion.Ambitos(cbbAmbitoP.Text);
+            procedimiento.PersonalAti = "0";
+            procedimiento.FinalidadProce = abstraccion.FinalidadProcedimientos(cbbFinalidadProcedimiento.Text);
+            procedimiento.DiagnosticoPpal = abstraccion.DiagnosticoProcedimiento(cbbDiagnosticoP.Text);
+            procedimiento.FormaRealiActo = abstraccion.FormaRealizacion(cbbFormaRealizacion.Text);
+            procedimiento.VrlProcedimiento = Convert.ToInt32(txtVrlProcedimiento.Text);
+            string msg = procesos.Actualizar(procedimiento);
             MessageBox.Show(msg);
-            modificartabla();
             Limpiar();
         }
         private void eliminar()
         {
             var proceso=new Procedimiento();
-            proceso.NumeroIdentificacion = TxtIde.Text;
+            proceso.CodigoC = txtCodigoProcedimiento.Text;
             string msg = procesos.Eliminar(proceso);
             MessageBox.Show(msg);
-            tablaProcedimientos.Rows.RemoveAt(posicion);
             Limpiar();
-        }
-        private void guardartabla(Procedimiento table)
-        {
-            tablaProcedimientos.Rows.Add(txtNumAuto.Text,TxtIde.Text,txtNumeroFactura.Text,cbbAmbitoP.Text, cbbDiagnosticoP.Text, txtVrlProcedimiento.Text);
-        }
-        private void modificartabla()
-        {
-            tablaProcedimientos[0, posicion].Value = txtNumAuto.Text;
-            tablaProcedimientos[1, posicion].Value = TxtIde.Text;
-            tablaProcedimientos[2, posicion].Value = txtNumeroFactura.Text;
-            tablaProcedimientos[3, posicion].Value = cbbAmbitoP.Text;
-            tablaProcedimientos[4, posicion].Value = cbbDiagnosticoP.Text;
-            tablaProcedimientos[5, posicion].Value = txtVrlProcedimiento.Text;
         }
         private void llenartabla()
         {
-            foreach (var item in procesos.ObtenerTodos())
-            {
-                tablaProcedimientos.Rows.Add(item.NumeroAutorizacion, item.NumeroIdentificacion, item.NumeroFactura, item.AmbitoRealProce, item.DiagnosticoPpal, item.VrlProcedimiento);
-            }
+            tablaProcedimientos.DataSource=procesos.ObtenerTodos();
         }
         private void Limpiar()
         {
@@ -257,6 +222,7 @@ namespace Vista
         private void txtNumeroFactura_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarN(e, txtNumeroFactura);
+            txtNumeroFactura.MaxLength = 6;
         }
 
         private void TxtIde_KeyPress(object sender, KeyPressEventArgs e)
@@ -283,12 +249,17 @@ namespace Vista
         private void tablaProcedimientos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             posicion= tablaProcedimientos.CurrentRow.Index;
-            txtNumAuto.Text = tablaProcedimientos.CurrentRow.Cells[0].Value.ToString();
-            TxtIde.Text= tablaProcedimientos.CurrentRow.Cells[1].Value.ToString();
-            txtNumeroFactura.Text = tablaProcedimientos.CurrentRow.Cells[2].Value.ToString();
-            cbbAmbitoP.Text= tablaProcedimientos.CurrentRow.Cells[3].Value.ToString();
-            cbbDiagnosticoP.Text= tablaProcedimientos.CurrentRow.Cells[4].Value.ToString();
-            txtVrlProcedimiento.Text= tablaProcedimientos.CurrentRow.Cells[5].Value.ToString();
+            Datetime.Value = (DateTime)tablaProcedimientos.CurrentRow.Cells[0].Value;
+            txtNumAuto.Text = tablaProcedimientos.CurrentRow.Cells[1].Value.ToString();
+            cbbAmbitoP.Text= mostrado.Ambitos(tablaProcedimientos.CurrentRow.Cells[2].Value.ToString());
+            cbbFinalidadProcedimiento.Text = mostrado.FinalidadProcedimientos(tablaProcedimientos.CurrentRow.Cells[3].Value.ToString());
+            cbbDiagnosticoP.Text= mostrado.DiagnosticoProcedimiento(tablaProcedimientos.CurrentRow.Cells[5].Value.ToString());
+            cbbFormaRealizacion.Text = mostrado.FormaRealizacion(tablaProcedimientos.CurrentRow.Cells[6].Value.ToString());
+            txtVrlProcedimiento.Text = tablaProcedimientos.CurrentRow.Cells[7].Value.ToString();
+            txtNumeroFactura.Text = tablaProcedimientos.CurrentRow.Cells[8].Value.ToString();
+            cbbTipos.Text = mostrado.TipoIdentificacion(tablaProcedimientos.CurrentRow.Cells[10].Value.ToString());
+            TxtIde.Text = tablaProcedimientos.CurrentRow.Cells[11].Value.ToString();
+            txtCodigoProcedimiento.Text=tablaProcedimientos.CurrentRow.Cells[12].Value.ToString();
         }
     }
 }

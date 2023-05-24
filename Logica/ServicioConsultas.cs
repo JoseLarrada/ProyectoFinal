@@ -11,41 +11,23 @@ namespace Logica
     public class ServicioConsultas : Idatos<Consultas>
     {
         List<Consultas> Listconsulta =new List<Consultas>();
-        ServicioPacientes pacientes= new ServicioPacientes();
-        RConsultas consultaR = new RConsultas("ReporteConsulta.txt");
-        public ServicioConsultas()
+        ServicioPacientes pacientes= new ServicioPacientes("");
+        Datos.RConsultas repositorio;
+        public ServicioConsultas(string conexion)
         {
-            Refresh();
+            repositorio = new Datos.RConsultas(conexion);
         }
-        public string Actualizar(Consultas Cliente, Consultas NuevoC)
+        public string Actualizar(Consultas Consulta)
         {
             try
             {
-                    if (!Existe(Cliente))
+                    if (!Existe(Consulta))
                     {
                         return "No Existe el paciente";
                     }
                     else
                     {
-                        Cliente.NumeroFactura = NuevoC.NumeroFactura;
-                        Cliente.CodigoConsultorio = NuevoC.CodigoConsultorio;
-                        Cliente.TipoId = NuevoC.TipoId;
-                        Cliente.NumeroIdentificacion = NuevoC.NumeroIdentificacion;
-                        Cliente.FechaConsulta = NuevoC.FechaConsulta;
-                        Cliente.NumeroAutorizacion = NuevoC.NumeroAutorizacion;
-                        Cliente.CodigoC = NuevoC.CodigoC;
-                        Cliente.FinalidadConsulta = NuevoC.FinalidadConsulta;
-                        Cliente.CausaExterna = NuevoC.CausaExterna;
-                        Cliente.CodDiagPpal = NuevoC.CodDiagPpal;
-                        Cliente.CodDiaRel1 = NuevoC.CodDiaRel1;
-                        Cliente.CodDiaRel2 = NuevoC.CodDiaRel2;
-                        Cliente.CodDiaRel3 = NuevoC.CodDiaRel3;
-                        Cliente.TipoDiagPpal = NuevoC.TipoDiagPpal;
-                        Cliente.ValorConsulta = NuevoC.ValorConsulta;
-                        Cliente.ValorCuoMod = NuevoC.ValorCuoMod;
-                        Cliente.ValorNetoPagar = NuevoC.ValorNetoPagar;
-                        string msg = consultaR.Modificar_Eliminar(Listconsulta);
-                        return msg + "  " + NuevoC.NumeroAutorizacion;
+                        return repositorio.Modificar(Consulta) + "  " + Consulta.NumeroAutorizacion;
                     }
             }
             catch (Exception)
@@ -62,43 +44,28 @@ namespace Logica
                 {
                     return "RELLENE LOS DATOS";
                 }
-                if (!Existe(cliente))
-                {
-                    return "No Existe el paciente";
-                }
-                if (ExisteConsulta(cliente))
-                {
-                    return "Ya hay un codigo de consulta con este numero";
-                }
                 else
                 {
-                    string msg = consultaR.Guardar(cliente);
-                    return msg;
+                    return repositorio.Guardar(cliente);
                 }
                 
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                return "No se puede crear la consulta";
+                return "No se puede crear la consulta  "+e.Message;
             }
         }
 
         public string Eliminar(Consultas cliente)
         {
-            if (!Existe(cliente))
+            if (!ExisteConsulta(cliente))
             {
                 return "NO SE ENCONTRO LA CONSULTA";
             }
             else
             {
-                Consultas Borrado = ObtenerPorId(cliente.NumeroIdentificacion);
-
-                Listconsulta.Remove(Borrado);
-
-                string resp = consultaR.Modificar_Eliminar(Listconsulta);
-                Refresh();
-
+                string resp = repositorio.Eliminar(cliente);
                 return resp;
             }
         }
@@ -107,13 +74,13 @@ namespace Logica
         {
             try
             {
-                if (Listconsulta == null)
+                if (repositorio.GetAll() == null)
                 {
                     return false;
                 }
                 else
                 {
-                    foreach (var item in Listconsulta)
+                    foreach (var item in ObtenerTodos())
                     {
                         if (item.NumeroAutorizacion == cliente.NumeroAutorizacion)
                         {
@@ -162,13 +129,8 @@ namespace Logica
 
         public List<Consultas> ObtenerTodos()
         {
-            return Listconsulta;
+            return repositorio.GetAll();
         }
-        private void Refresh()
-        {
-            Listconsulta = consultaR.ObtenerLista();
-        }
-
         public bool nulos(Consultas cliente)
         {
             if (string.IsNullOrEmpty(cliente.NumeroFactura) || string.IsNullOrEmpty(cliente.TipoId) || string.IsNullOrEmpty(cliente.NumeroIdentificacion) || string.IsNullOrEmpty(cliente.FechaConsulta.ToString()) ||

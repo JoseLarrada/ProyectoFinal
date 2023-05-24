@@ -13,7 +13,7 @@ namespace Entidades
             
         }
 
-        public Procedimiento(string numeroFactura, string codigoConsultorio, string tipoId, string numeroIdentificacion, string codigoC, DateTime fechaProcedimiento, string numeroAutorizacion, string ambitoRealProce, string finalidadProce, string personalAti, string diagnosticoPpal, string codigoDiagPpal,
+        public Procedimiento(string numeroFactura, string codigoConsultorio, string tipoId, string numeroIdentificacion, string codigoC, DateTime fechaProcedimiento, string numeroAutorizacion, string ambitoRealProce, string finalidadProce, string personalAti, string diagnosticoPpal,
                              string formaRealiActo, double vrlProcedimiento) : base(numeroFactura, codigoConsultorio, tipoId, numeroIdentificacion, codigoC)
         {
             FechaProcedimiento=fechaProcedimiento;
@@ -22,7 +22,6 @@ namespace Entidades
             FinalidadProce=finalidadProce;
             PersonalAti=personalAti;
             DiagnosticoPpal=diagnosticoPpal;
-            CodigoDiagPpal=codigoDiagPpal;
             FormaRealiActo=formaRealiActo;
             VrlProcedimiento=vrlProcedimiento;
         }
@@ -33,13 +32,7 @@ namespace Entidades
         public string FinalidadProce { get; set; }
         public string PersonalAti { get; set; }
         public string DiagnosticoPpal { get; set; }
-        public string CodigoDiagPpal { get; set; }
         public string FormaRealiActo { get; set; }
         public double VrlProcedimiento { get; set; }
-
-        public override string ToString()
-        {
-            return $"{NumeroFactura};{CodigoConsultorio};{TipoId};{NumeroIdentificacion};{CodigoC};{FechaProcedimiento.ToShortDateString()};{NumeroAutorizacion};{AmbitoRealProce};{FinalidadProce};{PersonalAti};{DiagnosticoPpal};{CodigoDiagPpal};{FormaRealiActo};{VrlProcedimiento}";
-        }
     }
 }

@@ -9,8 +9,8 @@ namespace Datos
     public interface IReportes<T>
     {
         string Guardar(T Tipo);
-        List<T> ObtenerLista();
-        string Modificar_Eliminar(List<T> listaActualizada);
-        T mapear(string linea);
+        string Modificar(T Tipo);
+        string Eliminar(T Tipo);
+        List<T> GetAll();
     }
 }

@@ -6,42 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics.Contracts;
+using System.Windows.Forms;
+using System.Data;
 
 namespace Logica
 {
     public class ServicioPacientes : Idatos<Pacientes>
     {
         List<Pacientes> ListaPacientes= new List<Pacientes>();
-        RPacientes paciente=new RPacientes("ReportePacientes.txt");
-        public ServicioPacientes()
+        Datos.RPacientes repositorio;
+        public ServicioPacientes(string conexion)
         {
-            Refresh();
+            repositorio = new Datos.RPacientes(conexion);
         }
-        public string Actualizar(Pacientes Cliente, Pacientes NuevoC)
+        public string Actualizar(Pacientes Cliente)
         {
-            try
-            {
-                Cliente.TipoId = NuevoC.TipoId;
-                Cliente.NumeroId = NuevoC.NumeroId;
-                Cliente.CodigoConsultorio = NuevoC.CodigoConsultorio;
-                Cliente.TipoUsuario = NuevoC.TipoUsuario;
-                Cliente.PrimerApellido = NuevoC.PrimerApellido;
-                Cliente.SegundoApellido = NuevoC.SegundoApellido;
-                Cliente.PrimerNombre = NuevoC.PrimerNombre;
-                Cliente.SegundoNombre = NuevoC.SegundoNombre;
-                Cliente.Edad = NuevoC.Edad;
-                Cliente.UnidadMedidaEdad = NuevoC.UnidadMedidaEdad;
-                Cliente.Sexo = NuevoC.Sexo;
-                Cliente.CodigoDepartamentosResidencia = NuevoC.CodigoDepartamentosResidencia;
-                Cliente.CodigoMunicipioResidencia = NuevoC.CodigoMunicipioResidencia;
-                Cliente.ZonaResidencia = NuevoC.ZonaResidencia;
-                string msg= paciente.Modificar_Eliminar(ListaPacientes);
-                return msg + "  " + NuevoC.PrimerNombre;
-            }
-            catch (Exception)
-            {
-                return "NO SE PUDO MODIFICAR";
-            }
+            return repositorio.Modificar(Cliente);
         }
 
         public string Crear(Pacientes cliente)
@@ -58,7 +38,7 @@ namespace Logica
                 }
                 else
                 {
-                     string msg = paciente.Guardar(cliente);
+                     string msg = repositorio.Guardar(cliente);
                      return msg;
                 }
             }
@@ -73,30 +53,23 @@ namespace Logica
         {
             if (!Existe(cliente))
             {
-                return "NO SE ENCONTRO EL CONTACTO";
+                return "No se encontro el paciente";
             }
             else
             {
-                Pacientes Borrado =  ObtenerPorId(cliente.NumeroId);
-
-                ListaPacientes.Remove(Borrado);
-
-                string resp = paciente.Modificar_Eliminar(ListaPacientes);
-                Refresh();
-
-                return resp;
+                return repositorio.Eliminar(cliente);
             }
         }
 
         public bool Existe(Pacientes Cliente)
         {
-            if (ListaPacientes == null)
+            if (ObtenerTodos() == null)
             {
                 return false;
             }
             else
             {
-                foreach (var item in ListaPacientes)
+                foreach (var item in ObtenerTodos())
                 {
                     if (item.NumeroId == Cliente.NumeroId)
                     {
@@ -120,7 +93,7 @@ namespace Logica
 
         public List<Pacientes> ObtenerTodos()
         {
-            return ListaPacientes;
+            return repositorio.GetAll();
         }
         public bool nulos(Pacientes cliente)
         {
@@ -131,10 +104,6 @@ namespace Logica
                 return true;
             }
             return false;
-        }
-        private void Refresh()
-        {
-            ListaPacientes = paciente.ObtenerLista();
         }
     }
 }

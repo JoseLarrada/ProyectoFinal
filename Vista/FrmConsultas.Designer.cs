@@ -67,12 +67,6 @@
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.PanelVista = new System.Windows.Forms.Panel();
             this.tablaConsultas = new System.Windows.Forms.DataGridView();
-            this.Num_Autorizacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Numero_Identificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Numf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vrlconsulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vrlCuota = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vrlNeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checkView = new System.Windows.Forms.CheckBox();
             this.PanelDatos.SuspendLayout();
             this.PanelVista.SuspendLayout();
@@ -438,49 +432,12 @@
             // tablaConsultas
             // 
             this.tablaConsultas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaConsultas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Num_Autorizacion,
-            this.Numero_Identificacion,
-            this.Numf,
-            this.vrlconsulta,
-            this.vrlCuota,
-            this.vrlNeto});
             this.tablaConsultas.Location = new System.Drawing.Point(34, 21);
             this.tablaConsultas.Name = "tablaConsultas";
             this.tablaConsultas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tablaConsultas.Size = new System.Drawing.Size(648, 330);
             this.tablaConsultas.TabIndex = 1;
             this.tablaConsultas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaConsultas_CellContentClick_1);
-            // 
-            // Num_Autorizacion
-            // 
-            this.Num_Autorizacion.HeaderText = "Num_Autorizacion";
-            this.Num_Autorizacion.Name = "Num_Autorizacion";
-            // 
-            // Numero_Identificacion
-            // 
-            this.Numero_Identificacion.HeaderText = "Numero_Identificacion";
-            this.Numero_Identificacion.Name = "Numero_Identificacion";
-            // 
-            // Numf
-            // 
-            this.Numf.HeaderText = "Num_Facturacion";
-            this.Numf.Name = "Numf";
-            // 
-            // vrlconsulta
-            // 
-            this.vrlconsulta.HeaderText = "Valor_Consulta";
-            this.vrlconsulta.Name = "vrlconsulta";
-            // 
-            // vrlCuota
-            // 
-            this.vrlCuota.HeaderText = "Valor_Cuota";
-            this.vrlCuota.Name = "vrlCuota";
-            // 
-            // vrlNeto
-            // 
-            this.vrlNeto.HeaderText = "Valor_Neto";
-            this.vrlNeto.Name = "vrlNeto";
             // 
             // checkView
             // 
@@ -560,11 +517,5 @@
         private System.Windows.Forms.Panel PanelVista;
         private System.Windows.Forms.CheckBox checkView;
         private System.Windows.Forms.DataGridView tablaConsultas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Num_Autorizacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Identificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Numf;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vrlconsulta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vrlCuota;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vrlNeto;
     }
 }

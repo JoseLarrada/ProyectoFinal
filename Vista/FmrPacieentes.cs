@@ -20,103 +20,70 @@ namespace Vista
             InitializeComponent();
         }
         int posicion = 0;
-        Configuraciones combob = new Configuraciones();
+        Configuraciones combob = new Configuraciones(ConfigConnection.connectionString);
         Manejo_Form manejo = new Manejo_Form();
-        ServicioPacientes pacientes = new ServicioPacientes();
+        ServicioPacientes pacientes = new ServicioPacientes(ConfigConnection.connectionString);
+        Logica.Configuraciones abstraccion = new Logica.Configuraciones(ConfigConnection.connectionString);
+        Logica.Datos_Prederminados llenado = new Logica.Datos_Prederminados(ConfigConnection.connectionString);
         private void llenarcombo()
         {
-
-            //Tipos de identificacion 
-            foreach (var item in combob.TipoIdentificacion())
-            {
-                cbbTipos.Items.Add(item);
-            }
-            //Departamentos
-            foreach (var item in combob.Departamentos())
-            {
-                cbbDepartamentos.Items.Add(item);
-            }
-            //Ciudades
-            foreach (var item in combob.Ciudades())
-            {
-                cbbCiudad.Items.Add(item);
-            }
-            //Sexo
-            foreach (var item in combob.Sexo())
-            {
-                cbbSexo.Items.Add(item);
-            }
-            //Localidad
-            cbbZona.Items.Add("Urbano");
-            cbbZona.Items.Add("Rural");
-            //Tipo Pacientes
-            foreach (var item in combob.TipoU())
-            {
-                ccbTipoUsuario.Items.Add(item);
-            }
+            //llenado.Municipios(cbbCiudad);
+            llenado.TipoIdentificacion(cbbTipos);
+            llenado.Departamentos(cbbDepartamentos);
+            llenado.Zona(cbbZona);
+            llenado.Sexo(cbbSexo);
+            llenado.TipoUsuarios(ccbTipoUsuario);
         }
         private void guardar()
         {
             
                 var paciente = new Pacientes();
-                paciente.TipoId = cbbTipos.Text;
+                paciente.TipoId = abstraccion.TipoIdentificacion(cbbTipos.Text);
                 paciente.NumeroId = txtNumI.Text;
-                paciente.CodigoConsultorio = "3052023";
-                paciente.TipoUsuario = ccbTipoUsuario.Text;
+                paciente.CodigoConsultorio = "750309";
+                paciente.TipoUsuario = abstraccion.TipoUsuarios(ccbTipoUsuario.Text);
                 paciente.PrimerApellido = txtxPapellido.Text;
                 paciente.SegundoApellido = txtxSapellido.Text;
                 paciente.PrimerNombre = txtxPnombre.Text;
                 paciente.SegundoNombre = txtxSnombre.Text;
                 paciente.Edad = txtEdad.Text;
                 paciente.UnidadMedidaEdad = txtMedidaEdad.Text;
-                paciente.CodigoDepartamentosResidencia = cbbDepartamentos.Text;
-                paciente.CodigoMunicipioResidencia = cbbCiudad.Text;
-                paciente.ZonaResidencia = cbbZona.Text;
-                paciente.Sexo = cbbSexo.Text;
+                paciente.CodigoDepartamentosResidencia = abstraccion.Departamentos(cbbDepartamentos.Text);
+                paciente.CodigoMunicipioResidencia = abstraccion.Municipios(cbbCiudad.Text);
+                paciente.ZonaResidencia = abstraccion.Zona(cbbZona.Text);
+                paciente.Sexo = abstraccion.Sexo(cbbSexo.Text);
                 string msg = pacientes.Crear(paciente);
                 MessageBox.Show(msg);
-                manejo.guardartabla(tablap, paciente, cbbTipos, txtNumI, txtxPnombre, txtxPapellido, txtEdad, cbbSexo);
                 limpiar();
         }
         private void modificar()
         {
             var pacientenuevo = new Pacientes();
-            var paciente = pacientes.ObtenerPorId(txtNumI.Text);
-            if (paciente == null)
-            {
-                MessageBox.Show("PACIENTE INEXISTENTE");
-            }
-            else
-            {
-                pacientenuevo.TipoId = cbbTipos.Text;
+                pacientenuevo.TipoId = abstraccion.TipoIdentificacion(cbbTipos.Text);
                 pacientenuevo.NumeroId = txtNumI.Text;
-                pacientenuevo.CodigoConsultorio = "3052023";
-                pacientenuevo.TipoUsuario = ccbTipoUsuario.Text;
+                pacientenuevo.CodigoConsultorio = "750309";
+                pacientenuevo.TipoUsuario = abstraccion.TipoUsuarios(ccbTipoUsuario.Text);
                 pacientenuevo.PrimerApellido = txtxPapellido.Text;
                 pacientenuevo.SegundoApellido = txtxSapellido.Text;
                 pacientenuevo.PrimerNombre = txtxPnombre.Text;
                 pacientenuevo.SegundoNombre = txtxSnombre.Text;
                 pacientenuevo.Edad = txtEdad.Text;
                 pacientenuevo.UnidadMedidaEdad = txtMedidaEdad.Text;
-                pacientenuevo.CodigoDepartamentosResidencia = cbbDepartamentos.Text;
-                pacientenuevo.CodigoMunicipioResidencia = cbbCiudad.Text;
-                pacientenuevo.ZonaResidencia = cbbZona.Text;
-                pacientenuevo.Sexo = cbbSexo.Text;
-                string msg = pacientes.Actualizar(paciente, pacientenuevo);
+                pacientenuevo.CodigoDepartamentosResidencia = abstraccion.Departamentos(cbbDepartamentos.Text);
+                pacientenuevo.CodigoMunicipioResidencia = abstraccion.Municipios(cbbCiudad.Text);
+                pacientenuevo.ZonaResidencia = abstraccion.Zona(cbbZona.Text);
+                pacientenuevo.Sexo = abstraccion.Sexo(cbbSexo.Text);
+                string msg = pacientes.Actualizar(pacientenuevo);
                 MessageBox.Show(msg);
-                manejo.modificartabla(tablap, posicion, cbbTipos, txtNumI, txtxPnombre, txtxPapellido,
-                                      txtEdad, cbbSexo);
                 limpiar();
-                
-            }
         }
         private void eliminar()
         {
             var paciente = new Pacientes();
             paciente.NumeroId = txtNumI.Text;
+            MessageBox.Show(paciente.NumeroId);
             string msg = pacientes.Eliminar(paciente);
             MessageBox.Show(msg);
-            tablap.Rows.RemoveAt(posicion);
             limpiar(); 
         }
         private void inicio()
@@ -145,10 +112,7 @@ namespace Vista
         }
         private void llenartabla()
         {
-            foreach (var item in pacientes.ObtenerTodos())
-            {
-                tablap.Rows.Add(item.TipoId, item.NumeroId, item.PrimerNombre, item.PrimerApellido, item.Edad, item.Sexo);
-            }
+            tablap.DataSource = pacientes.ObtenerTodos();
         }
         private void FmrPacieentes_Load(object sender, EventArgs e)
         {
@@ -230,6 +194,20 @@ namespace Vista
         {
             manejo.ValidarLetras(e, txtxSapellido);
             txtxSapellido.MaxLength = 15;
+        }
+
+        private void cbbDepartamentos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cbbCiudad.Text))
+            {
+                llenado.filtro(cbbCiudad, abstraccion.Departamentos(cbbDepartamentos.Text));
+            }
+            else
+            {
+                cbbCiudad.Items.Clear();
+                cbbCiudad.Text = "";
+                llenado.filtro(cbbCiudad, abstraccion.Departamentos(cbbDepartamentos.Text));
+            }
         }
     }
 }

@@ -97,5 +97,20 @@ namespace Datos
             }
             finally { sr = null; }
         }
+
+        public string Modificar(Facturacion Tipo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Eliminar(Facturacion Tipo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Facturacion> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

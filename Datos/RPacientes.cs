@@ -1,6 +1,7 @@
 ﻿using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data.OracleClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,91 +9,134 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    public class RPacientes : IReportes<Pacientes>
+    public class RPacientes : Conexiones,IReportes<Pacientes>
     {
-        string ruta = "ReportePacientes.txt";
-        public RPacientes(string ruta)
+        public RPacientes(string connectionString) : base(connectionString)
         {
-            this.ruta = ruta;
         }
-        public RPacientes()
-        {
-            
-        }
+
         public string Guardar(Pacientes Tipo)
         {
-            StreamWriter sw = new StreamWriter(ruta, true);
-            sw.WriteLine(Tipo.ToString());
-            sw.Close();
-            return "Guardado Correctamente";
-        }
-
-        public Pacientes mapear(string linea)
-        {
-            var Cliente = new Pacientes
-            {
-                TipoId = linea.Split(';')[0],
-                NumeroId = linea.Split(';')[1],
-                CodigoConsultorio = linea.Split(';')[2],
-                TipoUsuario = linea.Split(';')[3],
-                PrimerApellido = linea.Split(';')[4],
-                SegundoApellido = linea.Split(';')[5],
-                PrimerNombre = linea.Split(';')[6],
-                SegundoNombre = linea.Split(';')[7],
-                Edad = linea.Split(';')[8],
-                UnidadMedidaEdad = linea.Split(';')[9],
-                Sexo = linea.Split(';')[10],
-                CodigoDepartamentosResidencia = linea.Split(';')[11],
-                CodigoMunicipioResidencia = linea.Split(';')[12],
-                ZonaResidencia = linea.Split(';')[13]
-            };
-            return Cliente;
-        }
-
-        public string Modificar_Eliminar(List<Pacientes> listaActualizada)
-        {
-            string rutaTmp = "tmp.txt";
             try
             {
-                var sw = new StreamWriter(rutaTmp);
-
-                foreach (var item in listaActualizada)
+                using (var Comando = conexion.CreateCommand())
                 {
-                    sw.WriteLine(item.ToString());
+                    Comando.CommandText = "InsertarUsuarios";
+                    Comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    Comando.Parameters.Add("NumId", OracleType.VarChar).Value = Tipo.NumeroId;
+                    Comando.Parameters.Add("tipoId", OracleType.VarChar).Value = Tipo.TipoId;
+                    Comando.Parameters.Add("edad", OracleType.VarChar).Value = Tipo.Edad;
+                    Comando.Parameters.Add("p_Nombre", OracleType.VarChar).Value = Tipo.PrimerNombre;
+                    Comando.Parameters.Add("s_Nombre", OracleType.VarChar).Value = Tipo.SegundoNombre;
+                    Comando.Parameters.Add("p_Apellido", OracleType.VarChar).Value = Tipo.PrimerApellido;
+                    Comando.Parameters.Add("s_Apellido", OracleType.VarChar).Value = Tipo.SegundoApellido;
+                    Comando.Parameters.Add("u_Edad", OracleType.VarChar).Value = Tipo.UnidadMedidaEdad;
+                    Comando.Parameters.Add("TipoU", OracleType.VarChar).Value = Tipo.TipoUsuario;
+                    Comando.Parameters.Add("sexo", OracleType.VarChar).Value = Tipo.Sexo;
+                    Comando.Parameters.Add("departamento", OracleType.VarChar).Value = Tipo.CodigoDepartamentosResidencia;
+                    Comando.Parameters.Add("municipio", OracleType.VarChar).Value = Tipo.CodigoMunicipioResidencia;
+                    Comando.Parameters.Add("zona", OracleType.VarChar).Value = Tipo.ZonaResidencia;
+                    Comando.Parameters.Add("consultorio", OracleType.VarChar).Value = Tipo.CodigoConsultorio;
+                    Open();
+                    Comando.ExecuteNonQuery();
+                    Close();
                 }
-                sw.Close();
-                File.Delete(ruta);
-                File.Move(rutaTmp, ruta);
-                return "Se actualizo el Paciente";
+                return "Guardado Correctamente";
             }
-
-            catch (Exception)
+            catch (Exception E)
             {
-                return "Error al actualizar";
 
+                return "No se pudo Actualizar, ERROR Desconocido: " + E.Message;
+            }
+        }
+        public Pacientes Mapper(OracleDataReader dataReader)
+        {
+            if (!dataReader.HasRows) return null;
+            Pacientes consulta = new Pacientes();
+            consulta.TipoId = dataReader.GetString(0);
+            consulta.NumeroId = dataReader.GetString(1);
+            consulta.CodigoConsultorio = dataReader.GetString(2);
+            consulta.TipoUsuario = dataReader.GetString(3);
+            consulta.PrimerApellido = dataReader.GetString(4);
+            consulta.SegundoApellido = dataReader.GetString(5);
+            consulta.PrimerNombre = dataReader.GetString(6);
+            consulta.SegundoNombre = dataReader.GetString(7);
+            consulta.Edad = dataReader.GetString(8);
+            consulta.UnidadMedidaEdad = dataReader.GetString(9);
+            consulta.Sexo = dataReader.GetString(10);
+            consulta.CodigoDepartamentosResidencia = dataReader.GetString(11);
+            consulta.CodigoMunicipioResidencia = dataReader.GetString(12);
+            consulta.ZonaResidencia = dataReader.GetString(13);
+            return consulta;
+        }
+        public string Modificar(Pacientes Tipo)
+        {
+            try
+            {
+                using (var Comando = conexion.CreateCommand())
+                {
+                    Comando.CommandText = "ActualizarUsuario";
+                    Comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    Comando.Parameters.Add("NUM_IDE", OracleType.VarChar).Value = Tipo.NumeroId;
+                    Comando.Parameters.Add("TIPO_IDE", OracleType.VarChar).Value = Tipo.TipoId;
+                    Comando.Parameters.Add("EDAD", OracleType.VarChar).Value = Tipo.Edad;
+                    Comando.Parameters.Add("P_NOMBRE", OracleType.VarChar).Value = Tipo.PrimerNombre;
+                    Comando.Parameters.Add("S_NOMBRE", OracleType.VarChar).Value = Tipo.SegundoNombre;
+                    Comando.Parameters.Add("P_APELLIDO", OracleType.VarChar).Value = Tipo.PrimerApellido;
+                    Comando.Parameters.Add("S_APELLIDO", OracleType.VarChar).Value = Tipo.SegundoApellido;
+                    Comando.Parameters.Add("UNIDAD", OracleType.VarChar).Value = Tipo.UnidadMedidaEdad;
+                    Comando.Parameters.Add("TIPO_U", OracleType.VarChar).Value = Tipo.TipoUsuario;
+                    Comando.Parameters.Add("SEXO", OracleType.VarChar).Value = Tipo.Sexo;
+                    Comando.Parameters.Add("DEPARTAMENTO", OracleType.VarChar).Value = Tipo.CodigoDepartamentosResidencia;
+                    Comando.Parameters.Add("MUNICIPIO", OracleType.VarChar).Value = Tipo.CodigoMunicipioResidencia;
+                    Comando.Parameters.Add("ZONA", OracleType.VarChar).Value = Tipo.ZonaResidencia;
+                    Comando.Parameters.Add("CONSULTORIO", OracleType.VarChar).Value = Tipo.CodigoConsultorio;
+                    Open();
+                    Comando.ExecuteNonQuery();
+                    Close();
+                }
+                return "Modificado con exito";
+            }
+            catch (Exception e)
+            {
+
+                return e.Message;
             }
         }
 
-        public List<Pacientes> ObtenerLista()
+        public string Eliminar(Pacientes Tipo)
         {
-            StreamReader sr;
-            var lista = new List<Pacientes>();
             try
             {
-                sr = new StreamReader(ruta);
-                while (!sr.EndOfStream)
+                using (var Comando = conexion.CreateCommand())
                 {
-                    lista.Add(mapear(sr.ReadLine()));
+                    Comando.CommandText = $"DELETE FROM USUARIOS WHERE NUM_IDENTIFICACION={Tipo.NumeroId}";
+                    Open();
+                    Comando.ExecuteNonQuery();
+                    Close();
+                    return "Eliminado Satisfactoriamente";
                 }
-                sr.Close();
-                return lista;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //sr.Close();
-                return null;
+
+                return "NO eliminado:  " + e.Message;
             }
-            finally { sr = null; }
+        }
+
+        public List<Pacientes> GetAll()
+        {
+            List<Pacientes> consulta = new List<Pacientes>();
+            var comando = conexion.CreateCommand();
+            comando.CommandText = "select * from USUARIOS";
+            Open();
+            OracleDataReader lector = comando.ExecuteReader();
+            while (lector.Read())
+            {
+                consulta.Add(Mapper(lector));
+            }
+            Close();
+            return consulta;
         }
     }
 }

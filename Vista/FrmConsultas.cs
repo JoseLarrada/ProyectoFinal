@@ -16,15 +16,16 @@ namespace Vista
 {
     public partial class FrmConsultas : Form
     {
-        Configuraciones tiposid = new Configuraciones();
-        ServicioConsultas Consultas = new ServicioConsultas();
+        
+        Logica.ServicioConsultas Consultas = new Logica.ServicioConsultas(ConfigConnection.connectionString);
+        Logica.Configuraciones abstraccion =new Logica.Configuraciones(ConfigConnection.connectionString);
+        Logica.Datos_Prederminados llenado=new Logica.Datos_Prederminados(ConfigConnection.connectionString);
         Manejo_Form manejo=new Manejo_Form();
         Manejo_Form_Consulta manejoC=new Manejo_Form_Consulta();
         public FrmConsultas()
         {
             InitializeComponent();
         }
-        int posicion = 0;
         private void FrmConsultas_Load(object sender, EventArgs e)
         {
             llenarCombo();
@@ -42,39 +43,15 @@ namespace Vista
         }
         private void llenarCombo()
         {
-            //Tipos de  Identificacion
-            foreach (var item in tiposid.TipoIdentificacion())
-            {
-                cbbTipos.Items.Add(item);
-            }
-            //Codigos COnsultas
-            foreach (var item in tiposid.CodigoConsulta())
-            {
-                ccbCConsulta.Items.Add(item);
-            }
-            //Finalidad De consultas
-            foreach (var item in tiposid.FinalidadConsultas())
-            {
-                cbbFinalidadConsulta.Items.Add(item);
-            }
-            //Diagnostico Principal
-            
-            foreach (var item in tiposid.DiagnosticoPPal())
-            {
-                cbbDiagnosticoP.Items.Add(item);
-                cbbDiagR.Items.Add(item);
-                cbbDiagR2.Items.Add(item);
-                cbbDiagR3.Items.Add(item);
-            }
-            //Tipo de Diagnostico Principal
-            cbbTdiagP.Items.Add("Impresion Diagnostica");
-            cbbTdiagP.Items.Add("Confirmado Nuevo");
-            cbbTdiagP.Items.Add("Confirmado Repetido");
-            //Causa Externa
-            foreach (var item in tiposid.CausaE())
-            {
-                cbbCausa.Items.Add(item);
-            }
+            llenado.FinalidadConsultas(cbbFinalidadConsulta);
+            llenado.CodigoConsulta(ccbCConsulta);
+            llenado.TipoDiagnostico(cbbTdiagP);
+            llenado.DiagnosticoPrinciPal(cbbDiagnosticoP);
+            llenado.DiagnosticoPrinciPal(cbbDiagR);
+            llenado.DiagnosticoPrinciPal(cbbDiagR2);
+            llenado.DiagnosticoPrinciPal(cbbDiagR3);
+            llenado.TipoIdentificacion(cbbTipos);
+            llenado.CausasExternas(cbbCausa);
         }
         private void guardar()
         {
@@ -82,24 +59,24 @@ namespace Vista
             {
                 var consulta = new Consultas();
                 consulta.NumeroFactura = txtNumeroFactura.Text;
-                consulta.CodigoConsultorio = "3052023";
-                consulta.TipoId = cbbTipos.Text;
+                consulta.CodigoConsultorio = "750309";
+                consulta.TipoId = abstraccion.TipoIdentificacion(cbbTipos.Text);
                 consulta.NumeroIdentificacion = TxtIde.Text;
                 consulta.FechaConsulta = Datetime.Value;
                 consulta.NumeroAutorizacion = txtNumAuto.Text;
-                consulta.CodigoC = ccbCConsulta.Text;
-                consulta.FinalidadConsulta = cbbFinalidadConsulta.Text;
-                consulta.CausaExterna = cbbCausa.Text;
-                consulta.CodDiagPpal = cbbDiagnosticoP.Text;
-                consulta.CodDiaRel1 = cbbDiagR.Text;
-                consulta.CodDiaRel2 = cbbDiagR2.Text;
-                consulta.CodDiaRel3 = cbbDiagR3.Text;
-                consulta.TipoDiagPpal = cbbTdiagP.Text;
-                consulta.ValorConsulta = double.Parse(txtVrlConsulta.Text);
-                consulta.ValorCuoMod = double.Parse(txtVrlCuoM.Text);
-                consulta.ValorNetoPagar = double.Parse(txtVrlNeto.Text);
+                consulta.CodigoC = abstraccion.CodigoConsulta(ccbCConsulta.Text);
+                consulta.FinalidadConsulta = abstraccion.FinalidadConsultas(cbbFinalidadConsulta.Text);
+                consulta.CausaExterna = abstraccion.CausasExternas(cbbCausa.Text);
+                consulta.CodDiagPpal = abstraccion.DiagnosticoPrinciPal(cbbDiagnosticoP.Text);
+                consulta.CodDiaRel1 = abstraccion.DiagnosticoPrinciPal(cbbDiagR.Text);
+                consulta.CodDiaRel2 = abstraccion.DiagnosticoPrinciPal(cbbDiagR2.Text);
+                consulta.CodDiaRel3 = abstraccion.DiagnosticoPrinciPal(cbbDiagR3.Text);
+                consulta.TipoDiagPpal = abstraccion.TipoDiagnostico(cbbTdiagP.Text);
+                consulta.ValorConsulta = Convert.ToInt32(txtVrlConsulta.Text);
+                consulta.ValorCuoMod = Convert.ToInt32(txtVrlCuoM.Text);
+                consulta.ValorNetoPagar = Convert.ToInt32(txtVrlNeto.Text);
                 string msg = Consultas.Crear(consulta);
-                manejoC.guardartabla(tablaConsultas, consulta, txtNumAuto, TxtIde, txtNumeroFactura, txtVrlConsulta, txtVrlCuoM, txtVrlNeto);
+                MessageBox.Show(msg);
                 Limpiar();
             }
             catch (Exception)
@@ -116,43 +93,37 @@ namespace Vista
             var consulta = Consultas.ObtenerPorId(TxtIde.Text);
 
                 NuevaConsulta.NumeroFactura = txtNumeroFactura.Text;
-                NuevaConsulta.CodigoConsultorio = "3052023";
-                NuevaConsulta.TipoId = cbbTipos.Text;
+                NuevaConsulta.CodigoConsultorio = "750309";
+                NuevaConsulta.TipoId = abstraccion.TipoIdentificacion(cbbTipos.Text);
                 NuevaConsulta.NumeroIdentificacion = TxtIde.Text;
                 NuevaConsulta.FechaConsulta = Datetime.Value;
                 NuevaConsulta.NumeroAutorizacion = txtNumAuto.Text;
-                NuevaConsulta.CodigoC = ccbCConsulta.Text;
-                NuevaConsulta.FinalidadConsulta = cbbFinalidadConsulta.Text;
-                NuevaConsulta.CausaExterna = cbbCausa.Text;
-                NuevaConsulta.CodDiagPpal = cbbDiagnosticoP.Text;
-                NuevaConsulta.CodDiaRel1 = cbbDiagR.Text;
-                NuevaConsulta.CodDiaRel2 = cbbDiagR2.Text;
-                NuevaConsulta.CodDiaRel3 = cbbDiagR3.Text;
-                NuevaConsulta.TipoDiagPpal = cbbTdiagP.Text;
-                NuevaConsulta.ValorConsulta = double.Parse(txtVrlConsulta.Text);
-                NuevaConsulta.ValorCuoMod = double.Parse(txtVrlCuoM.Text);
-                NuevaConsulta.ValorNetoPagar = double.Parse(txtVrlNeto.Text);
-                string msg = Consultas.Actualizar(consulta, NuevaConsulta);
+                NuevaConsulta.CodigoC = abstraccion.CodigoConsulta(ccbCConsulta.Text);
+                NuevaConsulta.FinalidadConsulta = abstraccion.FinalidadConsultas(cbbFinalidadConsulta.Text);
+                NuevaConsulta.CausaExterna = abstraccion.CausasExternas(cbbCausa.Text);
+                NuevaConsulta.CodDiagPpal = abstraccion.DiagnosticoPrinciPal(cbbDiagnosticoP.Text);
+                NuevaConsulta.CodDiaRel1 = abstraccion.DiagnosticoPrinciPal(cbbDiagR.Text);
+                NuevaConsulta.CodDiaRel2 = abstraccion.DiagnosticoPrinciPal(cbbDiagR2.Text);
+                NuevaConsulta.CodDiaRel3 = abstraccion.DiagnosticoPrinciPal(cbbDiagR3.Text);
+                NuevaConsulta.TipoDiagPpal = abstraccion.TipoDiagnostico(cbbTdiagP.Text);
+                NuevaConsulta.ValorConsulta = Convert.ToInt32(txtVrlConsulta.Text);
+                NuevaConsulta.ValorCuoMod = Convert.ToInt32(txtVrlCuoM.Text);
+                NuevaConsulta.ValorNetoPagar = Convert.ToInt32(txtVrlNeto.Text);
+                string msg = Consultas.Actualizar(NuevaConsulta);
                 MessageBox.Show(msg);
-                manejoC.modificartabla(tablaConsultas,posicion,txtNumAuto,TxtIde,txtNumeroFactura, txtVrlConsulta, txtVrlCuoM, txtVrlNeto);
                 Limpiar();
         }
         private void eliminar()
         {
             var consulta = new Consultas();
-            consulta.NumeroIdentificacion = TxtIde.Text;
+            consulta.NumeroAutorizacion = txtNumAuto.Text;
             string msg = Consultas.Eliminar(consulta);
             MessageBox.Show(msg);
-            tablaConsultas.Rows.RemoveAt(posicion);
             Limpiar();
         }
         private void llenartabla()
         {
-            foreach (var item in Consultas.ObtenerTodos())
-            {
-
-                tablaConsultas.Rows.Add(item.NumeroFactura,item.NumeroIdentificacion,item.NumeroAutorizacion,item.ValorConsulta,item.ValorCuoMod,item.ValorNetoPagar);
-            }
+            tablaConsultas.DataSource = Consultas.ObtenerTodos();
         }
         private void Limpiar()
         {
@@ -214,7 +185,7 @@ namespace Vista
         private void txtNumAuto_KeyPress(object sender, KeyPressEventArgs e)
         {
             manejo.validarN(e, txtNumAuto);
-            txtNumAuto.MaxLength=5;
+            txtNumAuto.MaxLength=6;
         }
 
         private void txtVrlConsulta_KeyPress(object sender, KeyPressEventArgs e)
@@ -234,13 +205,21 @@ namespace Vista
 
         private void tablaConsultas_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            posicion = tablaConsultas.CurrentRow.Index;
-            txtNumAuto.Text = tablaConsultas.CurrentRow.Cells[0].Value.ToString();
-            TxtIde.Text = tablaConsultas.CurrentRow.Cells[1].Value.ToString();
-            txtNumeroFactura.Text = tablaConsultas.CurrentRow.Cells[2].Value.ToString();
-            txtVrlConsulta.Text = tablaConsultas.CurrentRow.Cells[3].Value.ToString();
-            txtVrlCuoM.Text = tablaConsultas.CurrentRow.Cells[4].Value.ToString();
-            txtVrlNeto.Text = tablaConsultas.CurrentRow.Cells[5].Value.ToString();
+            txtNumAuto.Text = tablaConsultas.CurrentRow.Cells[1].Value.ToString();
+            cbbFinalidadConsulta.Text = tablaConsultas.CurrentRow.Cells[2].Value.ToString();
+            cbbCausa.Text = tablaConsultas.CurrentRow.Cells[3].Value.ToString();
+            cbbDiagnosticoP.Text = tablaConsultas.CurrentRow.Cells[4].Value.ToString();
+            cbbDiagR.Text = tablaConsultas.CurrentRow.Cells[5].Value.ToString();
+            cbbDiagR2.Text = tablaConsultas.CurrentRow.Cells[6].Value.ToString();
+            cbbDiagR3.Text = tablaConsultas.CurrentRow.Cells[7].Value.ToString();
+            cbbTdiagP.Text = tablaConsultas.CurrentRow.Cells[8].Value.ToString();
+            txtVrlConsulta.Text = tablaConsultas.CurrentRow.Cells[9].Value.ToString();
+            txtVrlCuoM.Text = tablaConsultas.CurrentRow.Cells[10].Value.ToString();
+            txtVrlNeto.Text = tablaConsultas.CurrentRow.Cells[11].Value.ToString();
+            txtNumeroFactura.Text = tablaConsultas.CurrentRow.Cells[12].Value.ToString();
+            cbbTipos.Text = tablaConsultas.CurrentRow.Cells[14].Value.ToString();
+            TxtIde.Text = tablaConsultas.CurrentRow.Cells[15].Value.ToString();
+            ccbCConsulta.Text = tablaConsultas.CurrentRow.Cells[16].Value.ToString();
         }
     }
 }

@@ -11,42 +11,22 @@ namespace Logica
     public class ServicioProcedimientos : Idatos<Procedimiento>
     {
         List<Procedimiento> ListProcedimiento = new List<Procedimiento>();
-        ServicioPacientes pacientes = new ServicioPacientes();
-        RProcedimientos Proceso = new RProcedimientos("ReporteProcedimiento.txt");
-        public ServicioProcedimientos()
+        ServicioPacientes pacientes = new ServicioPacientes("");
+        Datos.RProcedimientos repositorio;
+        public ServicioProcedimientos(string conexion)
         {
-            Refresh();
+            repositorio = new Datos.RProcedimientos(conexion);
         }
-        public string Actualizar(Procedimiento Cliente, Procedimiento NuevoC)
+        public string Actualizar(Procedimiento Cliente)
         {
-            try
+            if (!ExisteProcedimiento(Cliente))
             {
-                if (!Existe(Cliente))
-                {
-                    return "No Existe el paciente";
-                }
-                else
-                {
-                    Cliente.NumeroFactura = NuevoC.NumeroFactura;
-                    Cliente.CodigoConsultorio = NuevoC.CodigoConsultorio;
-                    Cliente.TipoId = NuevoC.TipoId;
-                    Cliente.NumeroIdentificacion = NuevoC.NumeroIdentificacion;
-                    Cliente.FechaProcedimiento = NuevoC.FechaProcedimiento;
-                    Cliente.NumeroAutorizacion = NuevoC.NumeroAutorizacion;
-                    Cliente.AmbitoRealProce = NuevoC.AmbitoRealProce;
-                    Cliente.FinalidadProce = NuevoC.FinalidadProce;
-                    Cliente.DiagnosticoPpal = NuevoC.DiagnosticoPpal;
-                    Cliente.CodigoDiagPpal = NuevoC.CodigoDiagPpal;
-                    Cliente.FormaRealiActo = NuevoC.FormaRealiActo;
-                    Cliente.VrlProcedimiento = NuevoC.VrlProcedimiento;
-                    string msg = Proceso.Modificar_Eliminar(ListProcedimiento);
-                    return msg + "  " + NuevoC.NumeroAutorizacion;
-                }
+                return "Procedimiento no encontrado";
             }
-            catch (Exception)
+            else
             {
-
-                return "NO SE PUDO ACTUALIZAR";
+                string msg=repositorio.Modificar(Cliente);
+                return msg;
             }
         }
 
@@ -64,33 +44,26 @@ namespace Logica
                 }
                 else
                 {
-                    string msg = Proceso.Guardar(proced);
+                    string msg = repositorio.Guardar(proced);
                     return msg;
                 }
-
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                return "No se puede crear la consulta";
+                return "No se puede crear el procedimiento"+e.Message;
             }
         }
 
         public string Eliminar(Procedimiento cliente)
         {
-            if (!Existe(cliente))
+            if (!ExisteProcedimiento(cliente))
             {
                 return "NO SE ENCONTRO LA CONSULTA";
             }
             else
             {
-                Procedimiento Borrado = ObtenerPorId(cliente.NumeroIdentificacion);
-
-                ListProcedimiento.Remove(Borrado);
-
-                string resp = Proceso.Modificar_Eliminar(ListProcedimiento);
-                Refresh();
-
+                string resp=repositorio.Eliminar(cliente);
                 return resp;
             }
         }
@@ -98,15 +71,15 @@ namespace Logica
         {
             try
             {
-                if (ListProcedimiento == null)
+                if (repositorio.GetAll() == null)
                 {
                     return false;
                 }
                 else
                 {
-                    foreach (var item in ListProcedimiento)
+                    foreach (var item in repositorio.GetAll())
                     {
-                        if (item.NumeroIdentificacion == cliente.NumeroIdentificacion)
+                        if (item.CodigoC == cliente.CodigoC)
                         {
                             return true;
                         }
@@ -122,7 +95,7 @@ namespace Logica
         }
         public bool Existe(Procedimiento Cliente)
         {
-            if (ListProcedimiento == null)
+            if (repositorio.GetAll() == null)
             {
                 return false;
             }
@@ -139,25 +112,10 @@ namespace Logica
             }
 
         }
-        public Procedimiento ObtenerPorId(string identificacion)
-        {
-            foreach (var item in ListProcedimiento)
-            {
-                if (item.NumeroIdentificacion == identificacion)
-                {
-                    return item;
-                }
-            }
-            return null;
-        }
 
         public List<Procedimiento> ObtenerTodos()
         {
-            return ListProcedimiento;
-        }
-        private void Refresh()
-        {
-            ListProcedimiento = Proceso.ObtenerLista();
+            return repositorio.GetAll();
         }
 
         public bool nulos(Procedimiento cliente)
