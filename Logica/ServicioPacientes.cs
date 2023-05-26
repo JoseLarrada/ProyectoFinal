@@ -79,13 +79,13 @@ namespace Logica
                 return false;
             }
         }
-        public Pacientes ObtenerPorId(string identificacion)
+        public string ObtenerPorId(string identificacion)
         {
             foreach(var item in ListaPacientes)
             {
                 if (item.NumeroId==identificacion)
                 {
-                    return item;
+                    return item.NumeroId;
                 }
             }
             return null;

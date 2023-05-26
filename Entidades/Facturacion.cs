@@ -14,8 +14,8 @@ namespace Entidades
         }
 
         public Facturacion(string numeroFactura, string codigoConsultorio, string tipoId, string numeroIdentificacion, string codigoC, string nombrePrestador, 
-                           DateTime fechaExpedicion, DateTime fechaInicio, DateTime fechaFinal, string nombreConsultorio, string numeroContrato, string planBeneficios, 
-                           string numeroPoliza, double vrlTotCo, double vrlComision, double vrlTDescuento,
+                           DateTime fechaExpedicion, DateTime fechaInicio, DateTime fechaFinal, string nombreConsultorio, int numeroContrato, int planBeneficios,
+                           int numeroPoliza, double vrlTotCo, double vrlComision, double vrlTDescuento,
                            double vrlNetoP) : base(numeroFactura, codigoConsultorio, tipoId, numeroIdentificacion, codigoC)
         {
             NombrePrestador=nombrePrestador;
@@ -37,9 +37,9 @@ namespace Entidades
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFinal { get; set; }
         public string NombreConsultorio { get; set; }
-        public string NumeroContrato { get; set; }
-        public string PlanBeneficios { get; set; }
-        public string NumeroPoliza { get; set; }
+        public int NumeroContrato { get; set; }
+        public int PlanBeneficios { get; set; }
+        public int NumeroPoliza { get; set; }
         public double VrlTotCo { get; set; }
         public double VrlComision { get; set; }
         public double VrlTDescuento { get; set; }

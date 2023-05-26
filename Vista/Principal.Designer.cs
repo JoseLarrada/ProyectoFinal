@@ -218,6 +218,7 @@
             this.btnFacturacion.TabIndex = 0;
             this.btnFacturacion.Text = "FACTURACION";
             this.btnFacturacion.UseVisualStyleBackColor = true;
+            this.btnFacturacion.Click += new System.EventHandler(this.btnFacturacion_Click);
             // 
             // btnProcedimientos
             // 
@@ -268,6 +269,7 @@
             this.ClientSize = new System.Drawing.Size(1254, 681);
             this.Controls.Add(this.PnelV);
             this.Controls.Add(this.PanelVista);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Principal";
             this.Text = "Principal";
             this.Load += new System.EventHandler(this.Principal_Load);

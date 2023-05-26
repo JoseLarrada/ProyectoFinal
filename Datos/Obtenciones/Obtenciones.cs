@@ -43,7 +43,7 @@ namespace Datos.Obtencion_de_Id
             }
         }
 
-        public string obtenerNombres(string id,string procedimiento)
+        public string LlamadoGlobal(string id,string procedimiento)
         {
             try
             {

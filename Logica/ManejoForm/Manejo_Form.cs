@@ -6,22 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Logica
 {
     public class Manejo_Form
     {
         ErrorProvider Validar = new ErrorProvider();
-        public void modificartabla(DataGridView tabla,int posicion,ComboBox text0, TextBox text1, TextBox text2,
-                                    TextBox text3, TextBox text4, ComboBox text5)
-        {
-            tabla[0, posicion].Value = text0.Text;
-            tabla[1, posicion].Value = text1.Text;
-            tabla[2, posicion].Value = text2.Text;
-            tabla[3, posicion].Value = text3.Text;
-            tabla[4, posicion].Value = text4.Text;
-            tabla[5, posicion].Value = text5.Text;
-        }
         public void ValidarLetras(KeyPressEventArgs e, System.Windows.Forms.TextBox h)
         {
             if (Char.IsLetter(e.KeyChar) || Char.IsSeparator(e.KeyChar))
@@ -70,7 +61,7 @@ namespace Logica
                 e.Handled = true; return false;
             }
         }
-        public void extension(System.Windows.Forms.TextBox h, int valorMaximo, int valorMinimo,Button boton)
+        private void extension(System.Windows.Forms.TextBox h, int valorMaximo, int valorMinimo,Button boton)
         {
             if (h.Text.Length > valorMaximo || h.Text.Length < valorMinimo)
             {
@@ -115,19 +106,34 @@ namespace Logica
             }
             return null;
         }
-        public void guardartabla(DataGridView NomT,Pacientes table, ComboBox text0, TextBox text1, TextBox text2,
-                                    TextBox text3, TextBox text4, ComboBox text5)
+        public int extensioncajadetexto(ComboBox Típos)
         {
-            table.TipoId = text0.Text;
-            table.NumeroId = text1.Text;
-            table.PrimerNombre = text2.Text;
-            table.PrimerApellido = text3.Text;
-            table.Edad = text4.Text;
-            table.Sexo = text5.Text;
-            NomT.Rows.Add(table.TipoId, table.NumeroId, table.PrimerNombre, table.PrimerApellido, table.Edad, table.Sexo);
+            switch (Típos.SelectedIndex)
+            {
+                case 0:
+                    return 10;
+                case 1:
+                    return 10;
+                case 2:
+                    return 16;
+                case 3:
+                    return 6;
+                case 4:
+                    return 9;
+                case 5:
+                    return 12;
+                case 6:
+                    return 16;
+                case 7:
+                    return 15;
+                case 8:
+                    return 11;
+                case 9:
+                    return 16;
+                case 10:
+                    return 11;
+            }
+            return 0;
         }
-        
-
-
     }
 }

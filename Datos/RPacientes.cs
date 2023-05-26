@@ -53,20 +53,20 @@ namespace Datos
         {
             if (!dataReader.HasRows) return null;
             Pacientes consulta = new Pacientes();
-            consulta.TipoId = dataReader.GetString(0);
-            consulta.NumeroId = dataReader.GetString(1);
-            consulta.CodigoConsultorio = dataReader.GetString(2);
-            consulta.TipoUsuario = dataReader.GetString(3);
-            consulta.PrimerApellido = dataReader.GetString(4);
-            consulta.SegundoApellido = dataReader.GetString(5);
-            consulta.PrimerNombre = dataReader.GetString(6);
-            consulta.SegundoNombre = dataReader.GetString(7);
-            consulta.Edad = dataReader.GetString(8);
-            consulta.UnidadMedidaEdad = dataReader.GetString(9);
-            consulta.Sexo = dataReader.GetString(10);
-            consulta.CodigoDepartamentosResidencia = dataReader.GetString(11);
-            consulta.CodigoMunicipioResidencia = dataReader.GetString(12);
-            consulta.ZonaResidencia = dataReader.GetString(13);
+            consulta.NumeroId = dataReader.GetString(0);
+            consulta.TipoId = dataReader.GetString(1);
+            consulta.Edad = dataReader.GetString(2);
+            consulta.PrimerNombre = dataReader.GetString(3);
+            consulta.SegundoNombre = dataReader.GetString(4);
+            consulta.PrimerApellido = dataReader.GetString(5);
+            consulta.SegundoApellido = dataReader.GetString(6);
+            consulta.UnidadMedidaEdad = dataReader.GetString(7);
+            consulta.TipoUsuario = dataReader.GetString(8);
+            consulta.Sexo = dataReader.GetString(9);
+            consulta.CodigoDepartamentosResidencia = dataReader.GetString(10);
+            consulta.CodigoMunicipioResidencia = dataReader.GetString(11);
+            consulta.ZonaResidencia = dataReader.GetString(12);
+            consulta.CodigoConsultorio = dataReader.GetString(13);
             return consulta;
         }
         public string Modificar(Pacientes Tipo)

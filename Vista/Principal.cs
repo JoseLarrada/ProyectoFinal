@@ -74,5 +74,11 @@ namespace Vista
             PanelVista.Visible = true;
             abrirForm(new FrmProcedimientos());
         }
+
+        private void btnFacturacion_Click(object sender, EventArgs e)
+        {
+            PanelVista.Visible = true;
+            abrirForm(new FmrFacturacion());
+        }
     }
 }

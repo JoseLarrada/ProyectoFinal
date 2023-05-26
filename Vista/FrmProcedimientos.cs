@@ -19,7 +19,7 @@ namespace Vista
         {
             InitializeComponent();
         }
-        ErrorProvider Validar = new ErrorProvider();
+        Manejo_Form manejo = new Manejo_Form();
         Logica.Configuraciones abstraccion = new Logica.Configuraciones(ConfigConnection.connectionString);
         Logica.ConfiguracionNombres mostrado = new Logica.ConfiguracionNombres(ConfigConnection.connectionString);
         Logica.Datos_Prederminados llenado = new Logica.Datos_Prederminados(ConfigConnection.connectionString);
@@ -43,35 +43,6 @@ namespace Vista
             btnInsertar.Visible = true;
             btnInsertar.Location = new System.Drawing.Point(415, 422);
         }
-        public bool SoloNumeros(KeyPressEventArgs e)
-        {
-            if (Char.IsNumber(e.KeyChar))
-            {
-                e.Handled = false; return true;
-            }
-            else if (Char.IsControl(e.KeyChar))
-            {
-                e.Handled = false; return true;
-            }
-            else
-            {
-                e.Handled = true; return false;
-            }
-        }
-        private ErrorProvider validarN(KeyPressEventArgs e, System.Windows.Forms.TextBox h)
-        {
-            bool error = SoloNumeros(e);
-            if (!error)
-            {
-                Validar.SetError(h, "Solo numeros");
-                return null;
-            }
-            else
-            {
-                Validar.Clear();
-                return null;
-            }
-        } 
         private void guardar()
         {
             var procedimiento = new Procedimiento();
@@ -137,52 +108,6 @@ namespace Vista
             cbbFormaRealizacion.Text = string.Empty;
             cbbTipos.Text = string.Empty;
         }
-        private void extension(System.Windows.Forms.TextBox h, int valorMaximo, int valorMinimo)
-        {
-            if (h.Text.Length > valorMaximo || h.Text.Length < valorMinimo)
-            {
-                Validar.SetError(h, "Numero de caracteres superado"); btnInsertar.Enabled = false;
-            }
-            else
-            {
-                btnInsertar.Enabled = true;
-            }
-        }
-        private ErrorProvider validarExtension(KeyPressEventArgs e, System.Windows.Forms.TextBox h)
-        {
-            switch (cbbTipos.SelectedIndex)
-            {
-                case 0:
-                    extension(h, 10, 6);
-                    break;
-                case 1:
-                    extension(h, 11, 6);
-                    break;
-                case 2:
-                    extension(h, 6, 3);
-                    break;
-                case 3:
-                    extension(h, 16, 10);
-                    break;
-                case 4:
-                    extension(h, 16, 10);
-                    break;
-                case 5:
-                    extension(h, 16, 10);
-                    break;
-                case 6:
-                    extension(h, 15, 10);
-                    break;
-                case 7:
-                    extension(h, 11, 10);
-                    break;
-                case 8:
-                    extension(h, 9, 5);
-                    break;
-            }
-            return null;
-        }
-
         private void checkView_CheckedChanged(object sender, EventArgs e)
         {
             PanelDatos.Visible = false;
@@ -221,29 +146,30 @@ namespace Vista
 
         private void txtNumeroFactura_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, txtNumeroFactura);
+            manejo.validarN(e, txtNumeroFactura);
             txtNumeroFactura.MaxLength = 6;
         }
 
         private void TxtIde_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarExtension(e, TxtIde);
-            validarN(e, TxtIde);
+            manejo.validarExtension(cbbTipos,e, TxtIde,btnInsertar);
+            manejo.validarN(e, TxtIde);
+            TxtIde.MaxLength=manejo.extensioncajadetexto(cbbTipos);
         }
 
         private void txtCodigoProcedimiento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, txtCodigoProcedimiento);
+            manejo.validarN(e, txtCodigoProcedimiento);
         }
 
         private void txtNumAuto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, txtNumAuto);
+            manejo.validarN(e, txtNumAuto);
         }
 
         private void txtVrlProcedimiento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            validarN(e, txtVrlProcedimiento);
+            manejo.validarN(e, txtVrlProcedimiento);
         }
 
         private void tablaProcedimientos_CellContentClick(object sender, DataGridViewCellEventArgs e)

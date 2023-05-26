@@ -21,7 +21,7 @@ namespace Vista
         Logica.Configuraciones abstraccion =new Logica.Configuraciones(ConfigConnection.connectionString);
         Logica.Datos_Prederminados llenado=new Logica.Datos_Prederminados(ConfigConnection.connectionString);
         Manejo_Form manejo=new Manejo_Form();
-        Manejo_Form_Consulta manejoC=new Manejo_Form_Consulta();
+        Logica.ConfiguracionNombres mostrado = new Logica.ConfiguracionNombres(ConfigConnection.connectionString);
         public FrmConsultas()
         {
             InitializeComponent();
@@ -181,6 +181,7 @@ namespace Vista
         {
             manejo.validarN(e, TxtIde);
             manejo.validarExtension(cbbTipos,e, TxtIde,btnInsertar);
+            TxtIde.MaxLength=manejo.extensioncajadetexto(cbbTipos);
         }
         private void txtNumAuto_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -205,21 +206,22 @@ namespace Vista
 
         private void tablaConsultas_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            Datetime.Value= Datetime.Value = (DateTime)tablaConsultas.CurrentRow.Cells[0].Value;
             txtNumAuto.Text = tablaConsultas.CurrentRow.Cells[1].Value.ToString();
-            cbbFinalidadConsulta.Text = tablaConsultas.CurrentRow.Cells[2].Value.ToString();
-            cbbCausa.Text = tablaConsultas.CurrentRow.Cells[3].Value.ToString();
-            cbbDiagnosticoP.Text = tablaConsultas.CurrentRow.Cells[4].Value.ToString();
-            cbbDiagR.Text = tablaConsultas.CurrentRow.Cells[5].Value.ToString();
-            cbbDiagR2.Text = tablaConsultas.CurrentRow.Cells[6].Value.ToString();
-            cbbDiagR3.Text = tablaConsultas.CurrentRow.Cells[7].Value.ToString();
-            cbbTdiagP.Text = tablaConsultas.CurrentRow.Cells[8].Value.ToString();
+            cbbFinalidadConsulta.Text = mostrado.FinalidadConsultas(tablaConsultas.CurrentRow.Cells[2].Value.ToString());
+            cbbCausa.Text = mostrado.CausasExternas(tablaConsultas.CurrentRow.Cells[3].Value.ToString());
+            cbbDiagnosticoP.Text = mostrado.DiagnosticoPrinciPal(tablaConsultas.CurrentRow.Cells[4].Value.ToString());
+            cbbDiagR.Text = mostrado.DiagnosticoPrinciPal(tablaConsultas.CurrentRow.Cells[5].Value.ToString());
+            cbbDiagR2.Text = mostrado.DiagnosticoPrinciPal(tablaConsultas.CurrentRow.Cells[6].Value.ToString());
+            cbbDiagR3.Text = mostrado.DiagnosticoPrinciPal(tablaConsultas.CurrentRow.Cells[7].Value.ToString());
+            cbbTdiagP.Text = mostrado.TipoDiagnostico(tablaConsultas.CurrentRow.Cells[8].Value.ToString());
             txtVrlConsulta.Text = tablaConsultas.CurrentRow.Cells[9].Value.ToString();
             txtVrlCuoM.Text = tablaConsultas.CurrentRow.Cells[10].Value.ToString();
             txtVrlNeto.Text = tablaConsultas.CurrentRow.Cells[11].Value.ToString();
             txtNumeroFactura.Text = tablaConsultas.CurrentRow.Cells[12].Value.ToString();
-            cbbTipos.Text = tablaConsultas.CurrentRow.Cells[14].Value.ToString();
+            cbbTipos.Text = mostrado.TipoIdentificacion(tablaConsultas.CurrentRow.Cells[14].Value.ToString());
             TxtIde.Text = tablaConsultas.CurrentRow.Cells[15].Value.ToString();
-            ccbCConsulta.Text = tablaConsultas.CurrentRow.Cells[16].Value.ToString();
+            ccbCConsulta.Text = mostrado.CodigoConsulta(tablaConsultas.CurrentRow.Cells[16].Value.ToString());
         }
     }
 }

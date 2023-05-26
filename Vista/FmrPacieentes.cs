@@ -20,14 +20,13 @@ namespace Vista
             InitializeComponent();
         }
         int posicion = 0;
-        Configuraciones combob = new Configuraciones(ConfigConnection.connectionString);
         Manejo_Form manejo = new Manejo_Form();
+        Logica.ConfiguracionNombres muestra = new Logica.ConfiguracionNombres(ConfigConnection.connectionString);
         ServicioPacientes pacientes = new ServicioPacientes(ConfigConnection.connectionString);
         Logica.Configuraciones abstraccion = new Logica.Configuraciones(ConfigConnection.connectionString);
         Logica.Datos_Prederminados llenado = new Logica.Datos_Prederminados(ConfigConnection.connectionString);
         private void llenarcombo()
         {
-            //llenado.Municipios(cbbCiudad);
             llenado.TipoIdentificacion(cbbTipos);
             llenado.Departamentos(cbbDepartamentos);
             llenado.Zona(cbbZona);
@@ -154,16 +153,24 @@ namespace Vista
             posicion = tablap.CurrentRow.Index;
             cbbTipos.Text = tablap.CurrentRow.Cells[0].Value.ToString();
             txtNumI.Text = tablap.CurrentRow.Cells[1].Value.ToString();
-            txtxPnombre.Text= tablap.CurrentRow.Cells[2].Value.ToString();
-            txtxPapellido.Text= tablap.CurrentRow.Cells[3].Value.ToString();
-            txtEdad.Text= tablap.CurrentRow.Cells[4].Value.ToString();
-            cbbSexo.Text= tablap.CurrentRow.Cells[5].Value.ToString();
+            ccbTipoUsuario.Text= muestra.TipoIdentificacion(tablap.CurrentRow.Cells[3].Value.ToString());
+            txtxPapellido.Text= tablap.CurrentRow.Cells[4].Value.ToString();
+            txtxSapellido.Text= tablap.CurrentRow.Cells[5].Value.ToString();
+            txtxPnombre.Text= tablap.CurrentRow.Cells[6].Value.ToString();
+            txtxSnombre.Text= tablap.CurrentRow.Cells[7].Value.ToString();
+            txtEdad.Text = tablap.CurrentRow.Cells[8].Value.ToString();
+            txtMedidaEdad.Text = tablap.CurrentRow.Cells[9].Value.ToString();
+            cbbSexo.Text = muestra.Sexo(tablap.CurrentRow.Cells[10].Value.ToString());
+            cbbDepartamentos.Text = muestra.Departamentos(tablap.CurrentRow.Cells[11].Value.ToString());
+            cbbCiudad.Text = muestra.Municipios(tablap.CurrentRow.Cells[12].Value.ToString());
+            cbbZona.Text = muestra.Zona(tablap.CurrentRow.Cells[13].Value.ToString());
         }
 
         private void txtNumI_KeyPress(object sender, KeyPressEventArgs e)
         {
             manejo.validarN(e, txtNumI);
             manejo.validarExtension(cbbTipos,e, txtNumI,btnInsertar);
+            txtNumI.MaxLength = manejo.extensioncajadetexto(cbbTipos);
         }
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
