@@ -351,7 +351,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(988, 591);
+            this.ClientSize = new System.Drawing.Size(1004, 630);
             this.Controls.Add(this.PanelVista);
             this.Controls.Add(this.checkView);
             this.Controls.Add(this.BtnEliminar);

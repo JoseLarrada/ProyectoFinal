@@ -80,5 +80,11 @@ namespace Vista
             PanelVista.Visible = true;
             abrirForm(new FmrFacturacion());
         }
+
+        private void btnHistoriasClinicas_Click(object sender, EventArgs e)
+        {
+            PanelVista.Visible = true;
+            abrirForm(new Historias());
+        }
     }
 }

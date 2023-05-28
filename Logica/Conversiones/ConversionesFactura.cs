@@ -18,6 +18,11 @@ namespace Logica.Conversiones
             string nombre = par.LlamadoGlobal(codigo, "ConsultasFacturacion.ExtraerNombre");
             return nombre;
         }
+        public string ExtraerApellido(string codigo)
+        {
+            string Apellido = par.LlamadoGlobal(codigo, "ConsultasFacturacion.ExtraerNombre");
+            return Apellido;
+        }
         public string ExtraerId(string codigo)
         {
             string identificacion = par.LlamadoGlobal(codigo, "ConsultasFacturacion.ExtraerId");

@@ -52,6 +52,18 @@ namespace Vista
             string fecha = TablaFactura.CurrentRow.Cells[1].Value.ToString();
             servicios.Guardar(txtNumeroFactura.Texts, nombre, id, fecha, numeroAutorizacion, finalidad, txtValorDescuentos.Texts, txtValorTotal.Texts);
         }
+        private void nulos()
+        {
+            if(factura.nulos(txtNumeroFactura.Texts,txtNumeroContrato.Texts,txtPlanBeneficios.Texts,txtNumeroPoliza.Texts,
+                           txtValorComision.Texts, txtValorDescuentos.Texts, txtValorTotal.Texts))
+            {
+                btnModificar.Enabled = false;
+            }
+            else
+            {
+                btnModificar.Enabled = true;
+            }
+        }
         public ErrorProvider validarN(KeyPressEventArgs e, pruebas h)
         {
             bool error = manejo.SoloNumeros(e);
@@ -69,10 +81,12 @@ namespace Vista
         private void FmrFacturacion_Load(object sender, EventArgs e)
         {
             LlenarTabla();
+            nulos();
         }
         private void txtValorTotal_Enter(object sender, EventArgs e)
         {
             txtValorTotal.Texts = Convert.ToInt32(factura.ValorTotal(Convert.ToInt32(txtValorComision.Texts), Convert.ToInt32(txtValorDescuentos.Texts))).ToString();
+            nulos();
         }
         private void btnModificar_Click(object sender, EventArgs e)
         {
@@ -99,36 +113,43 @@ namespace Vista
         private void txtNumeroFactura_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarN(e, txtNumeroFactura);
+            nulos();
         }
 
         private void txtNumeroContrato_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarN(e, txtNumeroContrato);
+            nulos();
         }
 
         private void txtPlanBeneficios_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarN(e, txtPlanBeneficios);
+            nulos();
         }
 
         private void txtNumeroPoliza_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarN(e, txtNumeroPoliza);
+            nulos();
         }
 
         private void txtValorComision_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarN(e, txtValorComision);
+            nulos();
         }
 
         private void txtValorDescuentos_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarN(e, txtValorDescuentos);
+            nulos();
         }
 
         private void txtValorTotal_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarN(e, txtValorTotal);
+            nulos();
         }
     }
 }

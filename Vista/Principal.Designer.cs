@@ -185,7 +185,7 @@
             this.btnHistoriasClinicas.TabIndex = 0;
             this.btnHistoriasClinicas.Text = "HISTORIAS CLINICAS";
             this.btnHistoriasClinicas.UseVisualStyleBackColor = true;
-            this.btnHistoriasClinicas.Click += new System.EventHandler(this.button4_Click);
+            this.btnHistoriasClinicas.Click += new System.EventHandler(this.btnHistoriasClinicas_Click);
             // 
             // btnVistas
             // 
