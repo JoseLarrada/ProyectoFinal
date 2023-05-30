@@ -220,6 +220,7 @@
             this.btnVistas.TabIndex = 0;
             this.btnVistas.Text = "VISTAS";
             this.btnVistas.UseVisualStyleBackColor = true;
+            this.btnVistas.Click += new System.EventHandler(this.btnVistas_Click);
             // 
             // btnFacturacion
             // 

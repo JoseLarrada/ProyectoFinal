@@ -1,7 +1,10 @@
 ﻿using Datos;
 using Entidades;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,7 +39,7 @@ namespace Logica
                 {
                     return "RELLENE LOS DATOS";
                 }
-                if (ExisteConsulta(cliente))
+                if (ExisteConsulta(cliente.NumeroAutorizacion))
                 {
                     return "Ya existe una consulta asociada a este numero";
                 }
@@ -55,7 +58,7 @@ namespace Logica
 
         public string Eliminar(Consultas cliente)
         {
-            if (!ExisteConsulta(cliente))
+            if (!ExisteConsulta(cliente.NumeroAutorizacion))
             {
                 return "NO SE ENCONTRO LA CONSULTA";
             }
@@ -66,7 +69,7 @@ namespace Logica
             }
         }
 
-        public bool ExisteConsulta(Consultas cliente)
+        public bool ExisteConsulta(string numeroauto)
         {
             try
             {
@@ -78,7 +81,7 @@ namespace Logica
                 {
                     foreach (var item in ObtenerTodos())
                     {
-                        if (item.NumeroAutorizacion == cliente.NumeroAutorizacion)
+                        if (item.NumeroAutorizacion == numeroauto)
                         {
                             return true;
                         }
@@ -107,6 +110,37 @@ namespace Logica
         public List<Consultas> ObtenerTodos()
         {
             return repositorio.GetAll();
+        }
+        public void GenerarPDF()
+        {
+            // Crear un documento PDF
+            Document documento = new Document();
+
+            try
+            {
+                // Crear un escritor de PDF
+                PdfWriter escritor = PdfWriter.GetInstance(documento, new FileStream("InformeConsultas.pdf", FileMode.Create));
+
+                // Abrir el documento
+                documento.Open();
+
+                // Agregar contenido al documento
+                foreach (var item in ObtenerTodos())
+                {
+                    // Agregar un párrafo con el registro al documento
+                    documento.Add(new Paragraph(item.ToString()));
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier excepción que pueda ocurrir
+                Console.WriteLine("Error al generar el PDF: " + ex.Message);
+            }
+            finally
+            {
+                // Cerrar el documento
+                documento.Close();
+            }
         }
         public bool nulos(Consultas cliente)
         {

@@ -92,11 +92,21 @@ namespace Logica
                 throw;
             }
         }
+        public bool ExisteHistoria(string numauto)
+        {
+            foreach (var item in repositorio.GetAll())
+            {
+                if (item.NumeroAutorizacion==numauto)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public List<Procedimiento> ObtenerTodos()
         {
             return repositorio.GetAll();
         }
-
         public bool nulos(Procedimiento cliente)
         {
             if (string.IsNullOrEmpty(cliente.NumeroFactura) || string.IsNullOrEmpty(cliente.NumeroAutorizacion) || string.IsNullOrEmpty(cliente.NumeroIdentificacion) ||

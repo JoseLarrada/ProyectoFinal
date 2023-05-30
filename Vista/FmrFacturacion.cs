@@ -1,5 +1,7 @@
-﻿using Entidades;
+﻿using Datos;
+using Entidades;
 using Logica;
+using Logica.Conversiones;
 using Logica.ManejoForm;
 using System;
 using System.Collections.Generic;
@@ -16,9 +18,12 @@ namespace Vista
     public partial class FmrFacturacion : Form
     {
         ErrorProvider Validar = new ErrorProvider();
+        Logica.ServicioProcedimientos procedimiento = new ServicioProcedimientos(ConfigConnection.connectionString);
+        Logica.ServicioConsultas consultas = new Logica.ServicioConsultas(ConfigConnection.connectionString);
         Manejo_Formulario manejo = new Manejo_Formulario();
         Logica.ServicioFacturacion factura = new Logica.ServicioFacturacion(ConfigConnection.connectionString);
         Manejo_Pdf servicios = new Manejo_Pdf();
+        Logica.Conversiones.CoversionesHistoria conversionP= new Logica.Conversiones.CoversionesHistoria(ConfigConnection.connectionString);
         Logica.Conversiones.ConversionesFactura Conversion = new Logica.Conversiones.ConversionesFactura(ConfigConnection.connectionString);
         public FmrFacturacion()
         {
@@ -45,12 +50,25 @@ namespace Vista
         }
         private void imprimir()
         {
-            string nombre = Conversion.ExtraerNombre(txtNumeroFactura.Texts);
-            string id = Conversion.ExtraerId(txtNumeroFactura.Texts);
-            string numeroAutorizacion = Conversion.ExtraerNumAutorizacion(txtNumeroFactura.Texts);
-            string finalidad = Conversion.ExtraerFinalidad(txtNumeroFactura.Texts);
-            string fecha = TablaFactura.CurrentRow.Cells[1].Value.ToString();
-            servicios.Guardar(txtNumeroFactura.Texts, nombre, id, fecha, numeroAutorizacion, finalidad, txtValorDescuentos.Texts, txtValorTotal.Texts);
+            if (consultas.ExisteConsulta(Conversion.ExtraerNumAutorizacion(txtNumeroFactura.Texts)))
+            {
+                string nombre = Conversion.ExtraerNombre(txtNumeroFactura.Texts);
+                string id = Conversion.ExtraerId(txtNumeroFactura.Texts);
+                string numeroAutorizacion = Conversion.ExtraerNumAutorizacion(txtNumeroFactura.Texts);
+                string finalidad = Conversion.ExtraerFinalidad(txtNumeroFactura.Texts);
+                string fecha = TablaFactura.CurrentRow.Cells[1].Value.ToString();
+                servicios.Guardar(txtNumeroFactura.Texts, nombre, id, fecha, numeroAutorizacion, finalidad, txtValorDescuentos.Texts, txtValorTotal.Texts);
+            }
+            else if(procedimiento.ExisteHistoria(conversionP.ExtraernumAuto(txtNumeroFactura.Texts))) 
+            {
+                string nombre = conversionP.ExtraerNombres(txtNumeroFactura.Texts);
+                string id = conversionP.ExtraerNumeroId(txtNumeroFactura.Texts);
+                string numeroAutorizacion = conversionP.ExtraernumAuto(txtNumeroFactura.Texts);
+                string finalidad = conversionP.extraerFinalidadP(txtNumeroFactura.Texts);
+                string fecha = TablaFactura.CurrentRow.Cells[1].Value.ToString();
+                servicios.Guardar(txtNumeroFactura.Texts, nombre, id, fecha, numeroAutorizacion, finalidad, txtValorDescuentos.Texts, txtValorTotal.Texts);
+            }
+            
         }
         private void eliminar()
         {

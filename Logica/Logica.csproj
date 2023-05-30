@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicioProcedimientos.cs" />
     <Compile Include="ServicioRips.cs" />
+    <Compile Include="ServicioVistas.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Datos\Datos.csproj">

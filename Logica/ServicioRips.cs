@@ -58,6 +58,7 @@ namespace Logica
                 {
                     repositorioFactura.Generar(item);
                 }
+                
                 return "Generado con exito";
             }
             catch (Exception e)

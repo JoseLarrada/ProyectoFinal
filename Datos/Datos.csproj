@@ -51,8 +51,8 @@
     <Compile Include="Conexiones.cs" />
     <Compile Include="IReportes.cs" />
     <Compile Include="Mapeadores.cs" />
-    <Compile Include="Obtenciones\Obtenciones.cs" />
-    <Compile Include="Obtenciones\Llenado.cs" />
+    <Compile Include="Obtencion\Obtenciones.cs" />
+    <Compile Include="Obtencion\Llenado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RConsultas.cs" />
     <Compile Include="RFacturacion.cs" />

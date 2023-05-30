@@ -44,6 +44,10 @@ namespace Logica
         {
             try
             {
+                if (nulos(cliente))
+                {
+                    return "No se permiten datos vacios";
+                }
                 if (existe(cliente))
                 {
                     return "Ya existe esta factura";
@@ -84,7 +88,17 @@ namespace Logica
                 throw;
             }
         }
-
+        public bool nulos(HistoriaClinica cliente)
+        {
+            if (string.IsNullOrEmpty(cliente.NumeroFactura)|| string.IsNullOrEmpty(cliente.Tratamiento) || string.IsNullOrEmpty(cliente.Medicacion))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public List<HistoriaClinica> ObtenerTodos()
         {
             return repositorio.GetAll();

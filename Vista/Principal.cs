@@ -92,5 +92,11 @@ namespace Vista
             PanelVista.Visible = true;
             abrirForm(new FmrInformes());
         }
+
+        private void btnVistas_Click(object sender, EventArgs e)
+        {
+            PanelVista.Visible = true;
+            abrirForm(new FmrVistas());
+        }
     }
 }
