@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace Vista
         private string placeholderText = "";
         private bool isPlaceholder = false;
         private bool isPasswordChar = false;
+        private int maxLength = 32767;
 
         //Events
         public event EventHandler _TextChanged;
@@ -36,6 +38,7 @@ namespace Vista
         {
             InitializeComponent();
         }
+        
         #region -> Properties
         [Category("RJ Code Advance")]
         public Color BorderColor
@@ -186,9 +189,6 @@ namespace Vista
                 SetPlaceholder();
             }
         }
-
-
-
         #endregion
 
         #region -> Overridden methods

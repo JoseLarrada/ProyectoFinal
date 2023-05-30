@@ -274,6 +274,7 @@
             this.txtMedidaEdad.Name = "txtMedidaEdad";
             this.txtMedidaEdad.Size = new System.Drawing.Size(130, 20);
             this.txtMedidaEdad.TabIndex = 0;
+            this.txtMedidaEdad.Leave += new System.EventHandler(this.txtMedidaEdad_Leave);
             // 
             // txtEdad
             // 
@@ -282,6 +283,7 @@
             this.txtEdad.Size = new System.Drawing.Size(130, 20);
             this.txtEdad.TabIndex = 0;
             this.txtEdad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
+            this.txtEdad.Leave += new System.EventHandler(this.txtEdad_Leave);
             // 
             // txtxSapellido
             // 
@@ -334,7 +336,7 @@
             // PanelVista
             // 
             this.PanelVista.Controls.Add(this.tablap);
-            this.PanelVista.Location = new System.Drawing.Point(95, 41);
+            this.PanelVista.Location = new System.Drawing.Point(95, 23);
             this.PanelVista.Name = "PanelVista";
             this.PanelVista.Size = new System.Drawing.Size(820, 400);
             this.PanelVista.TabIndex = 2;

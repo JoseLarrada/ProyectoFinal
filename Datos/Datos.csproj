@@ -44,8 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArchivoTexto\Irips.cs" />
+    <Compile Include="ArchivoTexto\RipsConsultas.cs" />
+    <Compile Include="ArchivoTexto\RipsFacturas.cs" />
+    <Compile Include="ArchivoTexto\RipsProcedimientos.cs" />
     <Compile Include="Conexiones.cs" />
     <Compile Include="IReportes.cs" />
+    <Compile Include="Mapeadores.cs" />
     <Compile Include="Obtenciones\Obtenciones.cs" />
     <Compile Include="Obtenciones\Llenado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

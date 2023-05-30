@@ -84,7 +84,13 @@ namespace Vista
         private void btnHistoriasClinicas_Click(object sender, EventArgs e)
         {
             PanelVista.Visible = true;
-            abrirForm(new Historias());
+            abrirForm(new FmrHistorias());
+        }
+
+        private void BtnRips_Click(object sender, EventArgs e)
+        {
+            PanelVista.Visible = true;
+            abrirForm(new FmrInformes());
         }
     }
 }

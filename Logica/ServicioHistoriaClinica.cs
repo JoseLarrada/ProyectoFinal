@@ -19,7 +19,25 @@ namespace Logica
 
         public string Actualizar(HistoriaClinica Cliente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (!existePersona(Cliente))
+                {
+                    return "No existe Una persona asociada";
+                }
+                else
+                {
+                    string msg = repositorio.Modificar(Cliente);
+                    pdf.GuardarHistoria(Cliente);
+                    return msg;
+
+                }
+            }
+            catch (Exception e)
+            {
+
+                return e.Message;
+            }
         }
 
         public string Crear(HistoriaClinica cliente)
@@ -48,7 +66,23 @@ namespace Logica
 
         public string Eliminar(HistoriaClinica cliente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (!existePersona(cliente))
+                {
+                    return "No se encontro el usuario";
+                }
+                else
+                {
+                    string msg=repositorio.Eliminar(cliente);
+                    return msg;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<HistoriaClinica> ObtenerTodos()
@@ -67,6 +101,18 @@ namespace Logica
                 {
                     return true;
                 }
+            }
+            return false;
+        }
+        public bool existePersona(HistoriaClinica cliente)
+        {
+            if (ObtenerTodos()==null)
+            {
+                return false;
+            }
+            foreach (var item in ObtenerTodos())
+            {
+                if(item.NumeroIdentificacion==cliente.NumeroIdentificacion) { return true; }
             }
             return false;
         }

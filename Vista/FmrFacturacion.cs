@@ -15,15 +15,15 @@ namespace Vista
 {
     public partial class FmrFacturacion : Form
     {
+        ErrorProvider Validar = new ErrorProvider();
+        Manejo_Formulario manejo = new Manejo_Formulario();
+        Logica.ServicioFacturacion factura = new Logica.ServicioFacturacion(ConfigConnection.connectionString);
+        Manejo_Pdf servicios = new Manejo_Pdf();
+        Logica.Conversiones.ConversionesFactura Conversion = new Logica.Conversiones.ConversionesFactura(ConfigConnection.connectionString);
         public FmrFacturacion()
         {
             InitializeComponent();
         }
-        ErrorProvider Validar = new ErrorProvider();
-        Manejo_Form manejo = new Manejo_Form();
-        Logica.ServicioFacturacion factura = new Logica.ServicioFacturacion(ConfigConnection.connectionString);
-        Manejo_Pdf servicios = new Manejo_Pdf();
-        Logica.Conversiones.ConversionesFactura Conversion=new Logica.Conversiones.ConversionesFactura(ConfigConnection.connectionString);
         private void LlenarTabla()
         {
             TablaFactura.DataSource = factura.ObtenerNoPagados();
@@ -51,6 +51,13 @@ namespace Vista
             string finalidad = Conversion.ExtraerFinalidad(txtNumeroFactura.Texts);
             string fecha = TablaFactura.CurrentRow.Cells[1].Value.ToString();
             servicios.Guardar(txtNumeroFactura.Texts, nombre, id, fecha, numeroAutorizacion, finalidad, txtValorDescuentos.Texts, txtValorTotal.Texts);
+        }
+        private void eliminar()
+        {
+            var facturas = new Facturacion();
+            facturas.NumeroFactura= txtNumeroFactura.Texts;
+            string msg=factura.Eliminar(facturas);
+            MessageBox.Show(msg);
         }
         private void nulos()
         {
@@ -114,24 +121,27 @@ namespace Vista
         {
             validarN(e, txtNumeroFactura);
             nulos();
+            txtNumeroFactura.Texts=manejo.extension(txtNumeroFactura.Texts,6);
         }
-
         private void txtNumeroContrato_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarN(e, txtNumeroContrato);
             nulos();
+            txtNumeroContrato.Texts = manejo.extension(txtNumeroContrato.Texts, 8);
         }
 
         private void txtPlanBeneficios_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarN(e, txtPlanBeneficios);
             nulos();
+            txtPlanBeneficios.Texts = manejo.extension(txtPlanBeneficios.Texts, 8);
         }
 
         private void txtNumeroPoliza_KeyPress(object sender, KeyPressEventArgs e)
         {
             validarN(e, txtNumeroPoliza);
             nulos();
+            txtNumeroPoliza.Texts = manejo.extension(txtNumeroPoliza.Texts, 8);
         }
 
         private void txtValorComision_KeyPress(object sender, KeyPressEventArgs e)
@@ -150,6 +160,11 @@ namespace Vista
         {
             validarN(e, txtValorTotal);
             nulos();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            eliminar();
         }
     }
 }

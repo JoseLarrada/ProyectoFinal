@@ -11,7 +11,6 @@ namespace Logica
     public class ServicioConsultas : Idatos<Consultas>
     {
         List<Consultas> Listconsulta =new List<Consultas>();
-        ServicioPacientes pacientes= new ServicioPacientes("");
         Datos.RConsultas repositorio;
         public ServicioConsultas(string conexion)
         {
@@ -21,14 +20,7 @@ namespace Logica
         {
             try
             {
-                    if (!Existe(Consulta))
-                    {
-                        return "No Existe el paciente";
-                    }
-                    else
-                    {
-                        return repositorio.Modificar(Consulta) + "  " + Consulta.NumeroAutorizacion;
-                    }
+                return repositorio.Modificar(Consulta) + "  " + Consulta.NumeroAutorizacion;
             }
             catch (Exception)
             {
@@ -43,6 +35,10 @@ namespace Logica
                 if(nulos(cliente))
                 {
                     return "RELLENE LOS DATOS";
+                }
+                if (ExisteConsulta(cliente))
+                {
+                    return "Ya existe una consulta asociada a este numero";
                 }
                 else
                 {
@@ -96,25 +92,6 @@ namespace Logica
                 throw;
             }
         }
-        public bool Existe(Consultas Cliente)
-        {
-            if (Listconsulta == null)
-            {
-                return false;
-            }
-            else
-            {
-                foreach (var item in pacientes.ObtenerTodos())
-                {
-                    if (item.NumeroId == Cliente.NumeroIdentificacion)
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
-
         public Consultas ObtenerPorId(string identificacion)
         {
             foreach (var item in Listconsulta)
@@ -141,6 +118,29 @@ namespace Logica
                 return true;
             }
             return false;
+        }
+        public double total(string Valor_N,string cuotas)
+        {
+            if (double.Parse(cuotas) <= 0)
+            {
+                return double.Parse(Valor_N);
+            }
+            else
+            {
+                double total= Math.Round(double.Parse(Valor_N) / double.Parse(cuotas));
+                return total;
+            }
+        }
+        public string cuotas(int cuotas)
+        {
+            if (cuotas>48)
+            {
+                return "-1";
+            }
+            else
+            {
+                return cuotas.ToString();
+            }
         }
     }
 }

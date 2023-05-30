@@ -11,10 +11,10 @@ using System.Windows.Forms;
 namespace Logica
 {
     
-    public class Configuraciones
+    public class ConfiguracionesCodigos
     {
         Datos.Obtencion_de_Id.Obtenciones par;
-        public Configuraciones(string conexion)
+        public ConfiguracionesCodigos(string conexion)
         {
             par = new Datos.Obtencion_de_Id.Obtenciones(conexion);
         }

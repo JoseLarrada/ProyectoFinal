@@ -1,6 +1,7 @@
 ﻿using Datos;
 using Entidades;
 using Logica;
+using Logica.Configuraciones;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,10 +21,12 @@ namespace Vista
             InitializeComponent();
         }
         int posicion = 0;
-        Manejo_Form manejo = new Manejo_Form();
+        Manejo_Formulario manejo = new Manejo_Formulario();
+        Manejo_Edades edades = new Manejo_Edades();
+        ManejoUnidad unidad=new ManejoUnidad();
         Logica.ConfiguracionNombres muestra = new Logica.ConfiguracionNombres(ConfigConnection.connectionString);
         ServicioPacientes pacientes = new ServicioPacientes(ConfigConnection.connectionString);
-        Logica.Configuraciones abstraccion = new Logica.Configuraciones(ConfigConnection.connectionString);
+        Logica.ConfiguracionesCodigos abstraccion = new Logica.ConfiguracionesCodigos(ConfigConnection.connectionString);
         Logica.Datos_Prederminados llenado = new Logica.Datos_Prederminados(ConfigConnection.connectionString);
         private void llenarcombo()
         {
@@ -151,9 +154,9 @@ namespace Vista
         private void tablap_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             posicion = tablap.CurrentRow.Index;
-            cbbTipos.Text = tablap.CurrentRow.Cells[0].Value.ToString();
+            cbbTipos.Text = muestra.TipoIdentificacion(tablap.CurrentRow.Cells[0].Value.ToString());
             txtNumI.Text = tablap.CurrentRow.Cells[1].Value.ToString();
-            ccbTipoUsuario.Text= muestra.TipoIdentificacion(tablap.CurrentRow.Cells[3].Value.ToString());
+            ccbTipoUsuario.Text= muestra.TipoUsuarios(tablap.CurrentRow.Cells[3].Value.ToString());
             txtxPapellido.Text= tablap.CurrentRow.Cells[4].Value.ToString();
             txtxSapellido.Text= tablap.CurrentRow.Cells[5].Value.ToString();
             txtxPnombre.Text= tablap.CurrentRow.Cells[6].Value.ToString();
@@ -214,6 +217,24 @@ namespace Vista
                 cbbCiudad.Items.Clear();
                 cbbCiudad.Text = "";
                 llenado.filtro(cbbCiudad, abstraccion.Departamentos(cbbDepartamentos.Text));
+            }
+        }
+
+        private void txtEdad_Leave(object sender, EventArgs e)
+        {
+            txtEdad.Text = edades.Edad(cbbTipos, int.Parse(txtEdad.Text));
+            if (txtEdad.Text == "")
+            {
+                MessageBox.Show("Edad no permitida para este tipo de identificacion");
+            }
+        }
+
+        private void txtMedidaEdad_Leave(object sender, EventArgs e)
+        {
+            txtMedidaEdad.Text = unidad.Unidad_Medida(cbbTipos, txtMedidaEdad.Text);
+            if (txtMedidaEdad.Text=="")
+            {
+                MessageBox.Show("Unidad no permitida para este tipo de identificacion");
             }
         }
     }

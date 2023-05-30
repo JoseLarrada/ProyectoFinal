@@ -333,6 +333,7 @@
             this.txtVrlNeto.Name = "txtVrlNeto";
             this.txtVrlNeto.Size = new System.Drawing.Size(106, 20);
             this.txtVrlNeto.TabIndex = 0;
+            this.txtVrlNeto.Enter += new System.EventHandler(this.txtVrlNeto_Enter);
             this.txtVrlNeto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVrlNeto_KeyPress);
             // 
             // label1
@@ -351,6 +352,7 @@
             this.txtVrlCuoM.Size = new System.Drawing.Size(106, 20);
             this.txtVrlCuoM.TabIndex = 0;
             this.txtVrlCuoM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVrlCuoM_KeyPress);
+            this.txtVrlCuoM.Leave += new System.EventHandler(this.txtVrlCuoM_Leave);
             // 
             // TxtIde
             // 
@@ -359,6 +361,7 @@
             this.TxtIde.Size = new System.Drawing.Size(106, 20);
             this.TxtIde.TabIndex = 0;
             this.TxtIde.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtIde_KeyPress);
+            this.TxtIde.Leave += new System.EventHandler(this.TxtIde_Leave);
             // 
             // txtVrlConsulta
             // 
@@ -424,7 +427,7 @@
             // 
             this.PanelVista.BackColor = System.Drawing.Color.White;
             this.PanelVista.Controls.Add(this.tablaConsultas);
-            this.PanelVista.Location = new System.Drawing.Point(128, 28);
+            this.PanelVista.Location = new System.Drawing.Point(144, 40);
             this.PanelVista.Name = "PanelVista";
             this.PanelVista.Size = new System.Drawing.Size(721, 385);
             this.PanelVista.TabIndex = 2;

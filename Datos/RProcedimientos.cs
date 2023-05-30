@@ -14,7 +14,7 @@ namespace Datos
         public RProcedimientos(string connectionString) : base(connectionString)
         {
         }
-
+        Mapeadores mapp=new Mapeadores();
         public string Guardar(Procedimiento Tipo)
         {
             try
@@ -47,26 +47,6 @@ namespace Datos
 
                 return e.Message;
             }
-        }
-
-        public Procedimiento Mapper(OracleDataReader dataReader)
-        {
-            if (!dataReader.HasRows) return null;
-            Procedimiento consulta = new Procedimiento();
-            consulta.CodigoC = dataReader.GetString(0);
-            consulta.NumeroFactura = dataReader.GetString(1);
-            consulta.CodigoConsultorio = dataReader.GetString(2);
-            consulta.TipoId = dataReader.GetString(3);
-            consulta.NumeroIdentificacion = dataReader.GetString(4);
-            consulta.FechaProcedimiento = dataReader.GetDateTime(5);
-            consulta.NumeroAutorizacion = dataReader.GetString(6);
-            consulta.AmbitoRealProce = dataReader.GetString(7);
-            consulta.FinalidadProce = dataReader.GetString(8);
-            consulta.PersonalAti = dataReader.GetString(9);
-            consulta.DiagnosticoPpal = dataReader.GetString(10);
-            consulta.FormaRealiActo = dataReader.GetString(11);
-            consulta.VrlProcedimiento = dataReader.GetInt32(12);
-            return consulta;
         }
         public string Modificar(Procedimiento Tipo)
         {
@@ -131,7 +111,7 @@ namespace Datos
             OracleDataReader lector = comando.ExecuteReader();
             while (lector.Read())
             {
-                consulta.Add(Mapper(lector));
+                consulta.Add(mapp.MapperProcedimientos(lector));
             }
             Close();
             return consulta;

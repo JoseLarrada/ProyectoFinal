@@ -16,11 +16,12 @@ namespace Vista
 {
     public partial class FrmConsultas : Form
     {
-        
+
+        ServicioPacientes pacientes = new ServicioPacientes(ConfigConnection.connectionString);
         Logica.ServicioConsultas Consultas = new Logica.ServicioConsultas(ConfigConnection.connectionString);
-        Logica.Configuraciones abstraccion =new Logica.Configuraciones(ConfigConnection.connectionString);
+        Logica.ConfiguracionesCodigos abstraccion =new Logica.ConfiguracionesCodigos(ConfigConnection.connectionString);
         Logica.Datos_Prederminados llenado=new Logica.Datos_Prederminados(ConfigConnection.connectionString);
-        Manejo_Form manejo=new Manejo_Form();
+        Manejo_Formulario manejo=new Manejo_Formulario();
         Logica.ConfiguracionNombres mostrado = new Logica.ConfiguracionNombres(ConfigConnection.connectionString);
         public FrmConsultas()
         {
@@ -143,9 +144,31 @@ namespace Vista
             cbbTdiagP.Text = string.Empty;
             cbbTipos.Text = string.Empty;
         }
+        public void paciente()
+        {
+            if (pacientes.Existe(TxtIde.Text))
+            {
+                TxtIde.Text= TxtIde.Text;
+            }
+            else
+            {
+                TxtIde.Text= "";
+            }
+
+            if (TxtIde.Text == "")
+            {
+                MessageBox.Show("No se encuentra el usuario");
+                btnInsertar.Enabled = false;
+            }
+            else
+            {
+                btnInsertar.Enabled = true;
+            }
+        }
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             manejo.validarN(e, txtNumeroFactura);
+            txtNumeroFactura.MaxLength = 6;
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -186,7 +209,7 @@ namespace Vista
         private void txtNumAuto_KeyPress(object sender, KeyPressEventArgs e)
         {
             manejo.validarN(e, txtNumAuto);
-            txtNumAuto.MaxLength=6;
+            txtNumAuto.MaxLength=7;
         }
 
         private void txtVrlConsulta_KeyPress(object sender, KeyPressEventArgs e)
@@ -222,6 +245,26 @@ namespace Vista
             cbbTipos.Text = mostrado.TipoIdentificacion(tablaConsultas.CurrentRow.Cells[14].Value.ToString());
             TxtIde.Text = tablaConsultas.CurrentRow.Cells[15].Value.ToString();
             ccbCConsulta.Text = mostrado.CodigoConsulta(tablaConsultas.CurrentRow.Cells[16].Value.ToString());
+        }
+
+        private void txtVrlNeto_Enter(object sender, EventArgs e)
+        {
+            txtVrlNeto.Text=Consultas.total(txtVrlConsulta.Text, txtVrlCuoM.Text).ToString();
+        }
+
+        private void TxtIde_Leave(object sender, EventArgs e)
+        {
+            paciente();
+        }
+
+        private void txtVrlCuoM_Leave(object sender, EventArgs e)
+        {
+            txtVrlCuoM.Text=Consultas.cuotas(int.Parse(txtVrlCuoM.Text));
+            if (txtVrlCuoM.Text=="-1")
+            {
+                MessageBox.Show("Numero de cuotas superadas");
+                txtVrlCuoM.Text = "0";
+            }
         }
     }
 }

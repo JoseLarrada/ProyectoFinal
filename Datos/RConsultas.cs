@@ -12,34 +12,9 @@ namespace Datos
 {
     public class RConsultas : Conexiones,IReportes<Consultas>
     {
+        Mapeadores mapp=new Mapeadores();
         public RConsultas(string connectionString) : base(connectionString)
         {
-        }
-
-        private Consultas Mapper(OracleDataReader dataReader)
-        {
-
-            if (!dataReader.HasRows) return null;
-            Consultas consulta = new Consultas();
-            consulta.NumeroFactura = dataReader.GetString(0);
-            consulta.CodigoConsultorio = dataReader.GetString(1);
-            consulta.TipoId = dataReader.GetString(2);
-            consulta.NumeroIdentificacion = dataReader.GetString(3);
-            consulta.CodigoC = dataReader.GetString(4);
-            consulta.FechaConsulta = dataReader.GetDateTime(5);
-            consulta.NumeroAutorizacion = dataReader.GetString(6);
-            consulta.FinalidadConsulta = dataReader.GetString(7);
-            consulta.CausaExterna = dataReader.GetString(8);
-            consulta.CodDiagPpal = dataReader.GetString(9);
-            consulta.CodDiaRel1 = dataReader.GetString(10);
-            consulta.CodDiaRel2 = dataReader.GetString(11);
-            consulta.CodDiaRel3 = dataReader.GetString(12);
-            consulta.TipoDiagPpal = dataReader.GetString(13);
-            consulta.ValorConsulta = dataReader.GetInt32(14);
-            consulta.ValorCuoMod = dataReader.GetInt32(15);
-            consulta.ValorNetoPagar = dataReader.GetInt32(16);
-            return consulta;
-
         }
         public string Eliminar(Consultas Tipo)
         {
@@ -70,7 +45,7 @@ namespace Datos
             OracleDataReader lector = comando.ExecuteReader();
             while (lector.Read())
             {
-                consulta.Add(Mapper(lector));
+                consulta.Add(mapp.MapperConsultas(lector));
             }
             Close();
             return consulta;

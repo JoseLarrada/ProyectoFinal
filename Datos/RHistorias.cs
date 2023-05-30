@@ -16,7 +16,22 @@ namespace Datos
 
         public string Eliminar(HistoriaClinica Tipo)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var Comando = conexion.CreateCommand())
+                {
+                    Comando.CommandText = $"DELETE FROM HISTORIA_CLINICA WHERE NUMERO_IDENTIFICACION={Tipo.NumeroIdentificacion}";
+                    Open();
+                    Comando.ExecuteNonQuery();
+                    Close();
+                    return "Eliminado Satisfactoriamente";
+                }
+            }
+            catch (Exception e)
+            {
+
+                return "NO eliminado:  " + e.Message;
+            }
         }
 
         public List<HistoriaClinica> GetAll()
@@ -88,7 +103,26 @@ namespace Datos
 
         public string Modificar(HistoriaClinica Tipo)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using(var Comando = conexion.CreateCommand())
+                {
+                    Comando.CommandText = "ActualizarHistoria";
+                    Comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    Comando.Parameters.Add("trato", OracleType.VarChar).Value = Tipo.Tratamiento;
+                    Comando.Parameters.Add("medicina", OracleType.VarChar).Value = Tipo.Medicacion;
+                    Comando.Parameters.Add("numId", OracleType.VarChar).Value = Tipo.NumeroIdentificacion;
+                    Open();
+                    Comando.ExecuteNonQuery();
+                    Close();
+                    return "Modificado Correctamente";
+                }
+            }
+            catch (Exception e)
+            {
+
+                return "No se pudo Mofificar Debido a esto" + e.Message;
+            }
         }
     }
 }

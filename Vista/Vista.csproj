@@ -55,6 +55,12 @@
     <Compile Include="FmrFacturacion.Designer.cs">
       <DependentUpon>FmrFacturacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="FmrInformes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FmrInformes.Designer.cs">
+      <DependentUpon>FmrInformes.cs</DependentUpon>
+    </Compile>
     <Compile Include="FmrPacieentes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,11 +73,11 @@
     <Compile Include="FrmConsultas.Designer.cs">
       <DependentUpon>FrmConsultas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Historias.cs">
+    <Compile Include="FmrHistorias.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Historias.Designer.cs">
-      <DependentUpon>Historias.cs</DependentUpon>
+    <Compile Include="FmrHistorias.Designer.cs">
+      <DependentUpon>FmrHistorias.cs</DependentUpon>
     </Compile>
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
@@ -96,14 +102,17 @@
     <EmbeddedResource Include="FmrFacturacion.resx">
       <DependentUpon>FmrFacturacion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FmrInformes.resx">
+      <DependentUpon>FmrInformes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FmrPacieentes.resx">
       <DependentUpon>FmrPacieentes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmConsultas.resx">
       <DependentUpon>FrmConsultas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Historias.resx">
-      <DependentUpon>Historias.cs</DependentUpon>
+    <EmbeddedResource Include="FmrHistorias.resx">
+      <DependentUpon>FmrHistorias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>

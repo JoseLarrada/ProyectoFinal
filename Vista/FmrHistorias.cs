@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Logica;
 using Logica.Conversiones;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,16 @@ using System.Windows.Forms;
 
 namespace Vista
 {
-    public partial class Historias : Form
+    public partial class FmrHistorias : Form
     {
         Logica.ConfiguracionNombres nombres = new Logica.ConfiguracionNombres(ConfigConnection.connectionString);
         Logica.Conversiones.ConversionesFactura conversionfactura = new Logica.Conversiones.ConversionesFactura(ConfigConnection.connectionString);
         Logica.Conversiones.CoversionesHistoria conversionHistoria = new Logica.Conversiones.CoversionesHistoria(ConfigConnection.connectionString);
         Logica.ServicioHistoriaClinica Hclinica=new Logica.ServicioHistoriaClinica(ConfigConnection.connectionString);
         Logica.ServicioFacturacion facturas=new Logica.ServicioFacturacion(ConfigConnection.connectionString);
-        public Historias()
+        Manejo_Formulario manejo = new Manejo_Formulario();
+        ErrorProvider Validar = new ErrorProvider();
+        public FmrHistorias()
         {
             InitializeComponent();
         }
@@ -41,20 +44,80 @@ namespace Vista
             string msg = Hclinica.Crear(historia);
             MessageBox.Show(msg);
         }
+        public void Modificar()
+        {
+            var historia=new HistoriaClinica();
+            historia.NumeroIdentificacion = conversionfactura.ExtraerId(txtNumF.Texts);
+            historia.Tratamiento = txtTratamiento.Texts;
+            historia.Medicacion = txtMedicacion.Texts;
+            string msg=Hclinica.Actualizar(historia);
+            MessageBox.Show(msg);
+        }
+        public void eliminar()
+        {
+            var historia=new HistoriaClinica();
+            historia.NumeroIdentificacion= conversionfactura.ExtraerId(txtNumF.Texts);
+            string msg=Hclinica.Eliminar(historia);
+            MessageBox.Show(msg);
+        }
         public void llenartabla()
         {
             TablaFactura.DataSource = facturas.ObtenerTodos();
             tablaHistorias.DataSource=Hclinica.ObtenerTodos();
         }
-
+        public ErrorProvider validarN(KeyPressEventArgs e, pruebas h)
+        {
+            bool error = manejo.SoloNumeros(e);
+            if (!error)
+            {
+                Validar.SetError(h, "Solo numeros");
+                return null;
+            }
+            else
+            {
+                Validar.Clear();
+                return null;
+            }
+        }
         private void Historias_Load(object sender, EventArgs e)
         {
             llenartabla();
         }
-
         private void btnCrear_Click(object sender, EventArgs e)
         {
             Guardar();
+            txtNumF.Enabled = true;
+        }
+        private void TablaFactura_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtNumF.Texts = TablaFactura.CurrentRow.Cells[12].Value.ToString();
+            txtNumF.Enabled = false;
+        }
+
+        private void txtNumF_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarN(e, txtNumF);
+            txtNumF.Texts = manejo.extension(txtNumF.Texts,6);
+        }
+
+        private void txtTratamiento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            txtTratamiento.Texts = manejo.extension(txtTratamiento.Texts, 300);
+        }
+
+        private void txtMedicacion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            txtMedicacion.Texts = manejo.extension(txtMedicacion.Texts, 150);
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Modificar();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            eliminar();
         }
     }
 }

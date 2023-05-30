@@ -262,6 +262,7 @@
             this.TxtIde.Size = new System.Drawing.Size(106, 20);
             this.TxtIde.TabIndex = 0;
             this.TxtIde.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtIde_KeyPress);
+            this.TxtIde.Leave += new System.EventHandler(this.TxtIde_Leave);
             // 
             // txtVrlProcedimiento
             // 
@@ -331,7 +332,7 @@
             // 
             this.PanelVista.BackColor = System.Drawing.Color.White;
             this.PanelVista.Controls.Add(this.tablaProcedimientos);
-            this.PanelVista.Location = new System.Drawing.Point(144, 27);
+            this.PanelVista.Location = new System.Drawing.Point(144, 34);
             this.PanelVista.Name = "PanelVista";
             this.PanelVista.Size = new System.Drawing.Size(721, 385);
             this.PanelVista.TabIndex = 6;

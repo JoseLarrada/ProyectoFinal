@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Diagnostics.Contracts;
 using System.Windows.Forms;
 using System.Data;
+using iTextSharp.text.xml;
 
 namespace Logica
 {
@@ -21,14 +22,25 @@ namespace Logica
         }
         public string Actualizar(Pacientes Cliente)
         {
-            return repositorio.Modificar(Cliente);
+            if (Existe(Cliente.NumeroId))
+            {
+                return "Ya existe el Paciente";
+            }
+            if (nulos(Cliente))
+            {
+                return "No puden haber datos sin rellenar";
+            }
+            else
+            {
+                return repositorio.Modificar(Cliente);
+            }
         }
 
         public string Crear(Pacientes cliente)
         {
             try
             {
-                if (Existe(cliente))
+                if (Existe(cliente.NumeroId))
                 {
                      return "Ya existe el Paciente";
                 }
@@ -51,7 +63,7 @@ namespace Logica
 
         public string Eliminar(Pacientes cliente)
         {
-            if (!Existe(cliente))
+            if (!Existe(cliente.NumeroId))
             {
                 return "No se encontro el paciente";
             }
@@ -61,7 +73,7 @@ namespace Logica
             }
         }
 
-        public bool Existe(Pacientes Cliente)
+        public bool Existe(string Cliente)
         {
             if (ObtenerTodos() == null)
             {
@@ -71,7 +83,7 @@ namespace Logica
             {
                 foreach (var item in ObtenerTodos())
                 {
-                    if (item.NumeroId == Cliente.NumeroId)
+                    if (item.NumeroId == Cliente)
                     {
                         return true;
                     }
@@ -79,18 +91,6 @@ namespace Logica
                 return false;
             }
         }
-        public string ObtenerPorId(string identificacion)
-        {
-            foreach(var item in ListaPacientes)
-            {
-                if (item.NumeroId==identificacion)
-                {
-                    return item.NumeroId;
-                }
-            }
-            return null;
-        }
-
         public List<Pacientes> ObtenerTodos()
         {
             return repositorio.GetAll();

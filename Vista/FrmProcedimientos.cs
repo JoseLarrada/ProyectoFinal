@@ -19,8 +19,9 @@ namespace Vista
         {
             InitializeComponent();
         }
-        Manejo_Form manejo = new Manejo_Form();
-        Logica.Configuraciones abstraccion = new Logica.Configuraciones(ConfigConnection.connectionString);
+        ServicioPacientes pacientes = new ServicioPacientes(ConfigConnection.connectionString);
+        Manejo_Formulario manejo = new Manejo_Formulario();
+        Logica.ConfiguracionesCodigos abstraccion = new Logica.ConfiguracionesCodigos(ConfigConnection.connectionString);
         Logica.ConfiguracionNombres mostrado = new Logica.ConfiguracionNombres(ConfigConnection.connectionString);
         Logica.Datos_Prederminados llenado = new Logica.Datos_Prederminados(ConfigConnection.connectionString);
         Logica.ServicioProcedimientos procesos=new Logica.ServicioProcedimientos(ConfigConnection.connectionString);
@@ -45,23 +46,32 @@ namespace Vista
         }
         private void guardar()
         {
-            var procedimiento = new Procedimiento();
-            procedimiento.NumeroFactura = txtNumeroFactura.Text;
-            procedimiento.CodigoConsultorio = "750309";
-            procedimiento.TipoId = abstraccion.TipoIdentificacion(cbbTipos.Text);
-            procedimiento.NumeroIdentificacion = TxtIde.Text;
-            procedimiento.CodigoC = txtCodigoProcedimiento.Text;
-            procedimiento.FechaProcedimiento = Datetime.Value;
-            procedimiento.NumeroAutorizacion = txtNumAuto.Text;
-            procedimiento.AmbitoRealProce = abstraccion.Ambitos(cbbAmbitoP.Text);
-            procedimiento.PersonalAti = "0";
-            procedimiento.FinalidadProce = abstraccion.FinalidadProcedimientos(cbbFinalidadProcedimiento.Text);
-            procedimiento.DiagnosticoPpal= abstraccion.DiagnosticoProcedimiento(cbbDiagnosticoP.Text);
-            procedimiento.FormaRealiActo= abstraccion.FormaRealizacion(cbbFormaRealizacion.Text);
-            procedimiento.VrlProcedimiento = Convert.ToInt32(txtVrlProcedimiento.Text);
-            string msg = procesos.Crear(procedimiento);
-            MessageBox.Show(msg);
-            Limpiar();
+            try
+            {
+                var procedimiento = new Procedimiento();
+                procedimiento.NumeroFactura = txtNumeroFactura.Text;
+                procedimiento.CodigoConsultorio = "750309";
+                procedimiento.TipoId = abstraccion.TipoIdentificacion(cbbTipos.Text);
+                procedimiento.NumeroIdentificacion = TxtIde.Text;
+                procedimiento.CodigoC = txtCodigoProcedimiento.Text;
+                procedimiento.FechaProcedimiento = Datetime.Value;
+                procedimiento.NumeroAutorizacion = txtNumAuto.Text;
+                procedimiento.AmbitoRealProce = abstraccion.Ambitos(cbbAmbitoP.Text);
+                procedimiento.PersonalAti = "0";
+                procedimiento.FinalidadProce = abstraccion.FinalidadProcedimientos(cbbFinalidadProcedimiento.Text);
+                procedimiento.DiagnosticoPpal = abstraccion.DiagnosticoProcedimiento(cbbDiagnosticoP.Text);
+                procedimiento.FormaRealiActo = abstraccion.FormaRealizacion(cbbFormaRealizacion.Text);
+                procedimiento.VrlProcedimiento = Convert.ToInt32(txtVrlProcedimiento.Text);
+                string msg = procesos.Crear(procedimiento);
+                MessageBox.Show(msg);
+                Limpiar();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Rellene el dato numerico");
+            }
+            
         }
         private void modificar()
         {
@@ -94,6 +104,27 @@ namespace Vista
         private void llenartabla()
         {
             tablaProcedimientos.DataSource=procesos.ObtenerTodos();
+        }
+        public void paciente()
+        {
+            if (pacientes.Existe(TxtIde.Text))
+            {
+                TxtIde.Text = TxtIde.Text;
+            }
+            else
+            {
+                TxtIde.Text = "";
+            }
+
+            if (TxtIde.Text == "")
+            {
+                MessageBox.Show("No se encuentra el usuario");
+                btnInsertar.Enabled = false;
+            }
+            else
+            {
+                btnInsertar.Enabled = true;
+            }
         }
         private void Limpiar()
         {
@@ -160,11 +191,13 @@ namespace Vista
         private void txtCodigoProcedimiento_KeyPress(object sender, KeyPressEventArgs e)
         {
             manejo.validarN(e, txtCodigoProcedimiento);
+            txtCodigoProcedimiento.MaxLength = 6;
         }
 
         private void txtNumAuto_KeyPress(object sender, KeyPressEventArgs e)
         {
             manejo.validarN(e, txtNumAuto);
+            txtNumAuto.MaxLength = 7;
         }
 
         private void txtVrlProcedimiento_KeyPress(object sender, KeyPressEventArgs e)
@@ -186,6 +219,11 @@ namespace Vista
             cbbTipos.Text = mostrado.TipoIdentificacion(tablaProcedimientos.CurrentRow.Cells[10].Value.ToString());
             TxtIde.Text = tablaProcedimientos.CurrentRow.Cells[11].Value.ToString();
             txtCodigoProcedimiento.Text=tablaProcedimientos.CurrentRow.Cells[12].Value.ToString();
+        }
+
+        private void TxtIde_Leave(object sender, EventArgs e)
+        {
+            paciente();
         }
     }
 }

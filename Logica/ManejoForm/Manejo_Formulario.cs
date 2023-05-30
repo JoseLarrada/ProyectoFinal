@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Org.BouncyCastle.Asn1.Cmp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Logica
 {
-    public class Manejo_Form
+    public class Manejo_Formulario
     {
         ErrorProvider Validar = new ErrorProvider();
         public void ValidarLetras(KeyPressEventArgs e, System.Windows.Forms.TextBox h)
@@ -134,6 +135,14 @@ namespace Logica
                     return 11;
             }
             return 0;
+        }
+        public string extension(string extension,int final)
+        {
+            if (extension.Length> final)
+            {
+                return "";
+            }
+            return extension;
         }
     }
 }

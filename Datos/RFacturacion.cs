@@ -12,6 +12,7 @@ namespace Datos
 {
     public class RFacturacion : Conexiones,IReportes<Facturacion>
     {
+        Mapeadores mapp=new Mapeadores();
         public RFacturacion(string connectionString) : base(connectionString)
         {
         }
@@ -53,30 +54,6 @@ namespace Datos
                 return "No se pudo Guardar la factura: "+ e.Message;
             }
         }
-
-        public Facturacion Mapper(OracleDataReader dataReader)
-        {
-            if (!dataReader.HasRows) return null;
-            Facturacion factura = new Facturacion();
-            factura.NumeroFactura=dataReader.GetString(0);
-            factura.CodigoConsultorio=dataReader.GetString(1);
-            factura.TipoId=dataReader.GetString(2);
-            factura.NumeroIdentificacion=dataReader.GetString(3);
-            factura.NombrePrestador=dataReader.GetString(4);
-            factura.FechaExpedicion=dataReader.GetDateTime(5);
-            factura.FechaInicio=dataReader.GetDateTime(6);
-            factura.FechaFinal=dataReader.GetDateTime(7);
-            factura.NombreConsultorio = dataReader.GetString(8);
-            factura.NumeroContrato=dataReader.GetInt32(9);
-            factura.PlanBeneficios=dataReader.GetInt32(10);
-            factura.NumeroPoliza=dataReader.GetInt32(11);
-            factura.VrlComision = dataReader.GetInt32(12);
-            factura.VrlTDescuento= dataReader.GetInt32(13);
-            factura.VrlNetoP= dataReader.GetInt32(14);
-            factura.CodigoC= dataReader.GetString(15);
-            return factura;
-        }
-
         public string Modificar(Facturacion Tipo)
         {
             try
@@ -135,7 +112,7 @@ namespace Datos
             OracleDataReader lector = comando.ExecuteReader();
             while (lector.Read())
             {
-                factura.Add(Mapper(lector));
+                factura.Add(mapp.MapperFacturas(lector));
             }
             Close();
             return factura;
@@ -151,11 +128,10 @@ namespace Datos
             OracleDataReader lector = comando.ExecuteReader();
             while (lector.Read())
             {
-                factura.Add(Mapper(lector));
+                factura.Add(mapp.MapperFacturas(lector));
             }
             Close();
             return factura;
         }
-
     }
 }

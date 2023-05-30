@@ -134,6 +134,7 @@
             this.btnEliminar.TabIndex = 5;
             this.btnEliminar.Text = "Cancelar Factura";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnModificar
             // 

@@ -11,7 +11,6 @@ namespace Logica
     public class ServicioProcedimientos : Idatos<Procedimiento>
     {
         List<Procedimiento> ListProcedimiento = new List<Procedimiento>();
-        ServicioPacientes pacientes = new ServicioPacientes("");
         Datos.RProcedimientos repositorio;
         public ServicioProcedimientos(string conexion)
         {
@@ -34,9 +33,9 @@ namespace Logica
         {
             try
             {
-                if (!Existe(proced))
+                if (nulos(proced))
                 {
-                    return "No Existe el paciente";
+                    return "Rellene los Datos Correctamente";
                 }
                 if (ExisteProcedimiento(proced))
                 {
@@ -93,26 +92,6 @@ namespace Logica
                 throw;
             }
         }
-        public bool Existe(Procedimiento Cliente)
-        {
-            if (repositorio.GetAll() == null)
-            {
-                return false;
-            }
-            else
-            {
-                foreach (var item in pacientes.ObtenerTodos())
-                {
-                    if (item.NumeroId == Cliente.NumeroIdentificacion)
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-        }
-
         public List<Procedimiento> ObtenerTodos()
         {
             return repositorio.GetAll();
@@ -120,7 +99,13 @@ namespace Logica
 
         public bool nulos(Procedimiento cliente)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(cliente.NumeroFactura) || string.IsNullOrEmpty(cliente.NumeroAutorizacion) || string.IsNullOrEmpty(cliente.NumeroIdentificacion) ||
+                string.IsNullOrEmpty(cliente.FinalidadProce) || string.IsNullOrEmpty(cliente.AmbitoRealProce) || string.IsNullOrEmpty(cliente.CodigoC) || string.IsNullOrEmpty(cliente.CodigoConsultorio)
+                || string.IsNullOrEmpty(cliente.DiagnosticoPpal) || string.IsNullOrEmpty(cliente.FinalidadProce) || string.IsNullOrEmpty(cliente.FormaRealiActo) || cliente.VrlProcedimiento == 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

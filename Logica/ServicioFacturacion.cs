@@ -91,6 +91,10 @@ namespace Logica
         }
         public int ValorTotal(int valor1, int valor2)
         {
+            if (valor2>valor1)
+            {
+                return 0;
+            }
             return valor1 - valor2;
         }
         public bool nulos(string factura,string contrato,string beneficio,string poliza,string comision,string descuento,string total)

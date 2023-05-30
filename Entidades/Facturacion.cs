@@ -47,7 +47,7 @@ namespace Entidades
 
         public override string ToString()
         {
-            return $"{CodigoConsultorio};{NombrePrestador};{TipoId};{NumeroIdentificacion};{NumeroFactura};{FechaExpedicion.ToShortDateString()};{FechaInicio.ToShortDateString()};{FechaFinal.ToShortDateString()};{CodigoC};{NombreConsultorio};{NumeroContrato};{PlanBeneficios};{NumeroPoliza};{VrlTotCo};{VrlComision};{VrlTDescuento};{VrlNetoP}";
+            return $"{NumeroFactura},{CodigoConsultorio},{TipoId},{NumeroIdentificacion},{NombrePrestador},{FechaExpedicion.ToShortDateString()},{FechaInicio.ToShortDateString()},{FechaFinal.ToShortDateString()},{NombreConsultorio},{NumeroContrato},{PlanBeneficios},{NumeroPoliza},{VrlComision},{VrlTDescuento},{VrlNetoP},{CodigoC}";
         }
     }
 }
