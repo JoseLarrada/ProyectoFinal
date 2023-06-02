@@ -114,8 +114,17 @@ namespace Vista
         }
         private void txtValorTotal_Enter(object sender, EventArgs e)
         {
-            txtValorTotal.Texts = Convert.ToInt32(factura.ValorTotal(Convert.ToInt32(txtValorComision.Texts), Convert.ToInt32(txtValorDescuentos.Texts))).ToString();
-            nulos();
+            try
+            {
+                txtValorTotal.Texts = Convert.ToInt32(factura.ValorTotal(Convert.ToInt32(txtValorComision.Texts), Convert.ToInt32(txtValorDescuentos.Texts))).ToString();
+                nulos();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Rellene Los Datos antes de calcular");
+            }
+            
         }
         private void btnModificar_Click(object sender, EventArgs e)
         {
