@@ -58,16 +58,16 @@
     <Compile Include="ArchivoTexto\RipsFacturas.cs" />
     <Compile Include="ArchivoTexto\RipsProcedimientos.cs" />
     <Compile Include="Conexiones.cs" />
-    <Compile Include="IReportes.cs" />
-    <Compile Include="Mapeadores.cs" />
+    <Compile Include="Gestion Programa\IReportes.cs" />
+    <Compile Include="Gestion Programa\Mapeadores.cs" />
     <Compile Include="Obtencion\Obtenciones.cs" />
     <Compile Include="Obtencion\Llenado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RConsultas.cs" />
-    <Compile Include="RFacturacion.cs" />
-    <Compile Include="RHistorias.cs" />
-    <Compile Include="RPacientes.cs" />
-    <Compile Include="RProcedimientos.cs" />
+    <Compile Include="Gestion Programa\RConsultas.cs" />
+    <Compile Include="Gestion Programa\RFacturacion.cs" />
+    <Compile Include="Gestion Programa\RHistorias.cs" />
+    <Compile Include="Gestion Programa\RPacientes.cs" />
+    <Compile Include="Gestion Programa\RProcedimientos.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
