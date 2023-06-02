@@ -149,6 +149,8 @@ namespace Vista
             {
                 inicio();
             }
+            tablap.DataSource = 0;
+            llenartabla();
         }
 
         private void tablap_CellContentClick(object sender, DataGridViewCellEventArgs e)

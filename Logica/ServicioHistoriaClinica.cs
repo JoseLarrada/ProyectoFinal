@@ -44,9 +44,9 @@ namespace Logica
         {
             try
             {
-                if (nulos(cliente))
+                if (!nulos(cliente.NumeroFactura,cliente.Tratamiento,cliente.Medicacion))
                 {
-                    return "No se permiten datos vacios";
+                    return "Rellene todos los datos";
                 }
                 if (existe(cliente))
                 {
@@ -88,9 +88,9 @@ namespace Logica
                 throw;
             }
         }
-        public bool nulos(HistoriaClinica cliente)
+        public bool nulos(string factura, string descripcion,string medicacion)
         {
-            if (string.IsNullOrEmpty(cliente.NumeroFactura)|| string.IsNullOrEmpty(cliente.Tratamiento) || string.IsNullOrEmpty(cliente.Medicacion))
+            if (string.IsNullOrEmpty(factura) || string.IsNullOrEmpty(descripcion) || string.IsNullOrEmpty(medicacion))
             {
                 return true;
             }

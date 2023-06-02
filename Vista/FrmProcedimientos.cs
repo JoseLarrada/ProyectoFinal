@@ -151,6 +151,8 @@ namespace Vista
             {
                 inicio();
             }
+            tablaProcedimientos.DataSource = 0;
+            llenartabla();
         }
 
         private void FrmProcedimientos_Load(object sender, EventArgs e)

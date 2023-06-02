@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Org.BouncyCastle.Asn1.Crmf;
 
 namespace Logica
 {
@@ -106,7 +107,6 @@ namespace Logica
             }
             return null;
         }
-
         public List<Consultas> ObtenerTodos()
         {
             return repositorio.GetAll();

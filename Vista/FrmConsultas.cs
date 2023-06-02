@@ -193,11 +193,14 @@ namespace Vista
             {
                 inicio();
             }
+            tablaConsultas.DataSource = 0;
+            llenartabla();
         }
 
         private void btnInsertar_Click(object sender, EventArgs e)
         {
             guardar();
+            
         }
 
         private void TxtIde_KeyPress(object sender, KeyPressEventArgs e)

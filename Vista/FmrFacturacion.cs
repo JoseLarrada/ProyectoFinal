@@ -47,6 +47,8 @@ namespace Vista
             facturas.CodigoC = "P";
             string msg = factura.Actualizar(facturas);
             MessageBox.Show(msg);
+            TablaFactura.DataSource = 0;
+            LlenarTabla();
         }
         private void imprimir()
         {
@@ -56,7 +58,7 @@ namespace Vista
                 string id = Conversion.ExtraerId(txtNumeroFactura.Texts);
                 string numeroAutorizacion = Conversion.ExtraerNumAutorizacion(txtNumeroFactura.Texts);
                 string finalidad = Conversion.ExtraerFinalidad(txtNumeroFactura.Texts);
-                string fecha = TablaFactura.CurrentRow.Cells[1].Value.ToString();
+                string fecha = DateTime.Now.ToString();
                 servicios.Guardar(txtNumeroFactura.Texts, nombre, id, fecha, numeroAutorizacion, finalidad, txtValorDescuentos.Texts, txtValorTotal.Texts);
             }
             else if(procedimiento.ExisteHistoria(conversionP.ExtraernumAuto(txtNumeroFactura.Texts))) 
@@ -65,7 +67,7 @@ namespace Vista
                 string id = conversionP.ExtraerNumeroId(txtNumeroFactura.Texts);
                 string numeroAutorizacion = conversionP.ExtraernumAuto(txtNumeroFactura.Texts);
                 string finalidad = conversionP.extraerFinalidadP(txtNumeroFactura.Texts);
-                string fecha = TablaFactura.CurrentRow.Cells[1].Value.ToString();
+                string fecha = DateTime.Now.ToString();
                 servicios.Guardar(txtNumeroFactura.Texts, nombre, id, fecha, numeroAutorizacion, finalidad, txtValorDescuentos.Texts, txtValorTotal.Texts);
             }
             
@@ -76,6 +78,8 @@ namespace Vista
             facturas.NumeroFactura= txtNumeroFactura.Texts;
             string msg=factura.Eliminar(facturas);
             MessageBox.Show(msg);
+            TablaFactura.DataSource = 0;
+            LlenarTabla();
         }
         private void nulos()
         {
@@ -122,6 +126,7 @@ namespace Vista
         {
             txtValorComision.Texts = TablaFactura.CurrentRow.Cells[9].Value.ToString();
             txtNumeroFactura.Texts = TablaFactura.CurrentRow.Cells[12].Value.ToString();
+            btnEliminar.Enabled = true;
         }
         private void cbxFiltrar_CheckedChanged(object sender, EventArgs e)
         {

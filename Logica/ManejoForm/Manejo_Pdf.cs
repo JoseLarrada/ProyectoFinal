@@ -11,6 +11,7 @@ namespace Logica.ManejoForm
 {
     public class Manejo_Pdf
     {
+        
 
         public void Guardar(string idfactura, string nombrecliente, string idcliente, string fecha, string Autorizacion, string descripcion,
             string descuento, string total)
@@ -114,5 +115,7 @@ namespace Logica.ManejoForm
                 }
             }
         }
+
+
     }
 }

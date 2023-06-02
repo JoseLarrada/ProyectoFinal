@@ -121,6 +121,9 @@
   <data name="historia" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\historia.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="INFORMES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\INFORMES.HTML;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="muestra" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\muestra.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>

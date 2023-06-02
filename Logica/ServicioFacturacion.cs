@@ -47,7 +47,6 @@ namespace Logica
                 return repositorio.Eliminar(cliente);
             }
         }
-
         public List<Facturacion> ObtenerTodos()
         {
             return repositorio.GetAll();
