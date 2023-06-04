@@ -12,9 +12,11 @@ namespace Logica
     {
         List<Procedimiento> ListProcedimiento = new List<Procedimiento>();
         Datos.RProcedimientos repositorio;
+        Datos.Informes inProcedimientos;
         public ServicioProcedimientos(string conexion)
         {
             repositorio = new Datos.RProcedimientos(conexion);
+            inProcedimientos = new Datos.Informes(conexion);
         }
         public string Actualizar(Procedimiento Cliente)
         {
@@ -116,6 +118,10 @@ namespace Logica
                 return true;
             }
             return false;
+        }
+        public string GenerarPdf()
+        {
+            return inProcedimientos.InformesProcedimientos(ObtenerTodos());
         }
     }
 }

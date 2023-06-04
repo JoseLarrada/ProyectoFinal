@@ -12,9 +12,11 @@ namespace Logica
     {
         Datos.RHistorias repositorio;
         Manejo_Pdf pdf=new Manejo_Pdf();
+        Datos.Informes inHistoria;
         public ServicioHistoriaClinica(string conexion)
         {
             repositorio = new Datos.RHistorias(conexion);
+            inHistoria = new Datos.Informes(conexion);
         }
 
         public string Actualizar(HistoriaClinica Cliente)
@@ -129,6 +131,10 @@ namespace Logica
                 if(item.NumeroIdentificacion==cliente.NumeroIdentificacion) { return true; }
             }
             return false;
+        }
+        public string GenerarPDF()
+        {
+            return inHistoria.InformesHistorias(ObtenerTodos());
         }
     }
 }

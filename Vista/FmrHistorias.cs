@@ -48,6 +48,7 @@ namespace Vista
                 historia.Medicacion = txtMedicacion.Texts;
                 string msg = Hclinica.Crear(historia);
                 MessageBox.Show(msg);
+                Limpiar();
             }
             else if (procedimiento.ExisteHistoria(conversionHistoria.ExtraernumAuto(txtNumF.Texts)))
             {
@@ -66,9 +67,16 @@ namespace Vista
                 historia.Medicacion = txtMedicacion.Texts;
                 string msg = Hclinica.Crear(historia);
                 MessageBox.Show(msg);
+                Limpiar();
 
             }
 
+        }
+        public void Limpiar()
+        {
+            txtMedicacion.Texts = "";
+            txtNumF.Texts = "";
+            txtTratamiento.Texts = "";
         }
         public void Modificar()
         {
@@ -78,6 +86,7 @@ namespace Vista
             historia.Medicacion = txtMedicacion.Texts;
             string msg = Hclinica.Actualizar(historia);
             MessageBox.Show(msg);
+            Limpiar();
         }
         public void eliminar()
         {
@@ -85,6 +94,7 @@ namespace Vista
             historia.NumeroIdentificacion = conversionfactura.ExtraerId(txtNumF.Texts);
             string msg = Hclinica.Eliminar(historia);
             MessageBox.Show(msg);
+            Limpiar();
         }
         public void llenartabla()
         {

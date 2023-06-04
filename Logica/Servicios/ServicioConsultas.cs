@@ -16,9 +16,11 @@ namespace Logica
     {
         List<Consultas> Listconsulta =new List<Consultas>();
         Datos.RConsultas repositorio;
+        Datos.Informes inconsulta;
         public ServicioConsultas(string conexion)
         {
             repositorio = new Datos.RConsultas(conexion);
+            inconsulta = new Datos.Informes(conexion);
         }
         public string Actualizar(Consultas Consulta)
         {
@@ -111,36 +113,18 @@ namespace Logica
         {
             return repositorio.GetAll();
         }
-        public void GenerarPDF()
+        public string GenerarPDF()
         {
-            // Crear un documento PDF
-            Document documento = new Document();
-
             try
             {
-                // Crear un escritor de PDF
-                PdfWriter escritor = PdfWriter.GetInstance(documento, new FileStream("InformeConsultas.pdf", FileMode.Create));
-
-                // Abrir el documento
-                documento.Open();
-
-                // Agregar contenido al documento
-                foreach (var item in ObtenerTodos())
-                {
-                    // Agregar un párrafo con el registro al documento
-                    documento.Add(new Paragraph(item.ToString()));
-                }
+                return inconsulta.InformesConsultas(ObtenerTodos());
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                // Manejar cualquier excepción que pueda ocurrir
-                Console.WriteLine("Error al generar el PDF: " + ex.Message);
+
+                return "No se pudo generar el informe"+e.Message;
             }
-            finally
-            {
-                // Cerrar el documento
-                documento.Close();
-            }
+            
         }
         public bool nulos(Consultas cliente)
         {

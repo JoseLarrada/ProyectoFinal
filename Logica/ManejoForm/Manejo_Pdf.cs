@@ -3,6 +3,8 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using static System.Net.WebRequestMethods;
@@ -115,7 +117,5 @@ namespace Logica.ManejoForm
                 }
             }
         }
-
-
     }
 }

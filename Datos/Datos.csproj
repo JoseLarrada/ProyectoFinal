@@ -60,6 +60,7 @@
     <Compile Include="Conexiones.cs" />
     <Compile Include="Gestion BD\IReportes.cs" />
     <Compile Include="Gestion BD\Mapeadores.cs" />
+    <Compile Include="Informes.cs" />
     <Compile Include="Obtencion\Obtenciones.cs" />
     <Compile Include="Obtencion\Llenado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,16 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="Resources\INFORMES.HTML" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\historia.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\muestra.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

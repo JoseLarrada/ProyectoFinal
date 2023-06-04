@@ -9,12 +9,12 @@ namespace Logica
 {
     public class ServicioFacturacion : Idatos<Facturacion>
     {
-        List<Facturacion> ListFactura = new List<Facturacion>();
-        ServicioConsultas consulta = new ServicioConsultas("");
         Datos.RFacturacion repositorio;
+        Datos.Informes inFactura;
         public ServicioFacturacion(string conexion)
         {
             repositorio = new Datos.RFacturacion(conexion);
+            inFactura= new Datos.Informes(conexion);
         }
         public string Actualizar(Facturacion Cliente)
         {
@@ -106,6 +106,11 @@ namespace Logica
                 return true;
             }
             return false;
+        }
+        public string GenerarPdf()
+        {
+            return inFactura.InformesFacturas(ObtenerTodos());
+            
         }
     }
 }

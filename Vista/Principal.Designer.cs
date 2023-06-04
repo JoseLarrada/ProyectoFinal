@@ -96,6 +96,7 @@
             this.Salir.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Salir.TabIndex = 1;
             this.Salir.TabStop = false;
+            this.Salir.Click += new System.EventHandler(this.Salir_Click);
             // 
             // panel7
             // 

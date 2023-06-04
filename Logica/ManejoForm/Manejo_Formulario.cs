@@ -29,7 +29,7 @@ namespace Logica
             else
             {
                 e.Handled = true;
-                Validar.SetError(h, "Solo numeros");
+                Validar.SetError(h, "Solo Valores de caracteres");
             }
         }
         public ErrorProvider validarN(KeyPressEventArgs e, System.Windows.Forms.TextBox h)

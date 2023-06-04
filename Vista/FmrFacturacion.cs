@@ -49,6 +49,17 @@ namespace Vista
             MessageBox.Show(msg);
             TablaFactura.DataSource = 0;
             LlenarTabla();
+            limpiar();
+        }
+        private void limpiar()
+        {
+            txtNumeroContrato.Texts = "";
+            txtNumeroFactura.Texts = "";
+            txtNumeroPoliza.Texts = "";
+            txtPlanBeneficios.Texts = "";
+            txtValorComision.Texts = "";
+            txtValorDescuentos.Texts = "";
+            txtValorTotal.Texts = "";
         }
         private void imprimir()
         {
@@ -80,6 +91,7 @@ namespace Vista
             MessageBox.Show(msg);
             TablaFactura.DataSource = 0;
             LlenarTabla();
+            limpiar();
         }
         private void nulos()
         {

@@ -119,6 +119,8 @@
             this.Datetime.Name = "Datetime";
             this.Datetime.Size = new System.Drawing.Size(200, 20);
             this.Datetime.TabIndex = 3;
+            this.Datetime.ValueChanged += new System.EventHandler(this.Datetime_ValueChanged);
+            this.Datetime.Leave += new System.EventHandler(this.Datetime_Leave);
             // 
             // cbbDiagR3
             // 
@@ -427,7 +429,7 @@
             // 
             this.PanelVista.BackColor = System.Drawing.Color.White;
             this.PanelVista.Controls.Add(this.tablaConsultas);
-            this.PanelVista.Location = new System.Drawing.Point(144, 40);
+            this.PanelVista.Location = new System.Drawing.Point(128, 26);
             this.PanelVista.Name = "PanelVista";
             this.PanelVista.Size = new System.Drawing.Size(721, 385);
             this.PanelVista.TabIndex = 2;

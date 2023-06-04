@@ -269,5 +269,19 @@ namespace Vista
                 txtVrlCuoM.Text = "0";
             }
         }
+
+        private void Datetime_ValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Datetime_Leave(object sender, EventArgs e)
+        {
+            if (Datetime.Value < DateTime.Now.Date)
+            {
+                MessageBox.Show("fecha incorrecta, no puede ser de un dia anterior al que nos encontramos");
+                Datetime.Value = DateTime.Now;
+            }
+        }
     }
 }

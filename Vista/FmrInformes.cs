@@ -14,6 +14,9 @@ namespace Vista
     {
         Logica.ServicioRips rips = new Logica.ServicioRips(ConfigConnection.connectionString);
         Logica.ServicioConsultas consulta=new Logica.ServicioConsultas(ConfigConnection.connectionString);
+        Logica.ServicioFacturacion facturacion=new Logica.ServicioFacturacion(ConfigConnection.connectionString);
+        Logica.ServicioHistoriaClinica clinica=new Logica.ServicioHistoriaClinica(ConfigConnection.connectionString);
+        Logica.ServicioProcedimientos procedimientos=new Logica.ServicioProcedimientos(ConfigConnection.connectionString);
         public FmrInformes()
         {
             InitializeComponent();
@@ -97,7 +100,62 @@ namespace Vista
 
         private void btnConsultasR_Click(object sender, EventArgs e)
         {
-            
+            DialogResult result = MessageBox.Show("¿Desea continuar?", "Confirmación", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                string msg = consulta.GenerarPDF();
+                MessageBox.Show(msg);
+
+            }
+            else if (result == DialogResult.Cancel)
+            {
+
+            }
+        }
+
+        private void btnProcedimientosR_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("¿Desea continuar?", "Confirmación", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                string msg = procedimientos.GenerarPdf();
+                MessageBox.Show(msg);
+
+            }
+            else if (result == DialogResult.Cancel)
+            {
+
+            }
+        }
+
+        private void btnFacturasR_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("¿Desea continuar?", "Confirmación", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                string msg = facturacion.GenerarPdf();
+                MessageBox.Show(msg);
+
+            }
+            else if (result == DialogResult.Cancel)
+            {
+
+            }
+        }
+
+        private void btnHistoriasR_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("¿Desea continuar?", "Confirmación", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                string msg = clinica.GenerarPDF();
+                MessageBox.Show(msg);
+
+            }
+            else if (result == DialogResult.Cancel)
+            {
+
+            }
         }
     }
 }

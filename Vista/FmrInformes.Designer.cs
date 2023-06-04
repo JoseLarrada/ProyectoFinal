@@ -45,8 +45,7 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnHistoriasR = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // panel3
@@ -186,6 +185,7 @@
             this.btnProcedimientosR.TabIndex = 3;
             this.btnProcedimientosR.Text = "PROCEDIMIENTOS";
             this.btnProcedimientosR.UseVisualStyleBackColor = false;
+            this.btnProcedimientosR.Click += new System.EventHandler(this.btnProcedimientosR_Click);
             // 
             // panel1
             // 
@@ -211,6 +211,7 @@
             this.btnFacturasR.TabIndex = 3;
             this.btnFacturasR.Text = "FACTURAS";
             this.btnFacturasR.UseVisualStyleBackColor = false;
+            this.btnFacturasR.Click += new System.EventHandler(this.btnFacturasR_Click);
             // 
             // panel6
             // 
@@ -236,6 +237,7 @@
             this.btnHistoriasR.TabIndex = 3;
             this.btnHistoriasR.Text = "HISTORIAS CLINICAS";
             this.btnHistoriasR.UseVisualStyleBackColor = false;
+            this.btnHistoriasR.Click += new System.EventHandler(this.btnHistoriasR_Click);
             // 
             // panel7
             // 
@@ -245,22 +247,14 @@
             this.panel7.Size = new System.Drawing.Size(14, 53);
             this.panel7.TabIndex = 4;
             // 
-            // dateTimePicker2
+            // label2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(545, 77);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(545, 58);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Fecha de Informes";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(544, 73);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(63, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "INFORMES";
             // 
             // FmrInformes
             // 
@@ -268,10 +262,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(837, 449);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.Fechas);
             this.Controls.Add(this.panel7);
@@ -312,7 +305,6 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button btnHistoriasR;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }
