@@ -48,7 +48,7 @@ namespace Logica
             {
                 if (!nulos(cliente.NumeroFactura,cliente.Tratamiento,cliente.Medicacion))
                 {
-                    return "Rellene todos los datos";
+                    return "Rellene todos los datos ";
                 }
                 if (existe(cliente))
                 {
